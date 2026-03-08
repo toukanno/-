@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# editor
+.vscode/
+.idea/
+
+# temporary exports
+*.tmp
+*.bak
