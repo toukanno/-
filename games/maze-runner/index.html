@@ -4,33 +4,50 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Maze Runner</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #0d0d1a;
+    background: #060c12;
+    background-image: radial-gradient(ellipse at 50% 50%, rgba(0,255,204,0.04) 0%, transparent 70%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    font-family: 'Orbitron', monospace;
     color: #00ffcc;
+    padding: 16px;
   }
-  h1 { font-size: 1.8em; margin-bottom: 8px; text-shadow: 0 0 10px #00ffcc; }
-  #hud { display: flex; gap: 30px; margin-bottom: 8px; font-size: 1em; }
-  canvas { border: 2px solid #00ffcc; box-shadow: 0 0 20px #00ffcc44; }
-  #controls { margin-top: 8px; font-size: 0.8em; color: #888; }
+  h1 {
+    font-size: 1.9em; font-weight: 900; margin-bottom: 14px;
+    text-shadow: 0 0 20px rgba(0,255,204,0.6), 0 0 40px rgba(0,255,204,0.2); letter-spacing: 3px;
+  }
+  #hud { display: flex; gap: 12px; margin-bottom: 10px; }
+  .hcard {
+    background: rgba(0,255,204,0.05); border: 1px solid rgba(0,255,204,0.2);
+    border-radius: 8px; padding: 8px 18px; text-align: center;
+  }
+  .hcard .lbl { font-size: 0.55em; letter-spacing: 2px; color: rgba(0,255,204,0.4); margin-bottom: 3px; }
+  .hcard .val { font-size: 1.3em; font-weight: 700; color: #fff; }
+  .hcard.hi .val { color: #00ffcc; text-shadow: 0 0 10px rgba(0,255,204,0.5); }
+  canvas {
+    border: 1px solid rgba(0,255,204,0.3);
+    box-shadow: 0 0 30px rgba(0,255,204,0.12), 0 0 60px rgba(0,255,204,0.05);
+    border-radius: 4px;
+  }
+  #controls { margin-top: 10px; font-size: 0.58em; color: rgba(255,255,255,0.22); letter-spacing: 1px; }
 </style>
 </head>
 <body>
 <h1>🌀 MAZE RUNNER</h1>
 <div id="hud">
-  <span>レベル: <span id="level">1</span></span>
-  <span>タイム: <span id="timer">0</span>s</span>
-  <span>ベスト: <span id="best">--</span>s</span>
+  <div class="hcard hi"><div class="lbl">LEVEL</div><div class="val" id="level">1</div></div>
+  <div class="hcard"><div class="lbl">TIME</div><div class="val" id="timer">0</div></div>
+  <div class="hcard"><div class="lbl">BEST</div><div class="val" id="best">--</div></div>
 </div>
 <canvas id="canvas" width="480" height="480"></canvas>
-<div id="controls">↑↓←→ または WASD で移動 | Rで再生成</div>
+<div id="controls">↑↓←→ / WASD で移動 · R で再生成</div>
 
 <script>
 const canvas = document.getElementById('canvas');

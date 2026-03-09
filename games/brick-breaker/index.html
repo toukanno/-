@@ -4,37 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brick Breaker</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: #111;
+    background: #0a0a18;
+    background-image: radial-gradient(ellipse at 50% 20%, rgba(255,107,107,0.07) 0%, transparent 55%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
-    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    font-family: 'Orbitron', sans-serif;
     color: white;
+    padding: 16px;
   }
-  h1 { font-size: 1.8em; margin-bottom: 8px; color: #ff6b6b; }
-  #hud { display: flex; gap: 40px; margin-bottom: 8px; font-size: 1.1em; }
-  canvas { border: 2px solid #333; cursor: none; }
-  #msg {
-    margin-top: 10px;
-    font-size: 0.9em;
-    color: #888;
+  h1 {
+    font-size: 1.9em; font-weight: 900; margin-bottom: 14px;
+    color: #ff6b6b; text-shadow: 0 0 20px rgba(255,107,107,0.5), 0 0 40px rgba(255,107,107,0.2);
+    letter-spacing: 3px;
   }
+  #hud { display: flex; gap: 12px; margin-bottom: 10px; }
+  .hud-card {
+    background: rgba(255,107,107,0.05); border: 1px solid rgba(255,107,107,0.2);
+    border-radius: 8px; padding: 8px 18px; text-align: center;
+  }
+  .hud-card .lbl { font-size: 0.55em; letter-spacing: 2px; color: rgba(255,107,107,0.45); margin-bottom: 3px; }
+  .hud-card .val { font-size: 1.4em; font-weight: 700; }
+  .hud-card.hi .val { color: #ff6b6b; text-shadow: 0 0 10px rgba(255,107,107,0.5); }
+  canvas { border: 1px solid rgba(255,107,107,0.2); cursor: none; box-shadow: 0 0 30px rgba(255,107,107,0.08); border-radius: 4px; }
+  #msg { margin-top: 10px; font-size: 0.6em; color: rgba(255,255,255,0.25); letter-spacing: 1px; }
 </style>
 </head>
 <body>
 <h1>🧱 BRICK BREAKER</h1>
 <div id="hud">
-  <span>スコア: <span id="score">0</span></span>
-  <span>残機: <span id="lives">3</span></span>
-  <span>レベル: <span id="level">1</span></span>
+  <div class="hud-card hi"><div class="lbl">SCORE</div><div class="val" id="score">0</div></div>
+  <div class="hud-card"><div class="lbl">LIVES</div><div class="val" id="lives">3</div></div>
+  <div class="hud-card"><div class="lbl">LEVEL</div><div class="val" id="level">1</div></div>
 </div>
 <canvas id="canvas" width="480" height="560"></canvas>
-<div id="msg">クリックまたはスペースでスタート | マウス/矢印キーでパドル操作</div>
+<div id="msg">クリック / SPACE でスタート · マウス / ←→ でパドル操作</div>
 
 <script>
 const canvas = document.getElementById('canvas');
