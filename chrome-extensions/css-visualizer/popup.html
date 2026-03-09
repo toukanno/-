@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 320px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      padding: 16px;
+    }
+    h1 {
+      font-size: 16px;
+      text-align: center;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .mode-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 8px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      background: #16213e;
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .mode-btn:hover {
+      border-color: #667eea;
+      background: #1a1a3e;
+      color: #fff;
+    }
+    .mode-btn.active {
+      border-color: #667eea;
+      background: linear-gradient(135deg, #667eea22, #764ba222);
+      color: #fff;
+      box-shadow: 0 0 12px #667eea44;
+    }
+    .mode-btn .icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+    .divider {
+      height: 1px;
+      background: #333;
+      margin: 12px 0;
+    }
+    .reset-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .reset-btn:hover { background: #c0392b; }
+    .status {
+      text-align: center;
+      font-size: 11px;
+      color: #888;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>CSS Visualizer</h1>
+
+  <div class="mode-grid">
+    <button class="mode-btn" data-mode="boxmodel">
+      <span class="icon">&#9634;</span>
+      Box Model
+    </button>
+    <button class="mode-btn" data-mode="flexbox">
+      <span class="icon">&#9776;</span>
+      Flexbox
+    </button>
+    <button class="mode-btn" data-mode="grid">
+      <span class="icon">&#9638;</span>
+      Grid
+    </button>
+    <button class="mode-btn" data-mode="zindex">
+      <span class="icon">&#9047;</span>
+      Z-Index
+    </button>
+    <button class="mode-btn" data-mode="overflow">
+      <span class="icon">&#8865;</span>
+      Overflow
+    </button>
+    <button class="mode-btn" data-mode="position">
+      <span class="icon">&#8982;</span>
+      Position
+    </button>
+    <button class="mode-btn" data-mode="spacing">
+      <span class="icon">&#8596;</span>
+      Spacing
+    </button>
+    <button class="mode-btn" data-mode="typography">
+      <span class="icon">A</span>
+      Typography
+    </button>
+  </div>
+
+  <div class="divider"></div>
+
+  <button class="reset-btn" id="resetBtn">Reset All</button>
+  <div class="status" id="status">Click a mode to visualize</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
