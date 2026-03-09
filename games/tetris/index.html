@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tetris</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+    color: #eee;
+    gap: 30px;
+  }
+  #panel {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 160px;
+  }
+  .box {
+    background: #16213e;
+    border: 2px solid #0f3460;
+    padding: 12px;
+    border-radius: 8px;
+  }
+  .box h3 { color: #e94560; margin-bottom: 8px; font-size: 0.85em; letter-spacing: 2px; }
+  .box p { font-size: 1.3em; font-weight: bold; }
+  canvas { border: 2px solid #0f3460; box-shadow: 0 0 25px #0f346088; }
+  #nextCanvas { border: 1px solid #0f3460; }
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #e94560;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: inherit;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  button:hover { background: #c73652; }
+  #controls { font-size: 0.75em; color: #888; line-height: 1.8; }
+</style>
+</head>
+<body>
+<div id="panel">
+  <h2 style="color:#e94560;letter-spacing:3px">TETRIS</h2>
+  <div class="box">
+    <h3>SCORE</h3><p id="score">0</p>
+  </div>
+  <div class="box">
+    <h3>LINES</h3><p id="lines">0</p>
+  </div>
+  <div class="box">
+    <h3>LEVEL</h3><p id="level">1</p>
+  </div>
+  <div class="box">
+    <h3>NEXT</h3>
+    <canvas id="nextCanvas" width="100" height="100"></canvas>
+  </div>
+  <button id="startBtn" onclick="startGame()">スタート</button>
+  <div id="controls">
+    ←→: 移動<br>
+    ↑/Z: 回転<br>
+    ↓: ソフトドロップ<br>
+    スペース: ハードドロップ<br>
+    P: 一時停止
+  </div>
+</div>
+<canvas id="canvas" width="300" height="600"></canvas>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const nextCanvas = document.getElementById('nextCanvas');
+const nctx = nextCanvas.getContext('2d');
+
+const COLS = 10, ROWS = 20, CELL = 30;
+const COLORS = ['#00f5ff','#f700ff','#ffaa00','#0000ff','#ff8c00','#00ff00','#ff0000'];
+const PIECES = [
+  [[1,1,1,1]],                          // I
+  [[1,1],[1,1]],                         // O
+  [[0,1,0],[1,1,1]],                     // T
+  [[1,0,0],[1,1,1]],                     // J
+  [[0,0,1],[1,1,1]],                     // L
+  [[0,1,1],[1,1,0]],                     // S
+  [[1,1,0],[0,1,1]]                      // Z
+];
+
+let board, piece, pX, pY, pType, nextType, score, lines, level, gameInterval, running, paused, lockTimer;
+let highscore = 0;
+
+function initBoard() {
+  board = Array.from({ length: ROWS }, () => Array(COLS).fill(-1));
+}
+
+function newPiece() {
+  pType = nextType !== undefined ? nextType : Math.floor(Math.random() * PIECES.length);
+  nextType = Math.floor(Math.random() * PIECES.length);
+  piece = PIECES[pType].map(r => [...r]);
+  pX = Math.floor((COLS - piece[0].length) / 2);
+  pY = 0;
+  if (collides(piece, pX, pY)) gameOver();
+  drawNext();
+}
+
+function collides(p, x, y) {
+  for (let r = 0; r < p.length; r++) {
+    for (let c = 0; c < p[r].length; c++) {
+      if (!p[r][c]) continue;
+      const nx = x + c, ny = y + r;
+      if (nx < 0 || nx >= COLS || ny >= ROWS) return true;
+      if (ny >= 0 && board[ny][nx] !== -1) return true;
+    }
+  }
+  return false;
+}
+
+function rotate(p) {
+  const rows = p.length, cols = p[0].length;
+  const rotated = Array.from({ length: cols }, () => Array(rows).fill(0));
+  for (let r = 0; r < rows; r++)
+    for (let c = 0; c < cols; c++)
+      rotated[c][rows - 1 - r] = p[r][c];
+  return rotated;
+}
+
+function lock() {
+  for (let r = 0; r < piece.length; r++)
+    for (let c = 0; c < piece[r].length; c++)
+      if (piece[r][c] && pY + r >= 0)
+        board[pY + r][pX + c] = pType;
+  clearLines();
+  newPiece();
+}
+
+function clearLines() {
+  let cleared = 0;
+  for (let r = ROWS - 1; r >= 0; r--) {
+    if (board[r].every(c => c !== -1)) {
+      board.splice(r, 1);
+      board.unshift(Array(COLS).fill(-1));
+      cleared++;
+      r++;
+    }
+  }
+  if (cleared > 0) {
+    const pts = [0, 100, 300, 500, 800][cleared] * level;
+    score += pts;
+    lines += cleared;
+    highscore = Math.max(highscore, score);
+    level = Math.floor(lines / 10) + 1;
+    clearInterval(gameInterval);
+    gameInterval = setInterval(tick, Math.max(50, 500 - (level - 1) * 45));
+    updateHUD();
+    flashLines(cleared);
+  }
+}
+
+function flashLines(n) { /* visual feedback handled in draw */ }
+
+function tick() {
+  if (!running || paused) return;
+  if (!collides(piece, pX, pY + 1)) {
+    pY++;
+  } else {
+    lock();
+  }
+  draw();
+}
+
+function getGhostY() {
+  let gy = pY;
+  while (!collides(piece, pX, gy + 1)) gy++;
+  return gy;
+}
+
+function draw() {
+  ctx.fillStyle = '#0d0d1a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Grid
+  ctx.strokeStyle = '#1a1a3a';
+  ctx.lineWidth = 0.5;
+  for (let c = 0; c <= COLS; c++) {
+    ctx.beginPath(); ctx.moveTo(c*CELL,0); ctx.lineTo(c*CELL,canvas.height); ctx.stroke();
+  }
+  for (let r = 0; r <= ROWS; r++) {
+    ctx.beginPath(); ctx.moveTo(0,r*CELL); ctx.lineTo(canvas.width,r*CELL); ctx.stroke();
+  }
+
+  // Board
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      if (board[r][c] !== -1) drawCell(ctx, c, r, COLORS[board[r][c]]);
+    }
+  }
+
+  // Ghost piece
+  if (running && piece) {
+    const gy = getGhostY();
+    ctx.globalAlpha = 0.25;
+    for (let r = 0; r < piece.length; r++)
+      for (let c = 0; c < piece[r].length; c++)
+        if (piece[r][c]) drawCell(ctx, pX+c, gy+r, COLORS[pType]);
+    ctx.globalAlpha = 1;
+  }
+
+  // Active piece
+  if (piece) {
+    for (let r = 0; r < piece.length; r++)
+      for (let c = 0; c < piece[r].length; c++)
+        if (piece[r][c]) drawCell(ctx, pX+c, pY+r, COLORS[pType]);
+  }
+
+  // Pause overlay
+  if (paused) {
+    ctx.fillStyle = 'rgba(0,0,0,0.6)';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = '#e94560';
+    ctx.font = 'bold 36px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText('PAUSE', canvas.width/2, canvas.height/2);
+  }
+}
+
+function drawCell(c, x, y, color) {
+  const px = x * CELL, py = y * CELL;
+  c.fillStyle = color;
+  c.fillRect(px+1, py+1, CELL-2, CELL-2);
+  c.fillStyle = 'rgba(255,255,255,0.25)';
+  c.fillRect(px+1, py+1, CELL-2, 4);
+  c.fillRect(px+1, py+1, 4, CELL-2);
+  c.fillStyle = 'rgba(0,0,0,0.25)';
+  c.fillRect(px+1, py+CELL-5, CELL-2, 4);
+  c.fillRect(px+CELL-5, py+1, 4, CELL-2);
+}
+
+function drawNext() {
+  nctx.fillStyle = '#16213e';
+  nctx.fillRect(0,0,nextCanvas.width,nextCanvas.height);
+  const p = PIECES[nextType];
+  const offX = Math.floor((4 - p[0].length) / 2);
+  const offY = Math.floor((4 - p.length) / 2);
+  for (let r = 0; r < p.length; r++)
+    for (let c = 0; c < p[r].length; c++)
+      if (p[r][c]) drawCell(nctx, offX+c, offY+r, COLORS[nextType]);
+}
+
+function updateHUD() {
+  document.getElementById('score').textContent = score;
+  document.getElementById('lines').textContent = lines;
+  document.getElementById('level').textContent = level;
+}
+
+function startGame() {
+  initBoard();
+  score = 0; lines = 0; level = 1; running = true; paused = false;
+  updateHUD();
+  nextType = Math.floor(Math.random() * PIECES.length);
+  newPiece();
+  clearInterval(gameInterval);
+  gameInterval = setInterval(tick, 500);
+  document.getElementById('startBtn').textContent = 'リスタート';
+  draw();
+}
+
+function gameOver() {
+  running = false;
+  clearInterval(gameInterval);
+  highscore = Math.max(highscore, score);
+  ctx.fillStyle = 'rgba(0,0,0,0.75)';
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#e94560';
+  ctx.font = 'bold 32px Courier New';
+  ctx.textAlign = 'center';
+  ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2 - 20);
+  ctx.fillStyle = '#eee';
+  ctx.font = '22px Courier New';
+  ctx.fillText(`Score: ${score}`, canvas.width/2, canvas.height/2 + 20);
+}
+
+document.addEventListener('keydown', e => {
+  if (!running) return;
+  if (e.key === 'p' || e.key === 'P') { paused = !paused; draw(); return; }
+  if (paused) return;
+  switch (e.key) {
+    case 'ArrowLeft': if (!collides(piece, pX-1, pY)) { pX--; draw(); } break;
+    case 'ArrowRight': if (!collides(piece, pX+1, pY)) { pX++; draw(); } break;
+    case 'ArrowDown':
+      if (!collides(piece, pX, pY+1)) { pY++; score++; } else lock();
+      draw(); break;
+    case 'ArrowUp': case 'z': case 'Z': {
+      const r = rotate(piece);
+      if (!collides(r, pX, pY)) { piece = r; }
+      else if (!collides(r, pX+1, pY)) { piece = r; pX++; }
+      else if (!collides(r, pX-1, pY)) { piece = r; pX--; }
+      draw(); break;
+    }
+    case ' ': {
+      while (!collides(piece, pX, pY+1)) { pY++; score += 2; }
+      lock(); draw(); break;
+    }
+  }
+  e.preventDefault();
+});
+
+draw();
+</script>
+</body>
+</html>
