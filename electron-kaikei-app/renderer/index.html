@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title>会計帳簿作成システム</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- サイドバー -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <h1>会計帳簿<br>作成システム</h1>
+        <div class="fiscal-year-selector">
+          <label>会計年度</label>
+          <select id="fiscalYear"></select>
+        </div>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item active" data-page="shiwake">
+          <span class="nav-icon">📋</span>
+          <span>仕訳帳</span>
+        </li>
+        <li class="nav-item" data-page="sokanjo">
+          <span class="nav-icon">📒</span>
+          <span>総勘定元帳</span>
+        </li>
+        <li class="nav-item" data-page="shisan">
+          <span class="nav-icon">📊</span>
+          <span>試算表</span>
+        </li>
+        <li class="nav-item" data-page="taishaku">
+          <span class="nav-icon">⚖️</span>
+          <span>貸借対照表</span>
+        </li>
+        <li class="nav-item" data-page="soneki">
+          <span class="nav-icon">📈</span>
+          <span>損益計算書</span>
+        </li>
+        <li class="nav-item" data-page="kanjo-master">
+          <span class="nav-icon">⚙️</span>
+          <span>勘定科目マスタ</span>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <button id="btn-export-csv" class="btn btn-secondary btn-sm">
+          CSV出力
+        </button>
+      </div>
+    </nav>
+
+    <!-- メインコンテンツ -->
+    <main id="main-content">
+      <!-- 仕訳帳ページ -->
+      <div id="page-shiwake" class="page active">
+        <div class="page-header">
+          <h2>仕訳帳</h2>
+          <div class="page-actions">
+            <div class="date-range">
+              <input type="date" id="filter-date-from" class="form-control">
+              <span>〜</span>
+              <input type="date" id="filter-date-to" class="form-control">
+              <button id="btn-filter" class="btn btn-primary btn-sm">絞り込み</button>
+            </div>
+            <button id="btn-add-shiwake" class="btn btn-success">＋ 仕訳入力</button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="shiwake-table" class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 50px">No.</th>
+                <th style="width: 110px">日付</th>
+                <th style="width: 180px">借方科目</th>
+                <th style="width: 130px">借方金額</th>
+                <th style="width: 180px">貸方科目</th>
+                <th style="width: 130px">貸方金額</th>
+                <th>摘要</th>
+                <th style="width: 80px">操作</th>
+              </tr>
+            </thead>
+            <tbody id="shiwake-tbody">
+              <!-- JS で動的に生成 -->
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-right"><strong>合計</strong></td>
+                <td id="shiwake-total-debit" class="text-right amount">¥0</td>
+                <td></td>
+                <td id="shiwake-total-credit" class="text-right amount">¥0</td>
+                <td colspan="2"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- 総勘定元帳ページ -->
+      <div id="page-sokanjo" class="page">
+        <div class="page-header">
+          <h2>総勘定元帳</h2>
+          <div class="page-actions">
+            <select id="sokanjo-kanjo-select" class="form-control">
+              <option value="">勘定科目を選択</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table id="sokanjo-table" class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 110px">日付</th>
+                <th>摘要</th>
+                <th style="width: 130px">借方</th>
+                <th style="width: 130px">貸方</th>
+                <th style="width: 130px">残高</th>
+              </tr>
+            </thead>
+            <tbody id="sokanjo-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 試算表ページ -->
+      <div id="page-shisan" class="page">
+        <div class="page-header">
+          <h2>試算表</h2>
+          <div class="page-actions">
+            <button id="btn-refresh-shisan" class="btn btn-primary btn-sm">更新</button>
+          </div>
+        </div>
+
+        <div class="shisan-container">
+          <table id="shisan-table" class="data-table shisan-table">
+            <thead>
+              <tr>
+                <th>勘定科目</th>
+                <th style="width: 130px">借方合計</th>
+                <th style="width: 130px">貸方合計</th>
+                <th style="width: 130px">残高（借方）</th>
+                <th style="width: 130px">残高（貸方）</th>
+              </tr>
+            </thead>
+            <tbody id="shisan-tbody">
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td><strong>合計</strong></td>
+                <td id="shisan-total-debit" class="text-right amount"></td>
+                <td id="shisan-total-credit" class="text-right amount"></td>
+                <td id="shisan-balance-debit" class="text-right amount"></td>
+                <td id="shisan-balance-credit" class="text-right amount"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+      <!-- 貸借対照表ページ -->
+      <div id="page-taishaku" class="page">
+        <div class="page-header">
+          <h2>貸借対照表</h2>
+        </div>
+        <div class="bs-container">
+          <div class="bs-columns">
+            <div class="bs-column">
+              <h3 class="bs-column-title">資産の部</h3>
+              <div id="bs-assets"></div>
+              <div class="bs-total">
+                <strong>資産合計</strong>
+                <span id="bs-total-assets" class="amount">¥0</span>
+              </div>
+            </div>
+            <div class="bs-column">
+              <h3 class="bs-column-title">負債・純資産の部</h3>
+              <div id="bs-liabilities"></div>
+              <div class="bs-total">
+                <strong>負債・純資産合計</strong>
+                <span id="bs-total-liabilities" class="amount">¥0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 損益計算書ページ -->
+      <div id="page-soneki" class="page">
+        <div class="page-header">
+          <h2>損益計算書</h2>
+        </div>
+        <div class="pl-container">
+          <table class="data-table pl-table">
+            <tbody id="pl-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 勘定科目マスタページ -->
+      <div id="page-kanjo-master" class="page">
+        <div class="page-header">
+          <h2>勘定科目マスタ</h2>
+          <div class="page-actions">
+            <button id="btn-add-kanjo" class="btn btn-success">＋ 科目追加</button>
+          </div>
+        </div>
+        <div class="table-container">
+          <table id="kanjo-table" class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 80px">コード</th>
+                <th>科目名</th>
+                <th style="width: 150px">分類</th>
+                <th style="width: 100px">残高種別</th>
+                <th style="width: 80px">操作</th>
+              </tr>
+            </thead>
+            <tbody id="kanjo-tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 仕訳入力モーダル -->
+  <div id="modal-shiwake" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="modal-shiwake-title">仕訳入力</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-shiwake">
+          <input type="hidden" id="shiwake-id">
+          <div class="form-row">
+            <div class="form-group">
+              <label>日付 <span class="required">*</span></label>
+              <input type="date" id="input-date" class="form-control" required>
+            </div>
+          </div>
+          <div class="form-row form-row-2col">
+            <div class="form-group">
+              <label>借方科目 <span class="required">*</span></label>
+              <select id="input-debit-kanjo" class="form-control" required>
+                <option value="">選択してください</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>借方金額 <span class="required">*</span></label>
+              <input type="number" id="input-debit-amount" class="form-control text-right" min="0" required>
+            </div>
+          </div>
+          <div class="form-row form-row-2col">
+            <div class="form-group">
+              <label>貸方科目 <span class="required">*</span></label>
+              <select id="input-credit-kanjo" class="form-control" required>
+                <option value="">選択してください</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>貸方金額 <span class="required">*</span></label>
+              <input type="number" id="input-credit-amount" class="form-control text-right" min="0" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>摘要</label>
+              <input type="text" id="input-description" class="form-control" maxlength="200">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-cancel">キャンセル</button>
+        <button type="button" id="btn-save-shiwake" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 勘定科目マスタ入力モーダル -->
+  <div id="modal-kanjo" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>勘定科目</h3>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="form-kanjo">
+          <input type="hidden" id="kanjo-id">
+          <div class="form-row form-row-2col">
+            <div class="form-group">
+              <label>コード <span class="required">*</span></label>
+              <input type="text" id="input-kanjo-code" class="form-control" maxlength="10" required>
+            </div>
+            <div class="form-group">
+              <label>科目名 <span class="required">*</span></label>
+              <input type="text" id="input-kanjo-name" class="form-control" maxlength="50" required>
+            </div>
+          </div>
+          <div class="form-row form-row-2col">
+            <div class="form-group">
+              <label>分類 <span class="required">*</span></label>
+              <select id="input-kanjo-category" class="form-control" required>
+                <option value="">選択してください</option>
+                <option value="資産">資産</option>
+                <option value="負債">負債</option>
+                <option value="純資産">純資産</option>
+                <option value="収益">収益</option>
+                <option value="費用">費用</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>残高種別</label>
+              <select id="input-kanjo-balance-type" class="form-control">
+                <option value="debit">借方残高</option>
+                <option value="credit">貸方残高</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal-cancel">キャンセル</button>
+        <button type="button" id="btn-save-kanjo" class="btn btn-primary">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- トースト通知 -->
+  <div id="toast-container"></div>
+
+  <script src="js/db.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
