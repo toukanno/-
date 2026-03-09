@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0a0a0a; color: #eee; }
+    .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg, #1a1a2e, #16213e); }
+    .hero h1 { font-size: 3rem; margin-bottom: 16px; background: linear-gradient(90deg, #00f0ff, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero p { font-size: 1.2rem; color: #aaa; }
+    .projects { max-width: 1100px; margin: 80px auto; padding: 0 20px; }
+    .projects h2 { font-size: 2rem; text-align: center; margin-bottom: 40px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
+    .card { background: #1a1a2e; border-radius: 12px; padding: 24px; border: 1px solid #2a2a4a; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-4px); }
+    .card h3 { font-size: 1.1rem; margin-bottom: 10px; color: #00f0ff; }
+    .card p { color: #999; font-size: 0.9rem; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <h1>Toukanno</h1>
+    <p>Full Stack Developer / Creative Coder</p>
+  </section>
+  <section class="projects">
+    <h2>Projects</h2>
+    <div class="grid">
+      <div class="card"><h3>Web App</h3><p>モダンなWebアプリケーション開発</p></div>
+      <div class="card"><h3>Mobile App</h3><p>React NativeによるモバイルアプリUI</p></div>
+      <div class="card"><h3>API Server</h3><p>Node.js + Express RESTful API</p></div>
+    </div>
+  </section>
+</body>
+</html>

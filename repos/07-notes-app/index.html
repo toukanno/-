@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notes App</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #fafafa; height: 100vh; display: flex; flex-direction: column; }
+    header { background: #fbbf24; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.4rem; color: #1c1917; }
+    .new-btn { background: #1c1917; color: white; border: none; padding: 8px 18px; border-radius: 6px; cursor: pointer; }
+    .main { display: flex; flex: 1; overflow: hidden; }
+    .sidebar { width: 280px; background: white; border-right: 1px solid #e5e5e5; overflow-y: auto; }
+    .search { padding: 12px; border-bottom: 1px solid #e5e5e5; }
+    .search input { width: 100%; padding: 8px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.9rem; outline: none; }
+    .note-item { padding: 16px; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+    .note-item:hover { background: #fff8e1; }
+    .note-item.active { background: #fef3c7; border-left: 3px solid #fbbf24; }
+    .note-item h3 { font-size: 0.95rem; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .note-item .date { font-size: 0.75rem; color: #999; }
+    .editor { flex: 1; display: flex; flex-direction: column; }
+    .editor textarea { flex: 1; border: none; padding: 24px; font-size: 1rem; font-family: monospace; resize: none; outline: none; background: #fafafa; }
+    .editor .bar { padding: 8px 24px; background: white; border-top: 1px solid #eee; font-size: 0.8rem; color: #999; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Notes</h1>
+    <button class="new-btn" onclick="newNote()">+ 新規</button>
+  </header>
+  <div class="main">
+    <div class="sidebar">
+      <div class="search"><input type="text" placeholder="検索..." oninput="search(this.value)" /></div>
+      <div id="noteList"></div>
+    </div>
+    <div class="editor">
+      <textarea id="editor" placeholder="ここにメモを入力..." oninput="saveNote()"></textarea>
+      <div class="bar" id="bar">ノートを選択または新規作成してください</div>
+    </div>
+  </div>
+  <script>
+    let notes = JSON.parse(localStorage.getItem('notes') || '[{"id":1,"title":"はじめてのノート","content":"# はじめてのノート\\nMarkdownが使えます！","date":"2026-03-09"}]');
+    let current = notes[0]?.id || null;
+    function save() { localStorage.setItem('notes', JSON.stringify(notes)); }
+    function render(filter = '') {
+      const list = document.getElementById('noteList');
+      const filtered = notes.filter(n => n.content.includes(filter) || n.title.includes(filter));
+      list.innerHTML = filtered.map(n => `<div class="note-item ${n.id === current ? 'active' : ''}" onclick="select(${n.id})">
+        <h3>${n.title || '無題'}</h3>
+        <div class="date">${n.date}</div>
+      </div>`).join('');
+      const note = notes.find(n => n.id === current);
+      if (note) {
+        document.getElementById('editor').value = note.content;
+        document.getElementById('bar').textContent = `${note.content.length} 文字`;
+      }
+    }
+    function select(id) { current = id; render(); }
+    function newNote() {
+      const note = { id: Date.now(), title: '新しいノート', content: '', date: new Date().toLocaleDateString('ja-JP') };
+      notes.unshift(note); current = note.id; save(); render();
+    }
+    function saveNote() {
+      const note = notes.find(n => n.id === current);
+      if (!note) return;
+      note.content = document.getElementById('editor').value;
+      note.title = note.content.split('\n')[0].replace(/^#+ /, '') || '無題';
+      save(); render();
+    }
+    function search(v) { render(v); }
+    render();
+  </script>
+</body>
+</html>

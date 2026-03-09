@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #0f0f0f; color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .player { background: linear-gradient(145deg, #1a1a2e, #16213e); border-radius: 24px; padding: 32px; width: 360px; box-shadow: 0 24px 64px rgba(0,0,0,0.6); }
+    .album-art { width: 200px; height: 200px; margin: 0 auto 24px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #ec4899); display: flex; align-items: center; justify-content: center; font-size: 4rem; animation: spin 4s linear infinite paused; box-shadow: 0 8px 32px rgba(139,92,246,0.4); }
+    .album-art.playing { animation-play-state: running; }
+    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .song-title { text-align: center; font-size: 1.1rem; font-weight: bold; margin-bottom: 4px; }
+    .artist { text-align: center; color: #8b8b9a; font-size: 0.85rem; margin-bottom: 24px; }
+    .progress-wrap { margin-bottom: 8px; }
+    .progress { width: 100%; height: 4px; background: #2a2a3e; border-radius: 2px; cursor: pointer; appearance: none; outline: none; }
+    .progress::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #8b5cf6; cursor: pointer; }
+    .time { display: flex; justify-content: space-between; font-size: 0.75rem; color: #666; margin-bottom: 24px; }
+    .controls { display: flex; align-items: center; justify-content: center; gap: 24px; margin-bottom: 20px; }
+    .ctrl-btn { background: none; border: none; color: #8b8b9a; cursor: pointer; font-size: 1.2rem; transition: color 0.15s; }
+    .ctrl-btn:hover { color: white; }
+    .play-btn { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #8b5cf6, #ec4899); border: none; color: white; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(139,92,246,0.4); }
+    .volume { display: flex; align-items: center; gap: 10px; }
+    .vol-slider { flex: 1; height: 4px; appearance: none; background: #2a2a3e; border-radius: 2px; outline: none; }
+    .vol-slider::-webkit-slider-thumb { appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #666; cursor: pointer; }
+    .playlist { margin-top: 20px; border-top: 1px solid #1a1a2e; padding-top: 16px; max-height: 140px; overflow-y: auto; }
+    .pl-item { padding: 8px 12px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+    .pl-item:hover { background: rgba(139,92,246,0.15); }
+    .pl-item.active { background: rgba(139,92,246,0.25); color: #c4b5fd; }
+    .pl-num { color: #666; font-size: 0.8rem; width: 20px; }
+    .pl-info { flex: 1; }
+    .pl-info .title { font-size: 0.85rem; }
+    .pl-info .dur { font-size: 0.75rem; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <div class="album-art" id="albumArt">🎵</div>
+    <div class="song-title" id="songTitle">Midnight Drive</div>
+    <div class="artist" id="artistName">Lo-Fi Beats</div>
+    <div class="progress-wrap">
+      <input type="range" class="progress" id="progress" value="0" min="0" max="100">
+    </div>
+    <div class="time"><span id="current">0:00</span><span id="total">3:42</span></div>
+    <div class="controls">
+      <button class="ctrl-btn" onclick="prev()">⏮</button>
+      <button class="ctrl-btn" onclick="toggleShuffle()">🔀</button>
+      <button class="play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+      <button class="ctrl-btn" onclick="toggleRepeat()">🔁</button>
+      <button class="ctrl-btn" onclick="next()">⏭</button>
+    </div>
+    <div class="volume">🔈 <input type="range" class="vol-slider" value="70" min="0" max="100"> 🔊</div>
+    <div class="playlist" id="playlist"></div>
+  </div>
+  <script>
+    const songs = [
+      { title: 'Midnight Drive', artist: 'Lo-Fi Beats', dur: '3:42', emoji: '🌙' },
+      { title: 'Summer Vibes', artist: 'Chill Wave', dur: '4:15', emoji: '☀️' },
+      { title: 'Rainy Day', artist: 'Ambient Co.', dur: '3:55', emoji: '🌧️' },
+      { title: 'City Lights', artist: 'Urban Sound', dur: '2:58', emoji: '🌆' },
+    ];
+    let current = 0, playing = false, progress = 0, interval;
+    function updateUI() {
+      const s = songs[current];
+      document.getElementById('albumArt').textContent = s.emoji;
+      document.getElementById('songTitle').textContent = s.title;
+      document.getElementById('artistName').textContent = s.artist;
+      document.getElementById('total').textContent = s.dur;
+      document.querySelectorAll('.pl-item').forEach((el, i) => el.classList.toggle('active', i === current));
+    }
+    function togglePlay() {
+      playing = !playing;
+      document.getElementById('playBtn').textContent = playing ? '⏸' : '▶';
+      document.getElementById('albumArt').classList.toggle('playing', playing);
+      if (playing) {
+        interval = setInterval(() => {
+          progress = Math.min(progress + 0.5, 100);
+          document.getElementById('progress').value = progress;
+          const secs = Math.floor(progress / 100 * 222);
+          document.getElementById('current').textContent = `${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')}`;
+          if (progress >= 100) { progress = 0; next(); }
+        }, 500);
+      } else clearInterval(interval);
+    }
+    function next() { current = (current + 1) % songs.length; progress = 0; updateUI(); }
+    function prev() { current = (current - 1 + songs.length) % songs.length; progress = 0; updateUI(); }
+    function toggleShuffle() {}
+    function toggleRepeat() {}
+    document.getElementById('playlist').innerHTML = songs.map((s, i) => `
+      <div class="pl-item ${i === 0 ? 'active' : ''}" onclick="current=${i};progress=0;updateUI()">
+        <span class="pl-num">${i+1}</span>
+        <div class="pl-info"><div class="title">${s.title}</div><div class="dur">${s.dur}</div></div>
+        <span>${s.emoji}</span>
+      </div>`).join('');
+    updateUI();
+  </script>
+</body>
+</html>
