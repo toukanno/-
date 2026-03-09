@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Match</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    color: white;
+    padding: 20px;
+  }
+  h1 { font-size: 2em; margin-bottom: 10px; }
+  #hud { display: flex; gap: 30px; margin-bottom: 15px; font-size: 1.1em; }
+  #hud span { background: rgba(255,255,255,0.1); padding: 6px 16px; border-radius: 20px; }
+  #grid {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  .card {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    cursor: pointer;
+    perspective: 600px;
+    transition: transform 0.1s;
+  }
+  .card:hover { transform: scale(1.05); }
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+    border-radius: 10px;
+  }
+  .card.flipped .card-inner { transform: rotateY(180deg); }
+  .card-front, .card-back {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    font-size: 2.2em;
+  }
+  .card-front {
+    background: linear-gradient(135deg, #0f3460, #533483);
+    border: 2px solid #534b8a;
+    color: #534b8a;
+    font-size: 1.5em;
+  }
+  .card-back {
+    background: linear-gradient(135deg, #1a1a2e, #283593);
+    border: 2px solid #5c6bc0;
+    transform: rotateY(180deg);
+  }
+  .card.matched .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card.matched .card-back {
+    background: linear-gradient(135deg, #1b5e20, #388e3c);
+    border-color: #66bb6a;
+    animation: matchPulse 0.5s ease;
+  }
+  @keyframes matchPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+  button {
+    padding: 10px 28px;
+    font-size: 1em;
+    background: #e94560;
+    border: none;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  button:hover { background: #c73652; }
+  select {
+    padding: 8px 15px;
+    font-size: 1em;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+  #result {
+    font-size: 1.3em;
+    margin-bottom: 10px;
+    min-height: 30px;
+    color: #ffd700;
+  }
+</style>
+</head>
+<body>
+<h1>🎴 MEMORY MATCH</h1>
+<div id="hud">
+  <span>手数: <span id="moves">0</span></span>
+  <span>マッチ: <span id="matched">0</span>/<span id="total">0</span></span>
+  <span>タイム: <span id="timer">0</span>s</span>
+</div>
+<div id="result"></div>
+<div>
+  <select id="difficulty" onchange="newGame()">
+    <option value="4">かんたん (4×4)</option>
+    <option value="5" selected>ふつう (5×4)</option>
+    <option value="6">むずかしい (6×5)</option>
+  </select>
+  <button onclick="newGame()">新しいゲーム</button>
+</div>
+<br>
+<div id="grid"></div>
+
+<script>
+const EMOJIS = ['🎮','🎯','🎲','🎪','🎭','🎨','🎬','🎸','🎺','🎻','🎹','🥁',
+                '🎤','🎧','🎵','🎶','🏆','🎖','🥇','🏅','🎁','🎀','🎊','🎉',
+                '🌟','⭐','💫','✨','🌈','🌙','☀️','🌺'];
+
+let cards = [], flipped = [], matched = 0, moves = 0;
+let timerInterval, startTime, canFlip = true;
+
+function newGame() {
+  const diff = parseInt(document.getElementById('difficulty').value);
+  const cols = diff, rows = diff === 4 ? 4 : diff === 5 ? 4 : 5;
+  const total = cols * rows;
+  const pairs = total / 2;
+
+  clearInterval(timerInterval);
+  moves = 0; matched = 0; flipped = []; canFlip = true;
+  document.getElementById('moves').textContent = 0;
+  document.getElementById('matched').textContent = 0;
+  document.getElementById('total').textContent = pairs;
+  document.getElementById('timer').textContent = 0;
+  document.getElementById('result').textContent = '';
+
+  const emojis = EMOJIS.slice(0, pairs);
+  const deck = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
+
+  const grid = document.getElementById('grid');
+  grid.style.gridTemplateColumns = `repeat(${cols}, 70px)`;
+  grid.innerHTML = '';
+  cards = [];
+
+  deck.forEach((emoji, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="card-inner">
+        <div class="card-front">?</div>
+        <div class="card-back">${emoji}</div>
+      </div>`;
+    card.dataset.emoji = emoji;
+    card.dataset.index = i;
+    card.addEventListener('click', () => flipCard(card));
+    grid.appendChild(card);
+    cards.push(card);
+  });
+
+  // Brief peek at start
+  cards.forEach(c => c.classList.add('flipped'));
+  setTimeout(() => {
+    cards.forEach(c => c.classList.remove('flipped'));
+    startTime = Date.now();
+    timerInterval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      document.getElementById('timer').textContent = elapsed;
+    }, 1000);
+  }, 1200);
+}
+
+function flipCard(card) {
+  if (!canFlip) return;
+  if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+  if (flipped.length >= 2) return;
+
+  card.classList.add('flipped');
+  flipped.push(card);
+
+  if (flipped.length === 2) {
+    moves++;
+    document.getElementById('moves').textContent = moves;
+    canFlip = false;
+
+    if (flipped[0].dataset.emoji === flipped[1].dataset.emoji) {
+      flipped.forEach(c => {
+        c.classList.add('matched');
+        c.style.pointerEvents = 'none';
+      });
+      matched++;
+      document.getElementById('matched').textContent = matched;
+      flipped = [];
+      canFlip = true;
+
+      const totalPairs = cards.length / 2;
+      if (matched === totalPairs) {
+        clearInterval(timerInterval);
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        document.getElementById('result').textContent =
+          `🎉 クリア！ ${moves}手 / ${elapsed}秒`;
+      }
+    } else {
+      setTimeout(() => {
+        flipped.forEach(c => c.classList.remove('flipped'));
+        flipped = [];
+        canFlip = true;
+      }, 900);
+    }
+  }
+}
+
+newGame();
+</script>
+</body>
+</html>

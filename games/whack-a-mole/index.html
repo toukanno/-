@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Whack-a-Mole</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(180deg, #87CEEB 0%, #98D77E 60%, #7ab648 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    user-select: none;
+  }
+  h1 { font-size: 2.2em; color: #4a2c00; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); margin-bottom: 10px; }
+  #hud {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 15px;
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #4a2c00;
+  }
+  #hud span {
+    background: rgba(255,255,255,0.7);
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 3px solid #4a2c00;
+  }
+  #grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  .hole {
+    width: 130px;
+    height: 130px;
+    background: radial-gradient(ellipse at 50% 80%, #3d1f00 0%, #6b3a1f 40%, #8b5a2b 100%);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border: 4px solid #4a2c00;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4), inset 0 -4px 10px rgba(0,0,0,0.5);
+  }
+  .mole {
+    position: absolute;
+    bottom: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 75px;
+    transition: bottom 0.12s ease-out;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.4));
+    pointer-events: none;
+    line-height: 1;
+  }
+  .hole.active .mole { bottom: -5%; }
+  .hole.hit .mole { filter: brightness(0) saturate(0) drop-shadow(0 0 8px #ff0); }
+  .hit-effect {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 28px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+    animation: floatUp 0.7s ease-out forwards;
+    pointer-events: none;
+    z-index: 10;
+  }
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-60px); }
+  }
+  button {
+    padding: 14px 40px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #ff6b35;
+    border: none;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.2s;
+  }
+  button:hover { background: #e55a2a; transform: scale(1.05); }
+  #difficulty {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+  }
+  .diff-btn {
+    padding: 8px 20px;
+    font-size: 0.95em;
+    background: rgba(255,255,255,0.5);
+    border: 3px solid #4a2c00;
+    color: #4a2c00;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .diff-btn.active { background: #ff6b35; color: white; border-color: #ff6b35; }
+  #overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: white;
+  }
+  #overlay h2 { font-size: 3em; }
+  #overlay p { font-size: 1.5em; }
+  #combo {
+    font-size: 1.1em;
+    color: #4a2c00;
+    font-weight: bold;
+    min-height: 30px;
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+<h1>🔨 モグラたたき</h1>
+<div id="hud">
+  <span>スコア: <span id="score">0</span></span>
+  <span>残り: <span id="timer">30</span>s</span>
+  <span>ミス: <span id="miss">0</span></span>
+</div>
+<div id="combo"></div>
+<div id="difficulty">
+  <button class="diff-btn active" onclick="setDiff('easy')">かんたん</button>
+  <button class="diff-btn" onclick="setDiff('normal')">ふつう</button>
+  <button class="diff-btn" onclick="setDiff('hard')">むずかしい</button>
+</div>
+<div id="grid"></div>
+<button id="startBtn" onclick="startGame()">スタート</button>
+
+<div id="overlay">
+  <h2>🔨 モグラたたき</h2>
+  <p>モグラが出てきたらすばやくたたこう！</p>
+  <button onclick="startGame()" style="font-size:1.2em">スタート</button>
+</div>
+
+<script>
+const HOLES = 9;
+const MOLE_TYPES = [
+  { emoji: '🐭', points: 10, speed: 1.0 },
+  { emoji: '🐹', points: 20, speed: 0.7 },
+  { emoji: '💎', points: 50, speed: 0.5 },
+  { emoji: '💣', points: -30, speed: 0.8 }
+];
+
+let holes = [], score = 0, miss = 0, timeLeft = 30, gameTimer, moleTimers = [];
+let combo = 0, comboTimer;
+let difficulty = 'normal';
+let running = false;
+
+const DIFF_SETTINGS = {
+  easy: { moleTime: 1800, spawnRate: 2000, bombChance: 0 },
+  normal: { moleTime: 1200, spawnRate: 1400, bombChance: 0.1 },
+  hard: { moleTime: 800, spawnRate: 1000, bombChance: 0.2 }
+};
+
+function setDiff(d) {
+  difficulty = d;
+  document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function createGrid() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  holes = [];
+  for (let i = 0; i < HOLES; i++) {
+    const hole = document.createElement('div');
+    hole.className = 'hole';
+    const moleType = MOLE_TYPES[0];
+    hole.innerHTML = `<div class="mole">${moleType.emoji}</div>`;
+    hole.addEventListener('click', () => whack(i));
+    grid.appendChild(hole);
+    holes.push({ el: hole, active: false, type: null });
+  }
+}
+
+function showMole(i) {
+  if (!running || holes[i].active) return;
+  const settings = DIFF_SETTINGS[difficulty];
+  const usesBomb = Math.random() < settings.bombChance;
+  const typeIndex = usesBomb ? 3 :
+    Math.random() < 0.6 ? 0 :
+    Math.random() < 0.7 ? 1 : 2;
+  const type = MOLE_TYPES[typeIndex];
+  holes[i].active = true;
+  holes[i].type = type;
+  holes[i].el.querySelector('.mole').textContent = type.emoji;
+  holes[i].el.classList.add('active');
+
+  moleTimers[i] = setTimeout(() => {
+    if (holes[i].active && running) {
+      hideMole(i, true);
+    }
+  }, settings.moleTime);
+}
+
+function hideMole(i, missed = false) {
+  clearTimeout(moleTimers[i]);
+  if (missed && holes[i].type && holes[i].type !== MOLE_TYPES[3]) {
+    miss++;
+    combo = 0;
+    document.getElementById('miss').textContent = miss;
+    updateComboDisplay();
+  }
+  holes[i].active = false;
+  holes[i].type = null;
+  holes[i].el.classList.remove('active', 'hit');
+}
+
+function whack(i) {
+  if (!running || !holes[i].active) return;
+  const type = holes[i].type;
+  const pts = type.points;
+
+  if (type === MOLE_TYPES[3]) {
+    // Bomb!
+    score = Math.max(0, score + pts);
+    combo = 0;
+    showHitEffect(holes[i].el, pts);
+  } else {
+    combo++;
+    clearTimeout(comboTimer);
+    const multiplier = Math.min(combo, 5);
+    const earned = pts * multiplier;
+    score += earned;
+    showHitEffect(holes[i].el, '+' + earned + (multiplier > 1 ? ` x${multiplier}!` : ''));
+    comboTimer = setTimeout(() => { combo = 0; updateComboDisplay(); }, 2000);
+  }
+
+  updateComboDisplay();
+  document.getElementById('score').textContent = score;
+  holes[i].el.classList.add('hit');
+  setTimeout(() => hideMole(i), 150);
+}
+
+function showHitEffect(el, text) {
+  const effect = document.createElement('div');
+  effect.className = 'hit-effect';
+  effect.textContent = text;
+  el.appendChild(effect);
+  setTimeout(() => effect.remove(), 700);
+}
+
+function updateComboDisplay() {
+  const el = document.getElementById('combo');
+  if (combo >= 2) {
+    el.textContent = `🔥 ${combo} コンボ！`;
+    el.style.color = combo >= 4 ? '#ff4444' : '#ff8800';
+  } else {
+    el.textContent = '';
+  }
+}
+
+function spawnMoles() {
+  if (!running) return;
+  const settings = DIFF_SETTINGS[difficulty];
+  const emptyHoles = holes.map((h, i) => !h.active ? i : -1).filter(i => i >= 0);
+  if (emptyHoles.length > 0) {
+    const idx = emptyHoles[Math.floor(Math.random() * emptyHoles.length)];
+    showMole(idx);
+  }
+  setTimeout(spawnMoles, settings.spawnRate * (0.8 + Math.random() * 0.4));
+}
+
+function startGame() {
+  document.getElementById('overlay').style.display = 'none';
+  createGrid();
+  score = 0; miss = 0; timeLeft = 30; combo = 0; running = true;
+  document.getElementById('score').textContent = 0;
+  document.getElementById('miss').textContent = 0;
+  document.getElementById('timer').textContent = 30;
+  document.getElementById('combo').textContent = '';
+
+  clearInterval(gameTimer);
+  gameTimer = setInterval(() => {
+    timeLeft--;
+    document.getElementById('timer').textContent = timeLeft;
+    if (timeLeft <= 0) endGame();
+  }, 1000);
+
+  spawnMoles();
+}
+
+function endGame() {
+  running = false;
+  clearInterval(gameTimer);
+  moleTimers.forEach(t => clearTimeout(t));
+  holes.forEach((h, i) => hideMole(i));
+
+  const overlay = document.getElementById('overlay');
+  overlay.innerHTML = `
+    <h2>ゲーム終了！</h2>
+    <p>スコア: <strong>${score}</strong></p>
+    <p>ミス: ${miss}回 | コンボ最高: ${combo}</p>
+    <button onclick="startGame()" style="font-size:1.1em;padding:12px 35px">もう一度</button>
+  `;
+  overlay.style.display = 'flex';
+}
+
+createGrid();
+</script>
+</body>
+</html>

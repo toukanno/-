@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maze Runner</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0d0d1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+    color: #00ffcc;
+  }
+  h1 { font-size: 1.8em; margin-bottom: 8px; text-shadow: 0 0 10px #00ffcc; }
+  #hud { display: flex; gap: 30px; margin-bottom: 8px; font-size: 1em; }
+  canvas { border: 2px solid #00ffcc; box-shadow: 0 0 20px #00ffcc44; }
+  #controls { margin-top: 8px; font-size: 0.8em; color: #888; }
+</style>
+</head>
+<body>
+<h1>🌀 MAZE RUNNER</h1>
+<div id="hud">
+  <span>レベル: <span id="level">1</span></span>
+  <span>タイム: <span id="timer">0</span>s</span>
+  <span>ベスト: <span id="best">--</span>s</span>
+</div>
+<canvas id="canvas" width="480" height="480"></canvas>
+<div id="controls">↑↓←→ または WASD で移動 | Rで再生成</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const CELL = 24;
+let COLS, ROWS;
+let maze, player, goal, level = 1;
+let startTime, timerInterval, elapsed = 0;
+let best = {};
+let state = 'playing';
+let visitedCells = new Set();
+let keys = {};
+
+function initMaze() {
+  const size = Math.min(15, 9 + level * 2);
+  COLS = size; ROWS = size;
+  canvas.width = COLS * CELL;
+  canvas.height = ROWS * CELL;
+
+  maze = generateMaze(COLS, ROWS);
+  player = { x: 0, y: 0 };
+  goal = { x: COLS - 1, y: ROWS - 1 };
+  visitedCells.clear();
+  visitedCells.add(`0,0`);
+
+  clearInterval(timerInterval);
+  startTime = Date.now();
+  elapsed = 0;
+  timerInterval = setInterval(() => {
+    if (state === 'playing') {
+      elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+      document.getElementById('timer').textContent = elapsed;
+    }
+  }, 100);
+
+  state = 'playing';
+  draw();
+}
+
+function generateMaze(cols, rows) {
+  // DFS-based maze generation
+  const walls = [];
+  // Each cell has 4 walls: [top, right, bottom, left]
+  const grid = Array.from({ length: rows }, () =>
+    Array.from({ length: cols }, () => [true, true, true, true])
+  );
+  const visited = Array.from({ length: rows }, () => Array(cols).fill(false));
+
+  function carve(x, y) {
+    visited[y][x] = true;
+    const dirs = [[0,-1,0,2],[1,0,1,3],[0,1,2,0],[−1,0,3,1]];
+    // Shuffle
+    for (let i = dirs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [dirs[i], dirs[j]] = [dirs[j], dirs[i]];
+    }
+    for (const [dx, dy, wall, oppWall] of dirs) {
+      const nx = x + dx, ny = y + dy;
+      if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && !visited[ny][nx]) {
+        grid[y][x][wall] = false;
+        grid[ny][nx][oppWall] = false;
+        carve(nx, ny);
+      }
+    }
+  }
+  // Fix the direction array
+  const dirs = [[0,-1,0,2],[1,0,1,3],[0,1,2,0],[-1,0,3,1]];
+  function carve2(x, y) {
+    visited[y][x] = true;
+    const shuffled = [...dirs].sort(() => Math.random() - 0.5);
+    for (const [dx, dy, wall, oppWall] of shuffled) {
+      const nx = x + dx, ny = y + dy;
+      if (nx >= 0 && nx < cols && ny >= 0 && ny < rows && !visited[ny][nx]) {
+        grid[y][x][wall] = false;
+        grid[ny][nx][oppWall] = false;
+        carve2(nx, ny);
+      }
+    }
+  }
+  carve2(0, 0);
+  return grid;
+}
+
+function move(dx, dy) {
+  if (state !== 'playing') return;
+  const nx = player.x + dx, ny = player.y + dy;
+  if (nx < 0 || nx >= COLS || ny < 0 || ny >= ROWS) return;
+
+  // Check walls
+  if (dx === 1 && maze[player.y][player.x][1]) return;  // right
+  if (dx === -1 && maze[player.y][player.x][3]) return; // left
+  if (dy === -1 && maze[player.y][player.x][0]) return; // top
+  if (dy === 1 && maze[player.y][player.x][2]) return;  // bottom
+
+  player.x = nx;
+  player.y = ny;
+  visitedCells.add(`${nx},${ny}`);
+
+  if (player.x === goal.x && player.y === goal.y) {
+    clearInterval(timerInterval);
+    state = 'clear';
+    if (!best[level] || parseFloat(elapsed) < best[level]) {
+      best[level] = parseFloat(elapsed);
+    }
+    document.getElementById('best').textContent = best[level] + 's';
+    setTimeout(() => {
+      level++;
+      document.getElementById('level').textContent = level;
+      initMaze();
+    }, 1500);
+  }
+  draw();
+}
+
+function draw() {
+  ctx.fillStyle = '#0d0d1a';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Draw visited path
+  visitedCells.forEach(key => {
+    const [x, y] = key.split(',').map(Number);
+    ctx.fillStyle = 'rgba(0,255,204,0.08)';
+    ctx.fillRect(x * CELL, y * CELL, CELL, CELL);
+  });
+
+  // Goal glow
+  const goalAnim = (Math.sin(Date.now() * 0.005) + 1) / 2;
+  ctx.fillStyle = `rgba(255,215,0,${0.3 + goalAnim * 0.3})`;
+  ctx.fillRect(goal.x * CELL + 2, goal.y * CELL + 2, CELL - 4, CELL - 4);
+  ctx.fillStyle = `rgba(255,215,0,${0.6 + goalAnim * 0.4})`;
+  ctx.font = `${CELL - 4}px sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('★', goal.x * CELL + CELL/2, goal.y * CELL + CELL/2);
+
+  // Draw maze walls
+  ctx.strokeStyle = '#00ffcc';
+  ctx.lineWidth = 2;
+  ctx.shadowColor = '#00ffcc';
+  ctx.shadowBlur = 4;
+
+  for (let y = 0; y < ROWS; y++) {
+    for (let x = 0; x < COLS; x++) {
+      const px = x * CELL, py = y * CELL;
+      const cell = maze[y][x];
+      ctx.beginPath();
+      if (cell[0]) { ctx.moveTo(px, py); ctx.lineTo(px + CELL, py); }      // top
+      if (cell[1]) { ctx.moveTo(px+CELL, py); ctx.lineTo(px+CELL, py+CELL); } // right
+      if (cell[2]) { ctx.moveTo(px+CELL, py+CELL); ctx.lineTo(px, py+CELL); } // bottom
+      if (cell[3]) { ctx.moveTo(px, py+CELL); ctx.lineTo(px, py); }          // left
+      ctx.stroke();
+    }
+  }
+  ctx.shadowBlur = 0;
+
+  // Player
+  const px = player.x * CELL + CELL/2, py = player.y * CELL + CELL/2;
+  ctx.fillStyle = '#00ffcc';
+  ctx.shadowColor = '#00ffcc';
+  ctx.shadowBlur = 15;
+  ctx.beginPath();
+  ctx.arc(px, py, CELL/2 - 4, 0, Math.PI*2);
+  ctx.fill();
+  ctx.fillStyle = '#0d0d1a';
+  ctx.shadowBlur = 0;
+  ctx.font = `${CELL - 6}px sans-serif`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText('●', px, py);
+
+  // Clear message
+  if (state === 'clear') {
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillRect(0, canvas.height/2 - 40, canvas.width, 80);
+    ctx.fillStyle = '#ffd700';
+    ctx.font = 'bold 32px Courier New';
+    ctx.textAlign = 'center';
+    ctx.fillText(`CLEAR! ${elapsed}s`, canvas.width/2, canvas.height/2 + 10);
+  }
+}
+
+document.addEventListener('keydown', e => {
+  const map = {
+    ArrowUp: [0,-1], ArrowDown: [0,1], ArrowLeft: [-1,0], ArrowRight: [1,0],
+    w: [0,-1], s: [0,1], a: [-1,0], d: [1,0],
+    W: [0,-1], S: [0,1], A: [-1,0], D: [1,0]
+  };
+  if (map[e.key]) { move(...map[e.key]); e.preventDefault(); }
+  if (e.key === 'r' || e.key === 'R') initMaze();
+});
+
+// Touch controls
+let tx = 0, ty = 0;
+canvas.addEventListener('touchstart', e => {
+  tx = e.touches[0].clientX;
+  ty = e.touches[0].clientY;
+  e.preventDefault();
+}, { passive: false });
+canvas.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > Math.abs(dy)) move(dx > 0 ? 1 : -1, 0);
+  else move(0, dy > 0 ? 1 : -1);
+  e.preventDefault();
+}, { passive: false });
+
+initMaze();
+setInterval(draw, 50); // Redraw for goal animation
+</script>
+</body>
+</html>
