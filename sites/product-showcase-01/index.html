@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VOLTA — Electric Motorcycle</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#04040a;--fg:#f0f4ff;--blue:#0066ff;--blue2:#00aaff;--muted:#3a3a5a;--border:rgba(0,102,255,0.15)}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 5rem;backdrop-filter:blur(20px);background:rgba(4,4,10,0.9);border-bottom:1px solid var(--border)}
+  .logo{font-size:1.4rem;font-weight:900;letter-spacing:3px;color:var(--blue2)}
+  .nav-links{display:flex;gap:3rem;list-style:none}
+  .nav-links a{color:rgba(240,244,255,0.5);text-decoration:none;font-size:0.85rem;letter-spacing:1px;transition:color 0.2s}
+  .nav-links a:hover{color:var(--blue2)}
+  .nav-cta{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;padding:0.6rem 1.8rem;border-radius:4px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,102,255,0.5)}
+
+  /* FULL SCREEN HERO */
+  .hero{height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 5rem 6rem}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#04040a 0%,#060618 30%,#040418 60%,#04040a 100%)}
+  .hero-glow{position:absolute;top:30%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(0,102,255,0.2),transparent 70%);animation:h-glow 4s ease-in-out infinite}
+  @keyframes h-glow{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-55%) scale(1.1)}}
+  .moto-scene{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:350px;display:flex;align-items:center;justify-content:center}
+  .moto-emoji{font-size:16rem;filter:drop-shadow(0 0 60px rgba(0,102,255,0.8)) drop-shadow(0 40px 80px rgba(0,0,0,0.9));animation:moto-idle 3s ease-in-out infinite}
+  @keyframes moto-idle{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .moto-shadow{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:400px;height:30px;background:radial-gradient(ellipse,rgba(0,102,255,0.4),transparent 70%);filter:blur(10px);animation:shadow-pulse 3s ease-in-out infinite}
+  @keyframes shadow-pulse{0%,100%{transform:translateX(-50%) scaleX(1);opacity:0.5}50%{transform:translateX(-50%) scaleX(0.85);opacity:0.8}}
+  .hero-content{position:relative;z-index:10}
+  .hero-pretitle{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--blue2);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+  .hero-pretitle::before{content:'';width:40px;height:1px;background:var(--blue2)}
+  h1{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:0.95;letter-spacing:-4px;margin-bottom:2rem}
+  .h1-blue{color:var(--blue2)}
+  .hero-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:4rem}
+  .hero-desc{font-size:1.05rem;color:rgba(240,244,255,0.45);line-height:1.9;max-width:500px}
+  .hero-actions{display:flex;gap:1rem;flex-shrink:0}
+  .btn-blue{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border:none;padding:1rem 2.5rem;border-radius:4px;font-size:1rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:transform 0.2s,box-shadow 0.2s}
+  .btn-blue:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,102,255,0.5)}
+  .btn-outline{background:transparent;color:var(--fg);border:1px solid rgba(240,244,255,0.15);padding:1rem 2.5rem;border-radius:4px;font-size:1rem;cursor:pointer;white-space:nowrap;transition:all 0.2s}
+  .btn-outline:hover{border-color:var(--blue);color:var(--blue2)}
+
+  /* HUD OVERLAYS */
+  .hud{position:absolute;top:2rem;left:5rem;display:flex;gap:2rem}
+  .hud-item{display:flex;flex-direction:column;gap:0.3rem}
+  .hud-label{font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+  .hud-value{font-size:1.2rem;font-weight:700;color:var(--blue2);font-variant-numeric:tabular-nums}
+  .hud-bar{width:60px;height:2px;background:rgba(0,102,255,0.2);border-radius:1px;overflow:hidden;margin-top:0.3rem}
+  .hud-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue2));border-radius:1px}
+  .scroll-hint{position:absolute;right:5rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:1rem;color:rgba(240,244,255,0.3);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;writing-mode:vertical-rl}
+  .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--blue2));animation:scroll-line 2s ease-in-out infinite}
+  @keyframes scroll-line{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}50.01%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+  /* SPECS SECTION */
+  .specs{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .spec-col{padding:3rem 2rem;text-align:center;border-right:1px solid var(--border)}
+  .spec-col:last-child{border-right:none}
+  .spec-col .num{font-size:2.8rem;font-weight:900;color:var(--blue2);line-height:1}
+  .spec-col .unit{font-size:1rem;color:rgba(240,244,255,0.4);margin-left:0.3rem}
+  .spec-col .name{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:0.5rem}
+
+  /* SECTIONS */
+  .section{padding:8rem 5rem}
+  .section-tag{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--blue2);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+  .section-tag::before{content:'';width:40px;height:1px;background:var(--blue2)}
+  h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;letter-spacing:-2px;margin-bottom:1rem}
+  .tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:4rem}
+  .tech-card{background:rgba(0,102,255,0.04);border:1px solid var(--border);border-radius:12px;padding:2.5rem;transition:border-color 0.3s,transform 0.3s}
+  .tech-card:hover{border-color:rgba(0,102,255,0.4);transform:translateY(-4px)}
+  .tech-card:first-child{grid-column:span 2}
+  .tech-icon{font-size:2.5rem;margin-bottom:1.5rem}
+  .tech-card h3{font-size:1.1rem;font-weight:800;margin-bottom:0.8rem}
+  .tech-card p{font-size:0.85rem;color:rgba(240,244,255,0.45);line-height:1.9}
+  .tech-stat{font-size:2rem;font-weight:900;color:var(--blue2);margin-top:1rem}
+  .tech-stat-lbl{font-size:0.7rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+
+  /* GALLERY */
+  .gallery{padding:0 5rem 8rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+  .gallery-item{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:4/3;background:linear-gradient(135deg,var(--c1),var(--c2));cursor:pointer;transition:transform 0.3s}
+  .gallery-item:hover{transform:scale(1.02)}
+  .gi1{--c1:#040430;--c2:#0066ff}
+  .gi2{--c1:#040420;--c2:#00aaff}
+  .gi3{--c1:#020218;--c2:#0044cc}
+  .gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:2rem;background:linear-gradient(to top,rgba(0,0,0,0.8),transparent);font-size:0.85rem;font-weight:700;letter-spacing:1px}
+
+  /* CTA */
+  .cta{padding:8rem 5rem;text-align:center;position:relative;overflow:hidden}
+  .cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(0,102,255,0.1),transparent)}
+  .cta > *{position:relative}
+  .cta h2{font-size:clamp(2.5rem,5vw,5rem);font-weight:900;letter-spacing:-3px;margin-bottom:1rem}
+  .cta p{color:rgba(240,244,255,0.4);margin-bottom:3rem;font-size:1.1rem}
+  .price-display{font-size:2rem;font-weight:900;color:var(--blue2);margin-bottom:2rem}
+  .price-note{font-size:0.85rem;color:var(--muted);margin-top:0.5rem}
+
+  footer{padding:3rem 5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--muted)}
+  .footer-links{display:flex;gap:2rem}
+  .footer-links a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+  .footer-links a:hover{color:var(--blue2)}
+
+  @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{display:none}.hero{padding:0 1.5rem 4rem}.hud{display:none}.scroll-hint{display:none}.hero-bottom{flex-direction:column;gap:2rem}.specs{grid-template-columns:repeat(3,1fr)}.spec-col:nth-child(4),.spec-col:nth-child(5){border-top:1px solid var(--border)}.section{padding:5rem 1.5rem}.tech-grid{grid-template-columns:1fr}.tech-card:first-child{grid-column:span 1}.gallery{padding:0 1.5rem 5rem;grid-template-columns:1fr}.cta{padding:5rem 1.5rem}footer{flex-direction:column;gap:1rem;padding:2rem 1.5rem;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">VOLTA</div>
+  <ul class="nav-links"><li><a href="#tech">Technology</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#reserve">Reserve</a></li></ul>
+  <button class="nav-cta">Pre-order</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hud">
+    <div class="hud-item"><div class="hud-label">Range</div><div class="hud-value" id="range-val">320km</div><div class="hud-bar"><div class="hud-fill" style="width:85%"></div></div></div>
+    <div class="hud-item"><div class="hud-label">Battery</div><div class="hud-value">98%</div><div class="hud-bar"><div class="hud-fill" style="width:98%"></div></div></div>
+    <div class="hud-item"><div class="hud-label">Speed</div><div class="hud-value">0 km/h</div><div class="hud-bar"><div class="hud-fill" style="width:0%" id="speed-bar"></div></div></div>
+  </div>
+  <div class="moto-scene">
+    <div class="moto-emoji">🏍️</div>
+    <div class="moto-shadow"></div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
+  <div class="hero-content">
+    <div class="hero-pretitle">VOLTA EV Motorcycle · 2026</div>
+    <h1>THE<br>FUTURE<br><span class="h1-blue">RIDES NOW</span></h1>
+    <div class="hero-bottom">
+      <p class="hero-desc">VOLTAは電動モビリティの新時代を切り開く。0-100km/h 2.8秒、航続距離320km。排気音ゼロで、体験は最大級。</p>
+      <div class="hero-actions">
+        <button class="btn-blue">今すぐ予約する</button>
+        <button class="btn-outline">詳細を見る</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="specs">
+  <div class="spec-col"><div class="num">2.8<span class="unit">sec</span></div><div class="name">0–100 km/h</div></div>
+  <div class="spec-col"><div class="num">320<span class="unit">km</span></div><div class="name">Full Range</div></div>
+  <div class="spec-col"><div class="num">180<span class="unit">kW</span></div><div class="name">Peak Power</div></div>
+  <div class="spec-col"><div class="num">240<span class="unit">Nm</span></div><div class="name">Torque</div></div>
+  <div class="spec-col"><div class="num">30<span class="unit">min</span></div><div class="name">80% Charge</div></div>
+</div>
+
+<section id="tech" class="section">
+  <div class="section-tag">VOLTA Technology</div>
+  <h2>電動の<br>再定義</h2>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <div class="tech-icon">⚡</div>
+      <h3>VOLTA PowerCore™ Battery System</h3>
+      <p>独自開発のシリコン陽極バッテリーパックは、エネルギー密度が従来比40%向上。急速充電30分で80%まで充電可能。バッテリー寿命は10年以上を保証。</p>
+      <div class="tech-stat">340Wh/kg <span style="font-size:1rem;color:var(--muted)">Energy Density</span></div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🧠</div>
+      <h3>AI Ride Intelligence</h3>
+      <p>車両の状態、路面状況、天気をリアルタイム分析。最適な走行モードを自動選択し、安全性と効率を同時に最大化します。</p>
+      <div class="tech-stat">99.9% <span style="font-size:1rem;color:var(--muted)">Safety Score</span></div>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🏎️</div>
+      <h3>Adaptive Suspension</h3>
+      <p>路面から1秒間に1000回の情報を取得し、サスペンションを瞬時に最適化。どんな路面でも完璧なコントロールを実現。</p>
+    </div>
+    <div class="tech-card">
+      <div class="tech-icon">🔒</div>
+      <h3>Connected Security</h3>
+      <p>指紋認証＋顔認証＋GPSトラッキングの三重セキュリティ。スマートフォンと連携し、いつでもどこでも車両状態を確認。</p>
+    </div>
+  </div>
+</section>
+
+<div id="gallery" class="gallery">
+  <div class="gallery-item gi1"><div class="gallery-caption">Sport Mode · Night Ride</div></div>
+  <div class="gallery-item gi2"><div class="gallery-caption">Urban Commute · Zero Emission</div></div>
+  <div class="gallery-item gi3"><div class="gallery-caption">Track Performance · Full Power</div></div>
+</div>
+
+<section id="reserve" class="cta">
+  <div class="section-tag" style="justify-content:center">Limited Production</div>
+  <h2>世界限定<br>1000台</h2>
+  <p>VOLTAは生産台数を厳しく制限することで、最高品質を保証しています。</p>
+  <div class="price-display">¥3,200,000<div class="price-note">税込・登録費用別途 / 補助金適用で最大¥800,000割引</div></div>
+  <button class="btn-blue" style="font-size:1.1rem;padding:1.2rem 3rem">今すぐ予約する</button>
+</section>
+
+<footer>
+  <p>© 2026 VOLTA Electric Mobility. All rights reserved.</p>
+  <div class="footer-links"><a href="#">Dealers</a><a href="#">Support</a><a href="#">Media</a></div>
+</footer>
+
+<script>
+  // Animate speed in HUD
+  let speed = 0;
+  setInterval(() => {
+    speed = Math.floor(Math.random() * 20);
+    const el = document.querySelector('.hud-value:last-child');
+    if(el) el.textContent = speed + ' km/h';
+    const bar = document.getElementById('speed-bar');
+    if(bar) bar.style.width = (speed/200*100) + '%';
+  }, 2000);
+</script>
+</body>
+</html>

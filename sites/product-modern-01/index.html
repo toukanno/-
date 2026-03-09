@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AURA Watch — The Future on Your Wrist</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#05050f;--fg:#ffffff;--accent:#00d4ff;--accent2:#7b2fff;--muted:#5a5a7a;--border:rgba(255,255,255,0.07)}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 5rem;backdrop-filter:blur(20px);background:rgba(5,5,15,0.7)}
+  .logo{font-size:1.4rem;font-weight:900;letter-spacing:4px;text-transform:uppercase}
+  .logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:3rem;list-style:none}
+  .nav-links a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;transition:color 0.2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{background:transparent;color:var(--accent);border:1px solid var(--accent);padding:0.5rem 1.5rem;border-radius:4px;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+  .nav-cta:hover{background:var(--accent);color:#000}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 5rem 4rem;gap:4rem;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;top:-20%;right:-10%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.12),transparent 70%);pointer-events:none}
+  .hero::after{content:'';position:absolute;bottom:-20%;left:30%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(123,47,255,0.15),transparent 70%);pointer-events:none}
+  .hero-badge{display:inline-flex;align-items:center;gap:0.8rem;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);padding:0.5rem 1.2rem;border-radius:4px;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
+  .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:blink 1.5s infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  h1{font-size:clamp(2.5rem,6vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-3px;margin-bottom:1.5rem}
+  h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-desc{font-size:1.05rem;color:rgba(255,255,255,0.5);line-height:1.9;max-width:480px;margin-bottom:3rem}
+  .hero-actions{display:flex;gap:1rem;align-items:center}
+  .btn-buy{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;padding:1rem 2.5rem;border-radius:6px;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;letter-spacing:1px}
+  .btn-buy:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,212,255,0.3)}
+  .btn-learn{background:none;border:none;color:rgba(255,255,255,0.6);font-size:0.9rem;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s}
+  .btn-learn:hover{color:var(--accent)}
+  .btn-learn::after{content:'→';transition:transform 0.2s}
+  .btn-learn:hover::after{transform:translateX(4px)}
+  .hero-price{margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border)}
+  .price-label{font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+  .price-value{font-size:2.5rem;font-weight:900}
+  .price-value span{font-size:1rem;color:var(--muted);font-weight:400;margin-left:0.5rem;text-decoration:line-through}
+
+  /* Watch Display */
+  .hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+  .watch-container{position:relative;width:380px;height:500px}
+  .watch-glow{position:absolute;inset:-40px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.2),transparent 70%);animation:glow-pulse 3s ease-in-out infinite}
+  @keyframes glow-pulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.1);opacity:1}}
+  .watch-body{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:220px;height:260px;background:linear-gradient(145deg,#1a1a2e,#0d0d1a);border-radius:40px;border:1px solid rgba(255,255,255,0.1);box-shadow:0 40px 80px rgba(0,0,0,0.8),inset 0 1px 0 rgba(255,255,255,0.1)}
+  .watch-screen{position:absolute;top:20px;left:20px;right:20px;bottom:20px;background:linear-gradient(145deg,#000a1a,#001a2e);border-radius:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+  .watch-time{font-size:3rem;font-weight:900;letter-spacing:-2px;color:var(--accent);text-shadow:0 0 20px rgba(0,212,255,0.5)}
+  .watch-date{font-size:0.7rem;letter-spacing:3px;color:rgba(255,255,255,0.4);margin-top:0.3rem;text-transform:uppercase}
+  .watch-steps{margin-top:1.5rem;text-align:center}
+  .steps-bar{width:80px;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;margin:0 auto 0.3rem}
+  .steps-fill{height:100%;width:72%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px}
+  .steps-label{font-size:0.6rem;letter-spacing:2px;color:rgba(255,255,255,0.3);text-transform:uppercase}
+  .watch-band-top,.watch-band-bottom{position:absolute;left:50%;transform:translateX(-50%);width:80px;background:linear-gradient(180deg,#1a1a2e,#0d0d1a);border-radius:4px}
+  .watch-band-top{top:-80px;height:80px;border-radius:8px 8px 0 0}
+  .watch-band-bottom{bottom:-80px;height:80px;border-radius:0 0 8px 8px}
+  .watch-crown{position:absolute;right:-12px;top:50%;transform:translateY(-50%);width:12px;height:30px;background:linear-gradient(180deg,#2a2a4a,#1a1a3a);border-radius:4px;border:1px solid rgba(255,255,255,0.1)}
+  .floating-specs{position:absolute;background:rgba(5,5,15,0.9);border:1px solid var(--border);border-radius:12px;padding:0.8rem 1.2rem;backdrop-filter:blur(10px)}
+  .spec-1{top:10%;right:-20px;animation:float 4s ease-in-out infinite}
+  .spec-2{bottom:20%;left:-30px;animation:float 4s ease-in-out infinite 2s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+  .spec-val{font-size:1.2rem;font-weight:900;color:var(--accent)}
+  .spec-lbl{font-size:0.65rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+
+  /* FEATURES */
+  .features{padding:8rem 5rem;background:rgba(255,255,255,0.01)}
+  .features-header{text-align:center;margin-bottom:5rem}
+  .tag{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:1rem}
+  h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-2px}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+  .feature-card{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:16px;padding:2.5rem;transition:transform 0.3s,border-color 0.3s}
+  .feature-card:hover{transform:translateY(-4px);border-color:rgba(0,212,255,0.3)}
+  .feature-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(123,47,255,0.1));border:1px solid rgba(0,212,255,0.2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.5rem}
+  .feature-card h3{font-size:1.1rem;font-weight:800;margin-bottom:0.8rem}
+  .feature-card p{font-size:0.85rem;color:rgba(255,255,255,0.45);line-height:1.8}
+
+  /* SPECS TABLE */
+  .specs-section{padding:8rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+  .specs-table{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+  .spec-row{display:flex;justify-content:space-between;padding:1.2rem 2rem;border-bottom:1px solid var(--border)}
+  .spec-row:last-child{border-bottom:none}
+  .spec-row:nth-child(even){background:rgba(255,255,255,0.02)}
+  .spec-name{font-size:0.85rem;color:var(--muted);letter-spacing:1px}
+  .spec-data{font-size:0.85rem;font-weight:700;color:var(--accent)}
+
+  /* COLOR PICKER */
+  .colors-section{padding:6rem 5rem;text-align:center;background:rgba(0,212,255,0.03);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .color-options{display:flex;gap:2rem;justify-content:center;margin-top:3rem}
+  .color-swatch{width:80px;height:80px;border-radius:50%;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;border:3px solid transparent}
+  .color-swatch:hover,.color-swatch.active{transform:scale(1.15);box-shadow:0 0 0 4px rgba(255,255,255,0.2)}
+  .color-swatch.midnight{background:linear-gradient(145deg,#1a1a3e,#0a0a1a)}
+  .color-swatch.cyan{background:linear-gradient(145deg,#00d4ff,#0060a0)}
+  .color-swatch.violet{background:linear-gradient(145deg,#7b2fff,#3a0080)}
+  .color-swatch.gold{background:linear-gradient(145deg,#ffd700,#b8860b)}
+  .color-swatch.rose{background:linear-gradient(145deg,#ff6b9d,#c20054)}
+  .color-name{margin-top:3rem;font-size:1rem;font-weight:700;letter-spacing:2px;text-transform:uppercase}
+
+  /* CTA */
+  .product-cta{padding:8rem 5rem;text-align:center;position:relative;overflow:hidden}
+  .product-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(0,212,255,0.08),transparent)}
+  .product-cta > *{position:relative}
+  .product-cta h2{font-size:clamp(2.5rem,5vw,4rem);font-weight:900;letter-spacing:-3px;margin-bottom:1rem}
+  .product-cta p{color:rgba(255,255,255,0.5);margin-bottom:3rem;font-size:1.1rem}
+
+  footer{padding:3rem 5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  footer p{font-size:0.8rem;color:var(--muted)}
+  .footer-links{display:flex;gap:2rem}
+  .footer-links a{color:var(--muted);text-decoration:none;font-size:0.8rem;transition:color 0.2s}
+  .footer-links a:hover{color:var(--accent)}
+
+  @media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links{display:none}.hero{grid-template-columns:1fr;padding:7rem 1.5rem 3rem;text-align:center}.hero-actions{justify-content:center}.features{padding:5rem 1.5rem}.features-grid{grid-template-columns:1fr}.specs-section{grid-template-columns:1fr;padding:5rem 1.5rem;gap:3rem}.colors-section{padding:4rem 1.5rem}.product-cta{padding:5rem 1.5rem}footer{flex-direction:column;gap:1rem;padding:2rem 1.5rem;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">AU<span>R</span>A</div>
+  <ul class="nav-links"><li><a href="#features">Features</a></li><li><a href="#specs">Specs</a></li><li><a href="#colors">Colors</a></li><li><a href="#buy">Buy</a></li></ul>
+  <button class="nav-cta">Order Now</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">New Release 2026</div>
+    <h1>The Future<br>On Your <em>Wrist</em></h1>
+    <p class="hero-desc">AURA Watchは、最先端のセンサー技術とAIヘルスモニタリングを融合。あなたの身体を24時間、精密に把握します。</p>
+    <div class="hero-actions">
+      <button class="btn-buy">今すぐ購入</button>
+      <button class="btn-learn">詳細を見る</button>
+    </div>
+    <div class="hero-price">
+      <div class="price-label">Starting From</div>
+      <div class="price-value">¥68,000<span>¥89,000</span></div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="watch-container">
+      <div class="watch-glow"></div>
+      <div class="watch-body">
+        <div class="watch-band-top"></div>
+        <div class="watch-screen">
+          <div class="watch-time" id="watch-time">10:42</div>
+          <div class="watch-date">SUN, MAR 08</div>
+          <div class="watch-steps">
+            <div class="steps-bar"><div class="steps-fill"></div></div>
+            <div class="steps-label">8,432 steps</div>
+          </div>
+        </div>
+        <div class="watch-crown"></div>
+        <div class="watch-band-bottom"></div>
+      </div>
+      <div class="floating-specs spec-1">
+        <div class="spec-val">98%</div>
+        <div class="spec-lbl">SpO2</div>
+      </div>
+      <div class="floating-specs spec-2">
+        <div class="spec-val">72 bpm</div>
+        <div class="spec-lbl">Heart Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <div class="features-header">
+    <div class="tag">Why AURA</div>
+    <h2>次世代ヘルステック</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card"><div class="feature-icon">❤️</div><h3>AI Health Monitor</h3><p>心拍数、SpO2、体温を24時間リアルタイム計測。異常を即座に検知し通知します。</p></div>
+    <div class="feature-card"><div class="feature-icon">🏃</div><h3>Advanced Fitness</h3><p>100種類以上のアクティビティを自動認識。GPS内蔵でランニングルートを正確に記録。</p></div>
+    <div class="feature-card"><div class="feature-icon">🔋</div><h3>18-Day Battery</h3><p>省電力チップセット搭載で最大18日間の連続使用。急速充電で1時間以内にフル充電。</p></div>
+    <div class="feature-card"><div class="feature-icon">💧</div><h3>5ATM Waterproof</h3><p>水深50mまでの防水性能。水泳やダイビングでも安心して使用できます。</p></div>
+    <div class="feature-card"><div class="feature-icon">🌙</div><h3>Sleep Analysis</h3><p>深睡眠・浅睡眠・REM睡眠を精密に分析。睡眠品質スコアで健康をサポート。</p></div>
+    <div class="feature-card"><div class="feature-icon">📱</div><h3>Smart Connect</h3><p>iOS・Android完全対応。通知、音楽コントロール、決済機能をスマートに管理。</p></div>
+  </div>
+</section>
+
+<section id="specs" class="specs-section">
+  <div>
+    <div class="tag">Technical Specs</div>
+    <h2>妥協なき<br>スペック</h2>
+    <p style="color:rgba(255,255,255,0.5);margin-top:1rem;line-height:1.8">プロフェッショナルの要求に応える、フラッグシップグレードのスペックを搭載しています。</p>
+  </div>
+  <div class="specs-table">
+    <div class="spec-row"><span class="spec-name">Display</span><span class="spec-data">1.96" AMOLED 60Hz</span></div>
+    <div class="spec-row"><span class="spec-name">Resolution</span><span class="spec-data">466 × 466 px</span></div>
+    <div class="spec-row"><span class="spec-name">Processor</span><span class="spec-data">AURA Chip X2</span></div>
+    <div class="spec-row"><span class="spec-name">RAM / Storage</span><span class="spec-data">1GB / 32GB</span></div>
+    <div class="spec-row"><span class="spec-name">Battery Life</span><span class="spec-data">Up to 18 days</span></div>
+    <div class="spec-row"><span class="spec-name">Water Resistance</span><span class="spec-data">5ATM (50m)</span></div>
+    <div class="spec-row"><span class="spec-name">GPS</span><span class="spec-data">GPS + GLONASS + BDS</span></div>
+    <div class="spec-row"><span class="spec-name">Sensors</span><span class="spec-data">PPG, ECG, SpO2, Temp</span></div>
+    <div class="spec-row"><span class="spec-name">Connectivity</span><span class="spec-data">Bluetooth 5.3, WiFi 6</span></div>
+    <div class="spec-row"><span class="spec-name">Weight</span><span class="spec-data">28g (without band)</span></div>
+  </div>
+</section>
+
+<section id="colors" class="colors-section">
+  <div class="tag">Colorways</div>
+  <h2>5つのカラーバリエーション</h2>
+  <div class="color-options">
+    <div class="color-swatch midnight active" onclick="setColor(this,'Midnight Black')"></div>
+    <div class="color-swatch cyan" onclick="setColor(this,'Ocean Cyan')"></div>
+    <div class="color-swatch violet" onclick="setColor(this,'Deep Violet')"></div>
+    <div class="color-swatch gold" onclick="setColor(this,'Champagne Gold')"></div>
+    <div class="color-swatch rose" onclick="setColor(this,'Rose Bloom')"></div>
+  </div>
+  <div class="color-name" id="color-name">Midnight Black</div>
+</section>
+
+<section id="buy" class="product-cta">
+  <div class="tag">Limited Stock</div>
+  <h2>今が購入の<br>チャンスです</h2>
+  <p>先着500名様限定 — 送料無料 + 2年保証 + 専用ケース付き</p>
+  <button class="btn-buy" style="font-size:1.1rem;padding:1.2rem 3rem">¥68,000 で購入する</button>
+</section>
+
+<footer>
+  <p>© 2026 AURA Technology. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#">Privacy</a><a href="#">Terms</a><a href="#">Support</a><a href="#">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function setColor(el,name){
+    document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('color-name').textContent=name;
+  }
+  function updateTime(){
+    const now=new Date();
+    const h=String(now.getHours()).padStart(2,'0');
+    const m=String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('watch-time').textContent=h+':'+m;
+  }
+  updateTime(); setInterval(updateTime,1000);
+</script>
+</body>
+</html>
