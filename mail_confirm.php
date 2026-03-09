@@ -36,7 +36,7 @@
         <?php echo $_POST['comments']; ?>
       </p>
 
-      <form action="index.html">
+      <form action="contact.html">
         <input type="submit" class="button1" value="戻って修正する" />
       </form>
 
