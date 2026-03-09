@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON — Luxury Catalog</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#fdfcf9;--fg:#1a1612;--gold:#b8960c;--dark:#1a1612;--muted:#8a7e6e;--light:#f5f0e8;--border:#e8e0d0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Georgia',serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 4rem;background:rgba(253,252,249,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .logo{font-size:1.6rem;font-weight:400;letter-spacing:8px;text-transform:uppercase;color:var(--dark)}
+  .nav-links{display:flex;gap:3rem;list-style:none}
+  .nav-links a{color:var(--muted);text-decoration:none;font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;transition:color 0.2s}
+  .nav-links a:hover{color:var(--fg)}
+  .nav-right{display:flex;align-items:center;gap:2rem}
+  .cart-btn{background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--dark);position:relative}
+  .cart-count{position:absolute;top:-8px;right:-8px;width:18px;height:18px;background:var(--gold);border-radius:50%;font-size:0.6rem;font-family:'Segoe UI',sans-serif;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center}
+  .nav-account{font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);cursor:pointer;transition:color 0.2s;background:none;border:none}
+  .nav-account:hover{color:var(--fg)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;overflow:hidden;margin-top:0}
+  .hero-left{background:var(--dark);display:flex;flex-direction:column;justify-content:flex-end;padding:8rem 5rem 5rem;color:#fff;position:relative;overflow:hidden}
+  .hero-left::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 80% 60% at 30% 30%,rgba(184,150,12,0.15),transparent 60%)}
+  .season-tag{font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:rgba(255,255,255,0.4);margin-bottom:2rem;display:flex;align-items:center;gap:1rem}
+  .season-tag::before{content:'';width:40px;height:1px;background:var(--gold)}
+  .hero-h1{font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.1;letter-spacing:-1px;margin-bottom:2rem;color:#fff;position:relative}
+  .hero-h1 em{font-style:italic;color:var(--gold)}
+  .hero-desc{font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:2.1;font-family:'Segoe UI',sans-serif;max-width:400px;margin-bottom:3rem;position:relative}
+  .btn-white{background:#fff;color:var(--dark);border:none;padding:1rem 3rem;font-family:'Segoe UI',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.3s;position:relative}
+  .btn-white:hover{background:var(--gold);color:#fff}
+  .hero-right{display:grid;grid-template-rows:1fr 1fr}
+  .hero-img-top{background:var(--light);display:flex;align-items:center;justify-content:center;font-size:10rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+  .hero-img-top::after{content:'SS 2026';position:absolute;bottom:1.5rem;right:2rem;font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted)}
+  .hero-img-bottom{display:grid;grid-template-columns:1fr 1fr}
+  .hero-sub-img{background:var(--cream,#f0ebe0);display:flex;align-items:center;justify-content:center;font-size:6rem;border-right:1px solid var(--border);position:relative;overflow:hidden}
+  .hero-sub-img:last-child{border-right:none;background:#e8f0e5}
+  .hero-sub-img::after{content:'New';position:absolute;top:1rem;left:1rem;background:var(--gold);color:#fff;font-size:0.6rem;font-family:'Segoe UI',sans-serif;font-weight:700;padding:0.2rem 0.6rem;letter-spacing:1px}
+
+  /* MARQUEE */
+  .marquee{padding:1.5rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:var(--light)}
+  .m-track{display:flex;gap:4rem;animation:m-anim 25s linear infinite;white-space:nowrap}
+  .m-track span{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);flex-shrink:0}
+  .m-track .m-dot{color:var(--gold)}
+  @keyframes m-anim{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* CATALOG SECTION */
+  .catalog{padding:8rem 4rem}
+  .catalog-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem}
+  .catalog-filter{display:flex;gap:1rem;flex-wrap:wrap}
+  .filter-btn{background:none;border:1px solid var(--border);color:var(--muted);padding:0.5rem 1.2rem;font-family:'Segoe UI',sans-serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;border-radius:2px}
+  .filter-btn.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .filter-btn:hover:not(.active){border-color:var(--muted)}
+  .tag{font-size:0.65rem;letter-spacing:5px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);margin-bottom:0.8rem;display:flex;align-items:center;gap:1rem}
+  .tag::before{content:'';width:40px;height:1px;background:var(--gold)}
+  h2{font-size:clamp(2rem,4vw,3rem);font-weight:400;letter-spacing:-1px}
+
+  /* PRODUCTS */
+  .products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .product{border-right:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;cursor:pointer;group:true}
+  .product:nth-child(4n){border-right:none}
+  .product-img{aspect-ratio:3/4;background:var(--light);display:flex;align-items:center;justify-content:center;font-size:6rem;position:relative;overflow:hidden;transition:background 0.3s}
+  .product:hover .product-img{background:#ede5d8}
+  .product-overlay{position:absolute;inset:0;background:rgba(26,22,18,0.6);opacity:0;display:flex;align-items:center;justify-content:center;transition:opacity 0.3s}
+  .product:hover .product-overlay{opacity:1}
+  .quick-add{background:#fff;color:var(--dark);border:none;padding:0.7rem 2rem;font-family:'Segoe UI',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background 0.2s}
+  .quick-add:hover{background:var(--gold);color:#fff}
+  .product-badge{position:absolute;top:1rem;left:1rem;font-size:0.6rem;font-family:'Segoe UI',sans-serif;font-weight:700;padding:0.2rem 0.6rem;letter-spacing:1px}
+  .badge-new{background:var(--dark);color:#fff}
+  .badge-sale{background:var(--gold);color:#fff}
+  .product-info{padding:1.5rem}
+  .product-brand{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);margin-bottom:0.4rem}
+  .product-name{font-size:1rem;font-weight:400;margin-bottom:0.5rem}
+  .product-price-row{display:flex;align-items:center;gap:0.8rem}
+  .product-price{font-size:1rem;font-family:'Segoe UI',sans-serif;color:var(--dark)}
+  .product-old{font-size:0.85rem;color:var(--muted);text-decoration:line-through;font-family:'Segoe UI',sans-serif}
+  .product-colors{display:flex;gap:0.4rem;margin-top:0.8rem}
+  .color-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,0.1)}
+
+  /* FEATURED */
+  .featured{padding:0 4rem 8rem;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+  .featured-editorial{background:var(--dark);padding:6rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;min-height:600px}
+  .featured-editorial::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 60% 40%,rgba(184,150,12,0.2),transparent 70%)}
+  .featured-editorial > *{position:relative}
+  .ed-font{font-size:8rem;margin-bottom:2rem;opacity:0.8}
+  .ed-tag{font-size:0.6rem;letter-spacing:5px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:rgba(255,255,255,0.4);margin-bottom:1rem;display:flex;align-items:center;gap:1rem}
+  .ed-tag::before{content:'';width:30px;height:1px;background:var(--gold)}
+  .ed-title{font-size:2.5rem;font-weight:400;color:#fff;line-height:1.2;margin-bottom:1rem;letter-spacing:-1px}
+  .ed-desc{font-size:0.9rem;color:rgba(255,255,255,0.5);line-height:2;font-family:'Segoe UI',sans-serif;margin-bottom:2rem}
+  .btn-gold{background:var(--gold);color:#fff;border:none;padding:0.8rem 2.5rem;font-family:'Segoe UI',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all 0.2s}
+  .btn-gold:hover{background:#9a7a0a}
+  .featured-products{background:var(--light);padding:4rem;display:flex;flex-direction:column;gap:0}
+  .feat-product{display:grid;grid-template-columns:100px 1fr;gap:1.5rem;padding:2rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:transform 0.2s;align-items:center}
+  .feat-product:last-child{border-bottom:none}
+  .feat-product:hover{transform:translateX(6px)}
+  .feat-img{width:100px;height:120px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:3rem}
+  .feat-info .brand{font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);margin-bottom:0.3rem}
+  .feat-info .name{font-size:1rem;margin-bottom:0.5rem}
+  .feat-info .price{font-size:0.95rem;font-family:'Segoe UI',sans-serif;color:var(--gold)}
+  .feat-arrow{font-size:1.5rem;color:var(--border);margin-left:auto}
+
+  /* EDITORIAL STRIP */
+  .editorial-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .strip-item{padding:4rem;border-right:1px solid var(--border);position:relative;overflow:hidden;min-height:300px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(135deg,var(--c1),var(--c2))}
+  .strip-item:last-child{border-right:none}
+  .s1{--c1:#f5f0e8;--c2:#ede5d8}
+  .s2{--c1:#1a1612;--c2:#2a2218}
+  .s3{--c1:#e8f0e5;--c2:#d5e8d0}
+  .strip-emoji{font-size:5rem;margin-bottom:1.5rem;opacity:0.9}
+  .strip-cat{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);margin-bottom:0.5rem}
+  .s2 .strip-cat{color:rgba(255,255,255,0.4)}
+  .strip-title{font-size:1.5rem;font-weight:400;letter-spacing:-1px}
+  .s2 .strip-title{color:#fff}
+  .strip-link{margin-top:1rem;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:gap 0.2s}
+  .s2 .strip-link{color:rgba(255,255,255,0.4)}
+  .strip-link:hover{gap:1rem}
+
+  /* NEWSLETTER */
+  .newsletter{padding:8rem 4rem;background:var(--dark);text-align:center;position:relative;overflow:hidden}
+  .newsletter::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,150,12,0.1),transparent 70%)}
+  .newsletter > *{position:relative}
+  .newsletter h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:400;color:#fff;letter-spacing:-1px;margin-bottom:1rem}
+  .newsletter p{color:rgba(255,255,255,0.4);font-family:'Segoe UI',sans-serif;margin-bottom:3rem}
+  .email-row{display:flex;max-width:480px;margin:0 auto;border-bottom:1px solid rgba(255,255,255,0.2)}
+  .email-input{flex:1;background:none;border:none;color:#fff;font-family:'Segoe UI',sans-serif;font-size:0.9rem;padding:1rem 0;outline:none}
+  .email-input::placeholder{color:rgba(255,255,255,0.3)}
+  .email-btn{background:none;border:none;color:var(--gold);font-family:'Segoe UI',sans-serif;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;padding:1rem 0;white-space:nowrap;transition:color 0.2s}
+  .email-btn:hover{color:#fff}
+
+  footer{padding:4rem;border-top:1px solid var(--border);display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem}
+  .footer-brand p{font-size:0.85rem;color:var(--muted);line-height:1.8;max-width:260px;font-family:'Segoe UI',sans-serif;margin-top:1rem}
+  .footer-col h4{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;color:var(--muted);margin-bottom:1.5rem}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+  .footer-col a{color:var(--muted);text-decoration:none;font-size:0.85rem;font-family:'Segoe UI',sans-serif;transition:color 0.2s}
+  .footer-col a:hover{color:var(--fg)}
+  .footer-bottom{margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:0.75rem;color:var(--muted);font-family:'Segoe UI',sans-serif}
+
+  @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{display:none}.hero{grid-template-columns:1fr}.hero-right{display:none}.catalog{padding:5rem 1.5rem}.products-grid{grid-template-columns:1fr 1fr}.featured{grid-template-columns:1fr;padding:0 1.5rem 5rem}.editorial-strip{grid-template-columns:1fr}.strip-item:nth-child(n){border-right:none;border-bottom:1px solid var(--border)}.newsletter{padding:5rem 1.5rem}footer{grid-template-columns:1fr 1fr;gap:2rem;padding:3rem 1.5rem}.footer-bottom{flex-direction:column;gap:0.5rem}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">MAISON</div>
+  <ul class="nav-links"><li><a href="#catalog">Collection</a></li><li><a href="#">Womenswear</a></li><li><a href="#">Menswear</a></li><li><a href="#">Accessories</a></li><li><a href="#">Sale</a></li></ul>
+  <div class="nav-right">
+    <button class="nav-account">Account</button>
+    <button class="cart-btn">🛍️<div class="cart-count">2</div></button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="season-tag">Spring · Summer Collection 2026</div>
+    <div class="hero-h1">The Art of<br><em>Effortless</em><br>Elegance</div>
+    <p class="hero-desc">MAISONの新コレクションは、自然の美しさと職人技が交差する場所から生まれました。着る人の個性を引き立てる、時代を超えたスタイル。</p>
+    <button class="btn-white">コレクションを見る</button>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-top">👗</div>
+    <div class="hero-img-bottom">
+      <div class="hero-sub-img">👜</div>
+      <div class="hero-sub-img">💍</div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee"><div class="m-track"><span>MAISON</span><span class="m-dot">◆</span><span>Womenswear</span><span class="m-dot">◆</span><span>Menswear</span><span class="m-dot">◆</span><span>Accessories</span><span class="m-dot">◆</span><span>Jewellery</span><span class="m-dot">◆</span><span>Fragrance</span><span class="m-dot">◆</span><span>Home</span><span class="m-dot">◆</span><span>Beauty</span><span class="m-dot">◆</span><span>MAISON</span><span class="m-dot">◆</span><span>Womenswear</span><span class="m-dot">◆</span><span>Menswear</span><span class="m-dot">◆</span><span>Accessories</span><span class="m-dot">◆</span><span>Jewellery</span><span class="m-dot">◆</span><span>Fragrance</span><span class="m-dot">◆</span><span>Home</span><span class="m-dot">◆</span><span>Beauty</span><span class="m-dot">◆</span></div></div>
+
+<section id="catalog" class="catalog">
+  <div class="catalog-header">
+    <div><div class="tag">New Arrivals</div><h2>最新コレクション</h2></div>
+    <div class="catalog-filter">
+      <button class="filter-btn active" onclick="setFilter(this)">All</button>
+      <button class="filter-btn" onclick="setFilter(this)">Womenswear</button>
+      <button class="filter-btn" onclick="setFilter(this)">Menswear</button>
+      <button class="filter-btn" onclick="setFilter(this)">Accessories</button>
+      <button class="filter-btn" onclick="setFilter(this)">Sale</button>
+    </div>
+  </div>
+  <div class="products-grid">
+    <div class="product"><div class="product-img">👗<div class="product-badge badge-new">New</div><div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON</div><div class="product-name">Silk Midi Dress</div><div class="product-price-row"><span class="product-price">¥89,000</span></div><div class="product-colors"><div class="color-dot" style="background:#1a1612"></div><div class="color-dot" style="background:#c4a882"></div><div class="color-dot" style="background:#8b4040"></div></div></div></div>
+    <div class="product"><div class="product-img">🧥<div class="product-badge badge-new">New</div><div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON</div><div class="product-name">Cashmere Overcoat</div><div class="product-price-row"><span class="product-price">¥198,000</span></div><div class="product-colors"><div class="color-dot" style="background:#c4a882"></div><div class="color-dot" style="background:#1a1612"></div><div class="color-dot" style="background:#4a4a4a"></div></div></div></div>
+    <div class="product"><div class="product-img">👜<div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON</div><div class="product-name">Leather Tote Bag</div><div class="product-price-row"><span class="product-price">¥128,000</span></div><div class="product-colors"><div class="color-dot" style="background:#8b6040"></div><div class="color-dot" style="background:#1a1612"></div></div></div></div>
+    <div class="product"><div class="product-img">💍<div class="product-badge badge-new">New</div><div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON Fine</div><div class="product-name">Gold Ring Set</div><div class="product-price-row"><span class="product-price">¥42,000</span></div></div></div>
+    <div class="product"><div class="product-img">👔<div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON Homme</div><div class="product-name">Linen Suit</div><div class="product-price-row"><span class="product-price">¥148,000</span></div><div class="product-colors"><div class="color-dot" style="background:#e8dcc8"></div><div class="color-dot" style="background:#4a4a4a"></div><div class="color-dot" style="background:#1a1612"></div></div></div></div>
+    <div class="product"><div class="product-img">👡<div class="product-badge badge-sale">Sale</div><div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON</div><div class="product-name">Heeled Mules</div><div class="product-price-row"><span class="product-price">¥58,000</span><span class="product-old">¥82,000</span></div></div></div>
+    <div class="product"><div class="product-img">🧣<div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON</div><div class="product-name">Cashmere Scarf</div><div class="product-price-row"><span class="product-price">¥38,000</span></div><div class="product-colors"><div class="color-dot" style="background:#c4a882"></div><div class="color-dot" style="background:#8b4040"></div><div class="color-dot" style="background:#405a8b"></div></div></div></div>
+    <div class="product"><div class="product-img">🕶️<div class="product-badge badge-new">New</div><div class="product-overlay"><button class="quick-add">Quick Add</button></div></div><div class="product-info"><div class="product-brand">MAISON</div><div class="product-name">Sunglasses</div><div class="product-price-row"><span class="product-price">¥52,000</span></div><div class="product-colors"><div class="color-dot" style="background:#1a1612"></div><div class="color-dot" style="background:#8b6040"></div></div></div></div>
+  </div>
+</section>
+
+<div class="featured">
+  <div class="featured-editorial">
+    <div class="ed-font">🌸</div>
+    <div class="ed-tag">Editorial</div>
+    <div class="ed-title">春の装い——<br>自然に宿る美</div>
+    <p class="ed-desc">桜の満開をインスピレーションに、淡いトーンとシルクの素材感が融合した春の新作ルック。</p>
+    <button class="btn-gold">ルックブックを見る</button>
+  </div>
+  <div class="featured-products">
+    <div style="padding:3rem 2rem 2rem"><div class="tag">Staff Picks</div><h2 style="font-size:1.8rem">スタッフおすすめ</h2></div>
+    <div class="feat-product"><div class="feat-img">👗</div><div class="feat-info"><div class="brand">MAISON</div><div class="name">Floral Wrap Dress</div><div class="price">¥72,000</div></div><div class="feat-arrow">→</div></div>
+    <div class="feat-product"><div class="feat-img">👜</div><div class="feat-info"><div class="brand">MAISON</div><div class="name">Mini Crossbody</div><div class="price">¥98,000</div></div><div class="feat-arrow">→</div></div>
+    <div class="feat-product"><div class="feat-img">💍</div><div class="feat-info"><div class="brand">MAISON Fine</div><div class="name">Pearl Earrings</div><div class="price">¥28,000</div></div><div class="feat-arrow">→</div></div>
+    <div class="feat-product"><div class="feat-img">👡</div><div class="feat-info"><div class="brand">MAISON</div><div class="name">Ballet Flats</div><div class="price">¥64,000</div></div><div class="feat-arrow">→</div></div>
+  </div>
+</div>
+
+<div class="editorial-strip">
+  <div class="strip-item s1"><div class="strip-emoji">👗</div><div class="strip-cat">Womenswear</div><div class="strip-title">Spring Collection</div><a href="#" class="strip-link">Explore →</a></div>
+  <div class="strip-item s2"><div class="strip-emoji">🧥</div><div class="strip-cat">Menswear</div><div class="strip-title">Modern Classics</div><a href="#" class="strip-link">Explore →</a></div>
+  <div class="strip-item s3"><div class="strip-emoji">💎</div><div class="strip-cat">Fine Jewellery</div><div class="strip-title">Timeless Pieces</div><a href="#" class="strip-link">Explore →</a></div>
+</div>
+
+<section class="newsletter">
+  <div class="tag" style="justify-content:center;color:rgba(255,255,255,0.3)">Newsletter</div>
+  <h2>エレガンスの<br>最前線へ</h2>
+  <p>新コレクション、限定セール、スタイリングTipsをいち早くお届けします。</p>
+  <div class="email-row">
+    <input class="email-input" type="email" placeholder="メールアドレスを入力">
+    <button class="email-btn">登録する →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand"><div class="logo">MAISON</div><p>フランスのエスプリと日本の職人技が融合した、ラグジュアリーファッションブランド。</p></div>
+  <div class="footer-col"><h4>Collections</h4><ul><li><a href="#">Womenswear</a></li><li><a href="#">Menswear</a></li><li><a href="#">Accessories</a></li><li><a href="#">Jewellery</a></li></ul></div>
+  <div class="footer-col"><h4>Services</h4><ul><li><a href="#">Personal Styling</a></li><li><a href="#">Alterations</a></li><li><a href="#">Gift Wrapping</a></li><li><a href="#">Concierge</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Stores</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li></ul></div>
+  <div class="footer-bottom"><span>© 2026 MAISON. All rights reserved.</span><span>Privacy Policy · Terms of Service</span></div>
+</footer>
+
+<script>
+  function setFilter(el){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active')}
+</script>
+<!-- EDIT MODE PANEL --><div id="edit-panel" style="position:fixed;bottom:2rem;right:2rem;z-index:9999;font-family:'Segoe UI',sans-serif"><div id="edit-toolbar" style="display:none;background:#1a1a2e;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1rem;margin-bottom:0.8rem;min-width:240px;box-shadow:0 20px 60px rgba(0,0,0,0.5)"><div style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.8rem">編集ツール</div><div style="display:flex;flex-direction:column;gap:0.5rem"><button onclick="saveChanges()" style="background:linear-gradient(135deg,#6c63ff,#8b5cf6);color:#fff;border:none;padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer">💾 保存</button><button onclick="exportHTML()" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer">📄 HTMLエクスポート</button><button onclick="resetChanges()" style="background:rgba(255,80,80,0.15);color:#ff8080;border:1px solid rgba(255,80,80,0.2);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer">↩ リセット</button></div><div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.7rem;color:rgba(255,255,255,0.3)">クリックでテキスト編集</div></div><button id="edit-toggle" onclick="toggleEditMode()" style="background:linear-gradient(135deg,#6c63ff,#ec4899);color:#fff;border:none;padding:0.7rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(108,99,255,0.5)">✏️ 編集モード</button></div><style>.edit-mode [data-editable]:hover{outline:2px dashed rgba(108,99,255,0.7)!important;outline-offset:4px!important;cursor:text!important;border-radius:4px}.edit-mode [data-editable]:focus{outline:2px solid #6c63ff!important;outline-offset:4px!important;border-radius:4px}</style><script>let editMode=false;const STORE_KEY="site_edits_"+location.pathname;function toggleEditMode(){editMode=!editMode;document.body.classList.toggle("edit-mode",editMode);const btn=document.getElementById("edit-toggle");const tb=document.getElementById("edit-toolbar");btn.textContent=editMode?"✓ 編集中":"✏️ 編集モード";btn.style.background=editMode?"linear-gradient(135deg,#10b981,#06b6d4)":"linear-gradient(135deg,#6c63ff,#ec4899)";tb.style.display=editMode?"block":"none";document.querySelectorAll("[data-editable]").forEach(el=>{el.contentEditable=editMode?"true":"false"});}function saveChanges(){const data={};document.querySelectorAll("[data-editable]").forEach(el=>{if(el.id)data[el.id]=el.innerHTML;});localStorage.setItem(STORE_KEY,JSON.stringify(data));const btn=document.getElementById("edit-toggle");const orig=btn.textContent;btn.textContent="✓ 保存完了!";setTimeout(()=>btn.textContent=orig,1500);}function loadChanges(){const data=JSON.parse(localStorage.getItem(STORE_KEY)||"{}");Object.entries(data).forEach(([id,html])=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});}function exportHTML(){const blob=new Blob([document.documentElement.outerHTML],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="edited-site.html";a.click();}function resetChanges(){if(confirm("すべての変更をリセットしますか？")){localStorage.removeItem(STORE_KEY);location.reload();}}document.addEventListener("DOMContentLoaded",()=>{let c=0;const sel="h1,h2,h3,h4,h5,p,.hero-sub,.hero-desc,.section-sub,.hero-tag,.section-tag,.tag,.hero-h1,.ed-title,.ed-desc,.product-name,.plan-name";document.querySelectorAll(sel).forEach(el=>{if(!el.closest("#edit-panel")){if(!el.id)el.id="editable-"+(c++);el.setAttribute("data-editable","");}});loadChanges();});</script>
+</body>
+</html>
