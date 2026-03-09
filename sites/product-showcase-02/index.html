@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ORBIT — Smart Home Hub</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#07070f;--fg:#f5f5ff;--green:#00ff88;--purple:#8b5cf6;--muted:#444466;--border:rgba(255,255,255,0.06)}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 5rem;backdrop-filter:blur(20px);background:rgba(7,7,15,0.9);border-bottom:1px solid var(--border)}
+  .logo{font-size:1.4rem;font-weight:900;letter-spacing:2px;display:flex;align-items:center;gap:0.5rem}
+  .logo-dot{width:10px;height:10px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:dot-pulse 2s infinite}
+  @keyframes dot-pulse{0%,100%{box-shadow:0 0 10px var(--green)}50%{box-shadow:0 0 20px var(--green),0 0 40px rgba(0,255,136,0.3)}}
+  .nav-links{display:flex;gap:3rem;list-style:none}
+  .nav-links a{color:rgba(245,245,255,0.5);text-decoration:none;font-size:0.85rem;letter-spacing:1px;transition:color 0.2s}
+  .nav-links a:hover{color:var(--green)}
+  .nav-cta{background:var(--green);color:#07070f;border:none;padding:0.6rem 1.8rem;border-radius:50px;font-size:0.85rem;font-weight:800;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,255,136,0.4)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:8rem 5rem;gap:6rem;position:relative;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 50%,rgba(139,92,246,0.1),transparent 60%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(0,255,136,0.06),transparent 60%)}
+  .hero-tag{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.2);padding:0.4rem 1rem;border-radius:50px;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:2rem}
+  h1{font-size:clamp(2.5rem,5.5vw,5rem);font-weight:900;line-height:1.05;letter-spacing:-3px;margin-bottom:1.5rem}
+  h1 em{font-style:normal;color:var(--green)}
+  .hero-desc{font-size:1.05rem;color:rgba(245,245,255,0.45);line-height:1.9;max-width:460px;margin-bottom:3rem}
+  .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+  .btn-green{background:var(--green);color:#07070f;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1rem;font-weight:800;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+  .btn-green:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,255,136,0.4)}
+  .btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--border);padding:1rem 2.5rem;border-radius:50px;font-size:1rem;cursor:pointer;transition:all 0.2s}
+  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
+  .hero-trust{display:flex;gap:2rem;align-items:center}
+  .trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:rgba(245,245,255,0.4)}
+  .trust-item::before{content:'✓';color:var(--green);font-weight:800}
+
+  /* Device Visual */
+  .hero-visual{position:relative;display:flex;align-items:center;justify-content:center}
+  .orbit-hub{position:relative;width:380px;height:380px}
+  .hub-glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(139,92,246,0.3),transparent 70%);animation:hub-glow 3s ease-in-out infinite}
+  @keyframes hub-glow{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+  .hub-body{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:180px;height:180px;background:linear-gradient(145deg,#1a0a3a,#0a0a1a);border-radius:50%;border:2px solid rgba(139,92,246,0.3);box-shadow:0 0 60px rgba(139,92,246,0.2),inset 0 1px 0 rgba(255,255,255,0.1)}
+  .hub-screen{position:absolute;inset:20px;border-radius:50%;background:linear-gradient(145deg,#0a0018,#050010);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem}
+  .hub-icon{font-size:2.5rem;animation:hub-spin 8s linear infinite}
+  @keyframes hub-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .hub-status{font-size:0.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--green)}
+  .orbit-ring{position:absolute;top:50%;left:50%;border:1px solid rgba(139,92,246,0.15);border-radius:50%;animation:ring-spin 20s linear infinite}
+  .ring1{width:250px;height:250px;margin:-125px 0 0 -125px}
+  .ring2{width:340px;height:340px;margin:-170px 0 0 -170px;animation-direction:reverse;animation-duration:30s}
+  .orbit-device{position:absolute;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;background:rgba(7,7,15,0.9);border:1px solid rgba(139,92,246,0.3)}
+  @keyframes ring-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+  .dev1{top:-18px;left:50%;margin-left:-18px}
+  .dev2{bottom:-18px;left:50%;margin-left:-18px}
+  .dev3{left:-18px;top:50%;margin-top:-18px}
+  .dev4{right:-18px;top:50%;margin-top:-18px}
+  .dev5{top:20px;right:20px}
+  .dev6{bottom:20px;left:20px}
+  .connection-line{position:absolute;top:50%;left:50%;width:100px;height:1px;background:linear-gradient(90deg,rgba(0,255,136,0.5),transparent);transform-origin:left center;animation:con-blink 2s ease-in-out infinite}
+  @keyframes con-blink{0%,100%{opacity:0.3}50%{opacity:1}}
+
+  /* DEVICES SECTION */
+  .devices{padding:8rem 5rem;background:rgba(255,255,255,0.01)}
+  .devices-header{text-align:center;margin-bottom:5rem}
+  .tag{font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:1rem}
+  h2{font-size:clamp(2rem,4vw,3rem);font-weight:900;letter-spacing:-2px}
+  .devices-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+  .device-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:16px;padding:2rem;text-align:center;cursor:pointer;transition:transform 0.3s,border-color 0.3s,background 0.3s}
+  .device-card:hover,.device-card.active{transform:translateY(-4px);border-color:rgba(0,255,136,0.4);background:rgba(0,255,136,0.04)}
+  .device-card .icon{font-size:3rem;margin-bottom:1rem}
+  .device-card h3{font-size:0.95rem;font-weight:700;margin-bottom:0.4rem}
+  .device-card p{font-size:0.8rem;color:rgba(245,245,255,0.4);line-height:1.6}
+  .device-count{margin-top:0.8rem;font-size:0.7rem;color:var(--green);font-weight:700}
+
+  /* DASHBOARD PREVIEW */
+  .dashboard{padding:0 5rem 8rem}
+  .dash-container{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:20px;overflow:hidden}
+  .dash-header{background:rgba(139,92,246,0.08);border-bottom:1px solid var(--border);padding:1.5rem 2rem;display:flex;align-items:center;gap:1rem}
+  .dash-dots{display:flex;gap:0.5rem}
+  .dash-dot{width:12px;height:12px;border-radius:50%}
+  .dash-dot:nth-child(1){background:#ff5f57}
+  .dash-dot:nth-child(2){background:#febc2e}
+  .dash-dot:nth-child(3){background:#28c840}
+  .dash-title{font-size:0.8rem;color:rgba(245,245,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-left:1rem}
+  .dash-body{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+  .dash-widget{padding:2rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .dash-widget:nth-child(4n){border-right:none}
+  .dash-widget:nth-child(5),.dash-widget:nth-child(6),.dash-widget:nth-child(7),.dash-widget:nth-child(8){border-bottom:none}
+  .widget-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:1rem}
+  .widget-value{font-size:2rem;font-weight:900;color:var(--fg)}
+  .widget-sub{font-size:0.75rem;color:var(--green);margin-top:0.3rem}
+  .widget-bar{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;margin-top:1rem}
+  .widget-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--green),#00ccff)}
+
+  /* PRICING */
+  .pricing{padding:8rem 5rem;background:rgba(139,92,246,0.03);border-top:1px solid var(--border)}
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+  .plan{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:20px;padding:2.5rem;transition:transform 0.3s,border-color 0.3s}
+  .plan.featured{border-color:rgba(0,255,136,0.4);background:rgba(0,255,136,0.04);transform:scale(1.03)}
+  .plan-tag{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:0.5rem}
+  .plan-name{font-size:1.3rem;font-weight:900;margin-bottom:0.5rem}
+  .plan-price{font-size:2.5rem;font-weight:900;margin:1.5rem 0;color:var(--green)}
+  .plan-price span{font-size:1rem;font-weight:400;color:rgba(245,245,255,0.4)}
+  .plan-features{list-style:none;display:flex;flex-direction:column;gap:0.8rem;margin-bottom:2rem}
+  .plan-features li{font-size:0.85rem;color:rgba(245,245,255,0.6);display:flex;align-items:center;gap:0.6rem}
+  .plan-features li::before{content:'✓';color:var(--green);font-weight:800;flex-shrink:0}
+
+  footer{padding:3rem 5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:0.8rem;color:var(--muted)}
+  .footer-links{display:flex;gap:2rem}
+  .footer-links a{color:var(--muted);text-decoration:none;transition:color 0.2s}
+  .footer-links a:hover{color:var(--green)}
+
+  @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{display:none}.hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:3rem}.devices{padding:5rem 1.5rem}.devices-grid{grid-template-columns:1fr 1fr}.dashboard{padding:0 1.5rem 5rem}.dash-body{grid-template-columns:1fr 1fr}.dash-widget:nth-child(2n){border-right:none}.pricing{padding:5rem 1.5rem}.pricing-grid{grid-template-columns:1fr}.plan.featured{transform:none}footer{flex-direction:column;gap:1rem;padding:2rem 1.5rem;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo"><div class="logo-dot"></div>ORBIT</div>
+  <ul class="nav-links"><li><a href="#devices">Devices</a></li><li><a href="#dashboard">Dashboard</a></li><li><a href="#pricing">Pricing</a></li></ul>
+  <button class="nav-cta">Get Started Free</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div>
+    <div class="hero-tag">Smart Home Hub — Gen 4</div>
+    <h1>Your Home,<br><em>Intelligently</em><br>Connected</h1>
+    <p class="hero-desc">ORBITはすべてのスマートデバイスを一つのAIハブで統合。照明、温度、セキュリティ、エネルギーを自動最適化します。</p>
+    <div class="hero-btns">
+      <button class="btn-green">無料で始める</button>
+      <button class="btn-ghost">デモを見る</button>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">50,000+ Homes</div>
+      <div class="trust-item">500+ Devices</div>
+      <div class="trust-item">30% Energy Save</div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbit-hub">
+      <div class="hub-glow"></div>
+      <div class="orbit-ring ring2">
+        <div class="orbit-device dev5">💡</div>
+        <div class="orbit-device dev6">📷</div>
+      </div>
+      <div class="orbit-ring ring1">
+        <div class="orbit-device dev1">🌡️</div>
+        <div class="orbit-device dev2">🔒</div>
+        <div class="orbit-device dev3">🔊</div>
+        <div class="orbit-device dev4">📱</div>
+      </div>
+      <div class="hub-body">
+        <div class="hub-screen">
+          <div class="hub-icon">🏠</div>
+          <div class="hub-status">All Systems OK</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="devices" class="devices">
+  <div class="devices-header">
+    <div class="tag">Compatibility</div>
+    <h2>500以上のデバイスと連携</h2>
+    <p style="color:rgba(245,245,255,0.4);margin-top:1rem;font-size:1rem">Matter、Zigbee、Z-Wave、WiFi — すべての規格に対応。</p>
+  </div>
+  <div class="devices-grid">
+    <div class="device-card active"><div class="icon">💡</div><h3>照明</h3><p>スマート電球、シーリング、間接照明を自動スケジュール制御。</p><div class="device-count">120+ devices</div></div>
+    <div class="device-card"><div class="icon">🌡️</div><h3>温調</h3><p>AIが外気温と生活パターンを学習し、快適な室温を自動維持。</p><div class="device-count">45+ devices</div></div>
+    <div class="device-card"><div class="icon">🔒</div><h3>セキュリティ</h3><p>スマートロック、カメラ、センサーを統合した完璧なセキュリティ。</p><div class="device-count">90+ devices</div></div>
+    <div class="device-card"><div class="icon">⚡</div><h3>エネルギー</h3><p>消費電力をリアルタイム監視し、無駄を自動削減。電気代30%節約。</p><div class="device-count">60+ devices</div></div>
+    <div class="device-card"><div class="icon">🔊</div><h3>エンタメ</h3><p>TV、スピーカー、プロジェクターを声でコントロール。</p><div class="device-count">80+ devices</div></div>
+    <div class="device-card"><div class="icon">🍳</div><h3>キッチン</h3><p>スマート冷蔵庫、オーブン、食洗機をアプリから管理。</p><div class="device-count">55+ devices</div></div>
+    <div class="device-card"><div class="icon">🛁</div><h3>バスルーム</h3><p>シャワー温度設定、バスタブ自動給湯、鏡ディスプレイ連携。</p><div class="device-count">30+ devices</div></div>
+    <div class="device-card"><div class="icon">🌿</div><h3>庭・ガーデン</h3><p>自動散水、土壌センサー、除草ロボットを一元管理。</p><div class="device-count">20+ devices</div></div>
+  </div>
+</section>
+
+<section id="dashboard" class="dashboard">
+  <div style="padding:0 0 3rem"><div class="tag">Live Dashboard</div><h2>リアルタイム<br>コントロール</h2></div>
+  <div class="dash-container">
+    <div class="dash-header"><div class="dash-dots"><div class="dash-dot"></div><div class="dash-dot"></div><div class="dash-dot"></div></div><div class="dash-title">ORBIT Dashboard · Home Overview</div></div>
+    <div class="dash-body">
+      <div class="dash-widget"><div class="widget-label">室温</div><div class="widget-value">22°C</div><div class="widget-sub">↑ 快適ゾーン</div><div class="widget-bar"><div class="widget-fill" style="width:65%"></div></div></div>
+      <div class="dash-widget"><div class="widget-label">電力消費</div><div class="widget-value">2.4kW</div><div class="widget-sub">↓ 昨日比 -18%</div><div class="widget-bar"><div class="widget-fill" style="width:40%"></div></div></div>
+      <div class="dash-widget"><div class="widget-label">デバイス稼働</div><div class="widget-value">24/28</div><div class="widget-sub">オンライン</div><div class="widget-bar"><div class="widget-fill" style="width:86%"></div></div></div>
+      <div class="dash-widget"><div class="widget-label">セキュリティ</div><div class="widget-value">✓ OK</div><div class="widget-sub">全センサー正常</div></div>
+      <div class="dash-widget"><div class="widget-label">照明</div><div class="widget-value">7/12</div><div class="widget-sub">ON · 自動制御中</div><div class="widget-bar"><div class="widget-fill" style="width:58%"></div></div></div>
+      <div class="dash-widget"><div class="widget-label">今月の節約</div><div class="widget-value">¥4,280</div><div class="widget-sub">電気代節約額</div></div>
+      <div class="dash-widget"><div class="widget-label">湿度</div><div class="widget-value">58%</div><div class="widget-sub">最適範囲内</div><div class="widget-bar"><div class="widget-fill" style="width:58%"></div></div></div>
+      <div class="dash-widget"><div class="widget-label">CO₂濃度</div><div class="widget-value">420ppm</div><div class="widget-sub">換気推奨なし</div><div class="widget-bar"><div class="widget-fill" style="width:25%"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+  <div style="text-align:center"><div class="tag">Pricing</div><h2>シンプルな料金体系</h2><p style="color:rgba(245,245,255,0.4);margin-top:1rem">すべてのプランに30日間無料トライアル付き</p></div>
+  <div class="pricing-grid">
+    <div class="plan"><div class="plan-tag">Starter</div><div class="plan-name">Basic</div><div class="plan-price">無料<span>/月</span></div><ul class="plan-features"><li>最大5デバイス接続</li><li>基本的な自動化ルール</li><li>モバイルアプリ</li><li>メールサポート</li></ul><button class="btn-ghost" style="width:100%;padding:0.8rem">無料で始める</button></div>
+    <div class="plan featured"><div class="plan-tag">Most Popular</div><div class="plan-name">Home</div><div class="plan-price">¥980<span>/月</span></div><ul class="plan-features"><li>無制限デバイス接続</li><li>AI自動化 & 学習機能</li><li>エネルギー分析レポート</li><li>セキュリティ監視</li><li>24時間サポート</li></ul><button class="btn-green" style="width:100%;padding:0.8rem">14日間無料試用</button></div>
+    <div class="plan"><div class="plan-tag">Enterprise</div><div class="plan-name">Pro</div><div class="plan-price">¥2,980<span>/月</span></div><ul class="plan-features"><li>複数物件管理</li><li>API & 開発者ツール</li><li>カスタム自動化</li><li>専任サポート担当</li><li>SLA保証</li></ul><button class="btn-ghost" style="width:100%;padding:0.8rem">お問い合わせ</button></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ORBIT Smart Home. All rights reserved.</p>
+  <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Docs</a><a href="#">Status</a></div>
+</footer>
+<!-- EDIT MODE PANEL --><div id="edit-panel" style="position:fixed;bottom:2rem;right:2rem;z-index:9999;font-family:'Segoe UI',sans-serif"><div id="edit-toolbar" style="display:none;background:#1a1a2e;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1rem;margin-bottom:0.8rem;min-width:240px;box-shadow:0 20px 60px rgba(0,0,0,0.5)"><div style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.8rem">編集ツール</div><div style="display:flex;flex-direction:column;gap:0.5rem"><button onclick="saveChanges()" style="background:linear-gradient(135deg,#6c63ff,#8b5cf6);color:#fff;border:none;padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer">💾 保存</button><button onclick="exportHTML()" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer">📄 HTMLエクスポート</button><button onclick="resetChanges()" style="background:rgba(255,80,80,0.15);color:#ff8080;border:1px solid rgba(255,80,80,0.2);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer">↩ リセット</button></div><div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.7rem;color:rgba(255,255,255,0.3)">クリックでテキスト編集</div></div><button id="edit-toggle" onclick="toggleEditMode()" style="background:linear-gradient(135deg,#6c63ff,#ec4899);color:#fff;border:none;padding:0.7rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(108,99,255,0.5)">✏️ 編集モード</button></div><style>.edit-mode [data-editable]:hover{outline:2px dashed rgba(108,99,255,0.7)!important;outline-offset:4px!important;cursor:text!important;border-radius:4px}.edit-mode [data-editable]:focus{outline:2px solid #6c63ff!important;outline-offset:4px!important;border-radius:4px}</style><script>let editMode=false;const STORE_KEY="site_edits_"+location.pathname;function toggleEditMode(){editMode=!editMode;document.body.classList.toggle("edit-mode",editMode);const btn=document.getElementById("edit-toggle");const tb=document.getElementById("edit-toolbar");btn.textContent=editMode?"✓ 編集中":"✏️ 編集モード";btn.style.background=editMode?"linear-gradient(135deg,#10b981,#06b6d4)":"linear-gradient(135deg,#6c63ff,#ec4899)";tb.style.display=editMode?"block":"none";document.querySelectorAll("[data-editable]").forEach(el=>{el.contentEditable=editMode?"true":"false"});}function saveChanges(){const data={};document.querySelectorAll("[data-editable]").forEach(el=>{if(el.id)data[el.id]=el.innerHTML;});localStorage.setItem(STORE_KEY,JSON.stringify(data));const btn=document.getElementById("edit-toggle");const orig=btn.textContent;btn.textContent="✓ 保存完了!";setTimeout(()=>btn.textContent=orig,1500);}function loadChanges(){const data=JSON.parse(localStorage.getItem(STORE_KEY)||"{}");Object.entries(data).forEach(([id,html])=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});}function exportHTML(){const blob=new Blob([document.documentElement.outerHTML],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="edited-site.html";a.click();}function resetChanges(){if(confirm("すべての変更をリセットしますか？")){localStorage.removeItem(STORE_KEY);location.reload();}}document.addEventListener("DOMContentLoaded",()=>{let c=0;const sel="h1,h2,h3,h4,h5,p,.hero-sub,.hero-desc,.section-sub,.hero-tag,.section-tag,.tag,.hero-h1,.ed-title,.ed-desc,.product-name,.plan-name";document.querySelectorAll(sel).forEach(el=>{if(!el.closest("#edit-panel")){if(!el.id)el.id="editable-"+(c++);el.setAttribute("data-editable","");}});loadChanges();});</script>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLUX — AI Design Platform</title>
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  :root{--bg:#030308;--fg:#f8f8ff;--violet:#7c3aed;--indigo:#4f46e5;--pink:#ec4899;--muted:#3a3a5a;--border:rgba(255,255,255,0.06)}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--fg);overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 5rem;backdrop-filter:blur(20px);background:rgba(3,3,8,0.8);border-bottom:1px solid var(--border)}
+  .logo{font-size:1.4rem;font-weight:900;letter-spacing:-1px;background:linear-gradient(90deg,var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .nav-links{display:flex;gap:2.5rem;list-style:none}
+  .nav-links a{color:rgba(248,248,255,0.55);text-decoration:none;font-size:0.88rem;transition:color 0.2s}
+  .nav-links a:hover{color:var(--fg)}
+  .nav-right{display:flex;gap:1rem;align-items:center}
+  .nav-login{background:none;border:1px solid var(--border);color:rgba(248,248,255,0.6);padding:0.5rem 1.2rem;border-radius:8px;font-size:0.85rem;cursor:pointer;transition:all 0.2s}
+  .nav-login:hover{border-color:var(--violet);color:var(--fg)}
+  .nav-signup{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;border:none;padding:0.5rem 1.4rem;border-radius:8px;font-size:0.85rem;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s}
+  .nav-signup:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,0.4)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8rem 5rem 4rem;text-align:center;position:relative;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 30%,rgba(124,58,237,0.2),transparent 60%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(236,72,153,0.1),transparent 60%),radial-gradient(ellipse 40% 40% at 80% 20%,rgba(79,70,229,0.1),transparent 60%)}
+  .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.02) 1px,transparent 1px);background-size:50px 50px}
+  .hero-content{position:relative;max-width:900px}
+  .hero-pill{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.25);padding:0.4rem 1rem 0.4rem 0.5rem;border-radius:50px;font-size:0.8rem;margin-bottom:2.5rem}
+  .pill-badge{background:linear-gradient(135deg,var(--violet),var(--pink));padding:0.2rem 0.6rem;border-radius:50px;font-size:0.7rem;font-weight:700;color:#fff}
+  .pill-text{color:rgba(248,248,255,0.7)}
+  h1{font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:1;letter-spacing:-4px;margin-bottom:2rem}
+  h1 .grad{background:linear-gradient(135deg,var(--violet),var(--indigo),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-sub{font-size:1.25rem;color:rgba(248,248,255,0.5);max-width:600px;margin:0 auto 3rem;line-height:1.8}
+  .hero-input-row{display:flex;gap:0.5rem;max-width:500px;margin:0 auto 2.5rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:0.5rem;backdrop-filter:blur(10px)}
+  .hero-input{flex:1;background:none;border:none;color:var(--fg);font-size:0.95rem;padding:0.6rem 0.8rem;outline:none}
+  .hero-input::placeholder{color:rgba(248,248,255,0.3)}
+  .btn-start{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;border:none;padding:0.8rem 2rem;border-radius:8px;font-size:0.95rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:transform 0.2s,box-shadow 0.2s}
+  .btn-start:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(124,58,237,0.5)}
+  .hero-note{font-size:0.8rem;color:rgba(248,248,255,0.3);margin-bottom:4rem}
+  .hero-note a{color:rgba(124,58,237,0.8);text-decoration:none}
+
+  /* APP PREVIEW */
+  .app-preview{position:relative;max-width:1000px;margin:0 auto;width:100%}
+  .app-window{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;overflow:hidden;box-shadow:0 40px 120px rgba(0,0,0,0.8)}
+  .app-toolbar{background:rgba(255,255,255,0.04);border-bottom:1px solid var(--border);padding:0.8rem 1.5rem;display:flex;align-items:center;gap:1rem}
+  .app-dots{display:flex;gap:0.4rem}
+  .app-dot{width:10px;height:10px;border-radius:50%}
+  .app-dot:nth-child(1){background:#ff5f57}
+  .app-dot:nth-child(2){background:#febc2e}
+  .app-dot:nth-child(3){background:#28c840}
+  .app-url{flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;padding:0.3rem 1rem;font-size:0.75rem;color:rgba(248,248,255,0.35);text-align:center}
+  .app-body{display:grid;grid-template-columns:200px 1fr 200px;min-height:320px}
+  .app-sidebar{background:rgba(255,255,255,0.02);border-right:1px solid var(--border);padding:1rem}
+  .sidebar-item{padding:0.6rem 0.8rem;border-radius:6px;font-size:0.75rem;color:rgba(248,248,255,0.4);cursor:pointer;transition:all 0.2s;margin-bottom:0.2rem}
+  .sidebar-item.active{background:rgba(124,58,237,0.15);color:var(--violet);font-weight:700}
+  .sidebar-item:hover:not(.active){background:rgba(255,255,255,0.04)}
+  .sidebar-section{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(248,248,255,0.2);padding:0.8rem 0.8rem 0.4rem;margin-top:0.5rem}
+  .app-canvas{position:relative;background:linear-gradient(135deg,#0a0a18,#050510);display:flex;align-items:center;justify-content:center;padding:2rem;overflow:hidden}
+  .canvas-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:20px 20px}
+  .canvas-element{position:absolute;border-radius:8px;border:2px solid rgba(124,58,237,0.5)}
+  .ce1{top:30px;left:30px;width:120px;height:60px;background:linear-gradient(135deg,rgba(124,58,237,0.3),rgba(79,70,229,0.2))}
+  .ce2{top:110px;left:60px;width:180px;height:40px;background:linear-gradient(135deg,rgba(236,72,153,0.3),rgba(124,58,237,0.2))}
+  .ce3{bottom:40px;right:40px;width:100px;height:100px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,0.4),transparent)}
+  .ai-cursor{position:absolute;top:40%;left:45%;width:20px;height:20px;background:var(--violet);border-radius:50%;box-shadow:0 0 20px rgba(124,58,237,0.8);animation:cursor-move 4s ease-in-out infinite}
+  @keyframes cursor-move{0%,100%{top:40%;left:45%}25%{top:25%;left:60%}50%{top:60%;left:30%}75%{top:35%;left:70%}}
+  .app-right{background:rgba(255,255,255,0.02);border-left:1px solid var(--border);padding:1rem}
+  .prop-label{font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(248,248,255,0.25);margin-bottom:0.3rem;margin-top:0.8rem}
+  .prop-val{font-size:0.75rem;color:rgba(248,248,255,0.6);background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:4px;padding:0.3rem 0.6rem}
+  .prop-color{width:100%;height:24px;border-radius:4px;background:linear-gradient(90deg,var(--violet),var(--pink))}
+  .preview-glow{position:absolute;inset:-2px;background:linear-gradient(135deg,var(--violet),var(--pink));border-radius:18px;z-index:-1;opacity:0.4;filter:blur(20px)}
+
+  /* LOGOS */
+  .logos{padding:5rem 5rem 0;text-align:center}
+  .logos-label{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
+  .logos-row{display:flex;gap:4rem;justify-content:center;align-items:center;flex-wrap:wrap}
+  .logos-row span{font-size:1.2rem;font-weight:900;color:rgba(248,248,255,0.2);letter-spacing:2px;text-transform:uppercase}
+
+  /* FEATURES */
+  .features{padding:8rem 5rem}
+  .section-tag{font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;color:var(--violet);margin-bottom:1rem}
+  h2{font-size:clamp(2rem,4vw,3.5rem);font-weight:900;letter-spacing:-2px}
+  .features-bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:1.5rem;margin-top:4rem}
+  .bento{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:20px;padding:2.5rem;transition:border-color 0.3s,transform 0.3s}
+  .bento:hover{transform:translateY(-4px);border-color:rgba(124,58,237,0.3)}
+  .bento.wide{grid-column:span 2}
+  .bento-icon{font-size:2.5rem;margin-bottom:1.5rem}
+  .bento h3{font-size:1.15rem;font-weight:800;margin-bottom:0.8rem}
+  .bento p{font-size:0.875rem;color:rgba(248,248,255,0.45);line-height:1.85}
+  .bento-tag{display:inline-block;margin-top:1.5rem;font-size:0.7rem;color:var(--violet);border:1px solid rgba(124,58,237,0.3);padding:0.25rem 0.7rem;border-radius:50px}
+
+  /* SOCIAL PROOF */
+  .proof{padding:6rem 5rem;background:rgba(255,255,255,0.01);border-top:1px solid var(--border);display:grid;grid-template-columns:repeat(4,1fr);gap:2rem}
+  .proof-stat{text-align:center;padding:2rem}
+  .proof-num{font-size:3rem;font-weight:900;background:linear-gradient(135deg,var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .proof-label{font-size:0.8rem;color:var(--muted);margin-top:0.5rem;letter-spacing:1px}
+
+  /* PRICING */
+  .pricing{padding:8rem 5rem;text-align:center}
+  .pricing-toggle{display:inline-flex;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:50px;padding:0.3rem;margin:2rem auto;gap:0}
+  .ptoggle{background:none;border:none;color:rgba(248,248,255,0.5);padding:0.5rem 1.5rem;border-radius:50px;font-size:0.85rem;cursor:pointer;transition:all 0.2s}
+  .ptoggle.active{background:linear-gradient(135deg,var(--violet),var(--indigo));color:#fff}
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem;text-align:left}
+  .plan{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:20px;padding:2.5rem}
+  .plan.featured{border-color:rgba(124,58,237,0.5);background:rgba(124,58,237,0.06);position:relative;overflow:hidden}
+  .plan.featured::before{content:'Most Popular';position:absolute;top:1rem;right:-2rem;background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff;font-size:0.65rem;font-weight:700;padding:0.25rem 3rem;transform:rotate(45deg);letter-spacing:1px}
+  .plan-tier{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+  .plan-name{font-size:1.4rem;font-weight:900;margin-bottom:1.5rem}
+  .plan-price{font-size:3rem;font-weight:900;line-height:1}
+  .plan-price .currency{font-size:1.5rem;vertical-align:super}
+  .plan-period{font-size:0.85rem;color:var(--muted);margin-bottom:1.5rem}
+  .plan-desc{font-size:0.85rem;color:rgba(248,248,255,0.4);margin-bottom:2rem;line-height:1.7}
+  .plan-btn{width:100%;padding:0.9rem;border-radius:10px;font-size:0.9rem;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;margin-bottom:2rem}
+  .plan-btn.primary{background:linear-gradient(135deg,var(--violet),var(--pink));color:#fff}
+  .plan-btn.primary:hover{box-shadow:0 12px 30px rgba(124,58,237,0.4);transform:translateY(-2px)}
+  .plan-btn.ghost{background:transparent;border:1px solid var(--border);color:var(--fg)}
+  .plan-btn.ghost:hover{border-color:var(--violet);color:var(--violet)}
+  .plan-features{list-style:none;display:flex;flex-direction:column;gap:0.8rem}
+  .plan-features li{font-size:0.85rem;color:rgba(248,248,255,0.6);display:flex;align-items:flex-start;gap:0.7rem}
+  .plan-features li::before{content:'✓';color:var(--violet);font-weight:800;flex-shrink:0;margin-top:0.1rem}
+
+  /* FAQ */
+  .faq{padding:8rem 5rem;max-width:800px;margin:0 auto}
+  .faq-item{border-bottom:1px solid var(--border);padding:1.5rem 0;cursor:pointer}
+  .faq-q{display:flex;justify-content:space-between;align-items:center;font-size:1rem;font-weight:700}
+  .faq-icon{font-size:1.2rem;color:var(--violet);transition:transform 0.2s;flex-shrink:0}
+  .faq-a{font-size:0.9rem;color:rgba(248,248,255,0.5);line-height:1.8;max-height:0;overflow:hidden;transition:max-height 0.3s,padding 0.3s}
+  .faq-item.open .faq-icon{transform:rotate(45deg)}
+  .faq-item.open .faq-a{max-height:200px;padding-top:1rem}
+
+  /* CTA FINAL */
+  .cta-final{margin:0 5rem 8rem;border-radius:24px;padding:7rem;text-align:center;background:linear-gradient(135deg,rgba(124,58,237,0.2),rgba(236,72,153,0.1));border:1px solid rgba(124,58,237,0.3);position:relative;overflow:hidden}
+  .cta-final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(124,58,237,0.15),transparent)}
+  .cta-final > *{position:relative}
+  .cta-final h2{font-size:clamp(2.5rem,5vw,4.5rem);font-weight:900;letter-spacing:-3px;margin-bottom:1rem}
+  .cta-final p{color:rgba(248,248,255,0.5);margin-bottom:3rem;font-size:1.1rem}
+
+  footer{padding:4rem 5rem;border-top:1px solid var(--border)}
+  .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+  .footer-brand p{color:var(--muted);font-size:0.85rem;margin-top:1rem;line-height:1.8;max-width:250px}
+  .footer-col h4{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:1.2rem}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+  .footer-col a{color:rgba(248,248,255,0.4);text-decoration:none;font-size:0.875rem;transition:color 0.2s}
+  .footer-col a:hover{color:var(--fg)}
+  .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--border);font-size:0.8rem;color:var(--muted)}
+
+  @media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{display:none}.hero{padding:7rem 1.5rem 4rem}.app-body{grid-template-columns:1fr}.app-sidebar,.app-right{display:none}.logos{padding:3rem 1.5rem}.features{padding:5rem 1.5rem}.features-bento{grid-template-columns:1fr}.bento.wide{grid-column:span 1}.proof{grid-template-columns:1fr 1fr;padding:4rem 1.5rem}.pricing{padding:5rem 1.5rem}.pricing-grid{grid-template-columns:1fr}.faq{padding:5rem 1.5rem}.cta-final{margin:0 1.5rem 4rem;padding:4rem 1.5rem}footer{padding:3rem 1.5rem}.footer-top{grid-template-columns:1fr 1fr;gap:2rem}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">FLUX</div>
+  <ul class="nav-links"><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Docs</a></li><li><a href="#">Blog</a></li></ul>
+  <div class="nav-right"><button class="nav-login">Log in</button><button class="nav-signup">Get started free</button></div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-pill"><span class="pill-badge">NEW</span><span class="pill-text">FLUX AI v3.0 — Now with text-to-design</span></div>
+    <h1>Design Faster<br>with <span class="grad">AI</span></h1>
+    <p class="hero-sub">FLUXはAIがデザインの大半を担う次世代デザインプラットフォーム。アイデアを言葉で伝えるだけで、プロ品質のデザインが数秒で完成。</p>
+    <div class="hero-input-row">
+      <input class="hero-input" type="email" placeholder="メールアドレスを入力してください">
+      <button class="btn-start">無料で始める →</button>
+    </div>
+    <p class="hero-note">無料プランあり · クレジットカード不要 · <a href="#">14日間 Pro トライアル</a></p>
+    <div class="app-preview">
+      <div class="preview-glow"></div>
+      <div class="app-window">
+        <div class="app-toolbar"><div class="app-dots"><div class="app-dot"></div><div class="app-dot"></div><div class="app-dot"></div></div><div class="app-url">app.flux.design · My Project</div></div>
+        <div class="app-body">
+          <div class="app-sidebar">
+            <div class="sidebar-section">Pages</div>
+            <div class="sidebar-item active">🏠 Home</div>
+            <div class="sidebar-item">📄 About</div>
+            <div class="sidebar-item">💼 Portfolio</div>
+            <div class="sidebar-section">Components</div>
+            <div class="sidebar-item">📦 Navbar</div>
+            <div class="sidebar-item">🃏 Cards</div>
+            <div class="sidebar-item">📝 Forms</div>
+            <div class="sidebar-item">🖼️ Hero</div>
+          </div>
+          <div class="app-canvas">
+            <div class="canvas-grid"></div>
+            <div class="canvas-element ce1"></div>
+            <div class="canvas-element ce2"></div>
+            <div class="canvas-element ce3"></div>
+            <div class="ai-cursor"></div>
+          </div>
+          <div class="app-right">
+            <div class="prop-label">Width</div><div class="prop-val">1440px</div>
+            <div class="prop-label">Height</div><div class="prop-val">Auto</div>
+            <div class="prop-label">Background</div><div class="prop-color"></div>
+            <div class="prop-label">Font</div><div class="prop-val">Inter · 16px</div>
+            <div class="prop-label">Border Radius</div><div class="prop-val">12px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="logos">
+  <div class="logos-label">世界中の5,000社以上が使用</div>
+  <div class="logos-row">
+    <span>Acme Co.</span><span>Globex</span><span>Initech</span><span>Umbrella</span><span>Soylent</span><span>Wonka Co.</span>
+  </div>
+</div>
+
+<section id="features" class="features">
+  <div class="section-tag">Features</div>
+  <h2>デザインを<br>10倍速に</h2>
+  <div class="features-bento">
+    <div class="bento wide"><div class="bento-icon">🤖</div><h3>AI Text-to-Design</h3><p>「モダンなECサイトのヒーローセクションを作って」と入力するだけ。FLUXのAIが瞬時にデザイン案を生成。フォント、カラー、レイアウトまで自動で最適化します。</p><span class="bento-tag">AI Powered</span></div>
+    <div class="bento"><div class="bento-icon">🎨</div><h3>Smart Components</h3><p>再利用可能なコンポーネントライブラリ。一か所の変更が全体に即時反映。</p><span class="bento-tag">Productivity</span></div>
+    <div class="bento"><div class="bento-icon">👥</div><h3>Real-time Collab</h3><p>チーム全員がリアルタイムで同じキャンバスを編集。Google Docsのように直感的。</p><span class="bento-tag">Team</span></div>
+    <div class="bento"><div class="bento-icon">📱</div><h3>Responsive Auto</h3><p>デスクトップデザインを1クリックでモバイル対応に変換。全サイズ完璧に対応。</p><span class="bento-tag">Export</span></div>
+    <div class="bento"><div class="bento-icon">⚡</div><h3>One-click Export</h3><p>HTML/CSS、React、Vue、Figmaなど、あらゆる形式にワンクリックでエクスポート。</p><span class="bento-tag">Dev Ready</span></div>
+    <div class="bento wide"><div class="bento-icon">🔌</div><h3>2,000+ Integrations</h3><p>Slack、GitHub、Jira、Notion、Google Workspace、Zapier……あらゆるツールとシームレスに連携。ワークフローを最適化し、チームの生産性を最大化します。</p><span class="bento-tag">Ecosystem</span></div>
+  </div>
+</section>
+
+<div class="proof">
+  <div class="proof-stat"><div class="proof-num">5M+</div><div class="proof-label">Active Users</div></div>
+  <div class="proof-stat"><div class="proof-num">10x</div><div class="proof-label">Faster Design</div></div>
+  <div class="proof-stat"><div class="proof-num">98%</div><div class="proof-label">Satisfaction Rate</div></div>
+  <div class="proof-stat"><div class="proof-num">24/7</div><div class="proof-label">AI Assistance</div></div>
+</div>
+
+<section id="pricing" class="pricing">
+  <div class="section-tag">Pricing</div>
+  <h2>シンプルな料金プラン</h2>
+  <p style="color:rgba(248,248,255,0.4);margin-top:1rem">すべてのプランに14日間無料トライアル</p>
+  <div class="pricing-toggle">
+    <button class="ptoggle active" onclick="setToggle(this,'monthly')">月払い</button>
+    <button class="ptoggle" onclick="setToggle(this,'annual')">年払い <span style="color:#a78bfa;font-size:0.75rem">20%OFF</span></button>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan"><div class="plan-tier">Free</div><div class="plan-name">Starter</div><div class="plan-price"><span class="currency">¥</span>0<div class="plan-period">永久無料</div></div><div class="plan-desc">個人プロジェクトや学習に最適なフリープラン。</div><button class="plan-btn ghost">無料で始める</button><ul class="plan-features"><li>3プロジェクトまで</li><li>基本的なAI機能</li><li>2GBストレージ</li><li>コミュニティサポート</li></ul></div>
+    <div class="plan featured"><div class="plan-tier">Most Popular</div><div class="plan-name">Pro</div><div class="plan-price"><span class="currency">¥</span>1,980<div class="plan-period">/月（税込）</div></div><div class="plan-desc">フリーランサーや小規模チームに最適なプロプラン。</div><button class="plan-btn primary">14日間無料で試す</button><ul class="plan-features"><li>無制限プロジェクト</li><li>フルAI機能 · Text-to-Design</li><li>50GBストレージ</li><li>リアルタイムコラボ（5名）</li><li>優先サポート</li><li>全フォーマットエクスポート</li></ul></div>
+    <div class="plan"><div class="plan-tier">Enterprise</div><div class="plan-name">Business</div><div class="plan-price"><span class="currency">¥</span>9,800<div class="plan-period">/月・チーム（税込）</div></div><div class="plan-desc">大規模チームや企業向けのエンタープライズプラン。</div><button class="plan-btn ghost">セールスに相談</button><ul class="plan-features"><li>無制限プロジェクト・メンバー</li><li>高度なAI機能</li><li>1TBストレージ</li><li>SSO / SAML認証</li><li>専任サポート担当</li><li>SLA保証・カスタム契約</li></ul></div>
+  </div>
+</section>
+
+<div class="faq" style="max-width:800px;margin:0 auto">
+  <div style="text-align:center;margin-bottom:4rem"><div class="section-tag" style="text-align:center">FAQ</div><h2>よくある質問</h2></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">無料プランでできることは？<span class="faq-icon">+</span></div><div class="faq-a">無料プランでは最大3つのプロジェクトを作成でき、基本的なAI機能とテンプレートを利用できます。クレジットカード不要で、いつでもアップグレードまたはキャンセル可能です。</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">FigmaやAdobe XDから移行できますか？<span class="faq-icon">+</span></div><div class="faq-a">はい。FigmaおよびAdobe XDからのインポートに対応しています。既存のデザインファイルをFLUXに取り込み、そのまま編集を続けることができます。</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">生成されたデザインの著作権は？<span class="faq-icon">+</span></div><div class="faq-a">FLUXで作成したすべてのデザインの著作権はお客様に帰属します。商用利用も自由です。</div></div>
+  <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">チームでの利用方法は？<span class="faq-icon">+</span></div><div class="faq-a">ProプランではチームメンバーをプロジェクトにInviteし、リアルタイムで同時編集が可能です。コメント機能やバージョン管理も完備しています。</div></div>
+</div>
+
+<div class="cta-final">
+  <h2>今すぐ<br>デザインを始めよう</h2>
+  <p>5分でセットアップ完了。クレジットカード不要。</p>
+  <button class="btn-start" style="font-size:1.1rem;padding:1.2rem 3rem">無料で始める →</button>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><div class="logo">FLUX</div><p>AIデザインプラットフォームで、誰もがプロデザイナーになれる世界を目指しています。</p></div>
+    <div class="footer-col"><h4>Product</h4><ul><li><a href="#">Features</a></li><li><a href="#">Pricing</a></li><li><a href="#">Templates</a></li><li><a href="#">Integrations</a></li></ul></div>
+    <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Blog</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+    <div class="footer-col"><h4>Support</h4><ul><li><a href="#">Docs</a></li><li><a href="#">Help Center</a></li><li><a href="#">Status</a></li><li><a href="#">Contact</a></li></ul></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 FLUX Design Inc. All rights reserved.</span><span>Privacy · Terms · Cookies</span></div>
+</footer>
+
+<script>
+  function toggleFaq(el){el.classList.toggle('open')}
+  function setToggle(el,type){document.querySelectorAll('.ptoggle').forEach(b=>b.classList.remove('active'));el.classList.add('active')}
+</script>
+<!-- EDIT MODE PANEL --><div id="edit-panel" style="position:fixed;bottom:2rem;right:2rem;z-index:9999;font-family:'Segoe UI',sans-serif"><div id="edit-toolbar" style="display:none;background:#1a1a2e;border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1rem;margin-bottom:0.8rem;min-width:240px;box-shadow:0 20px 60px rgba(0,0,0,0.5)"><div style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:0.8rem">編集ツール</div><div style="display:flex;flex-direction:column;gap:0.5rem"><button onclick="saveChanges()" style="background:linear-gradient(135deg,#6c63ff,#8b5cf6);color:#fff;border:none;padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;font-weight:700;cursor:pointer">💾 保存</button><button onclick="exportHTML()" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);border:1px solid rgba(255,255,255,0.1);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer">📄 HTMLエクスポート</button><button onclick="resetChanges()" style="background:rgba(255,80,80,0.15);color:#ff8080;border:1px solid rgba(255,80,80,0.2);padding:0.5rem 1rem;border-radius:6px;font-size:0.8rem;cursor:pointer">↩ リセット</button></div><div style="margin-top:0.8rem;padding-top:0.8rem;border-top:1px solid rgba(255,255,255,0.06);font-size:0.7rem;color:rgba(255,255,255,0.3)">クリックでテキスト編集</div></div><button id="edit-toggle" onclick="toggleEditMode()" style="background:linear-gradient(135deg,#6c63ff,#ec4899);color:#fff;border:none;padding:0.7rem 1.4rem;border-radius:50px;font-size:0.85rem;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(108,99,255,0.5)">✏️ 編集モード</button></div><style>.edit-mode [data-editable]:hover{outline:2px dashed rgba(108,99,255,0.7)!important;outline-offset:4px!important;cursor:text!important;border-radius:4px}.edit-mode [data-editable]:focus{outline:2px solid #6c63ff!important;outline-offset:4px!important;border-radius:4px}</style><script>let editMode=false;const STORE_KEY="site_edits_"+location.pathname;function toggleEditMode(){editMode=!editMode;document.body.classList.toggle("edit-mode",editMode);const btn=document.getElementById("edit-toggle");const tb=document.getElementById("edit-toolbar");btn.textContent=editMode?"✓ 編集中":"✏️ 編集モード";btn.style.background=editMode?"linear-gradient(135deg,#10b981,#06b6d4)":"linear-gradient(135deg,#6c63ff,#ec4899)";tb.style.display=editMode?"block":"none";document.querySelectorAll("[data-editable]").forEach(el=>{el.contentEditable=editMode?"true":"false"});}function saveChanges(){const data={};document.querySelectorAll("[data-editable]").forEach(el=>{if(el.id)data[el.id]=el.innerHTML;});localStorage.setItem(STORE_KEY,JSON.stringify(data));const btn=document.getElementById("edit-toggle");const orig=btn.textContent;btn.textContent="✓ 保存完了!";setTimeout(()=>btn.textContent=orig,1500);}function loadChanges(){const data=JSON.parse(localStorage.getItem(STORE_KEY)||"{}");Object.entries(data).forEach(([id,html])=>{const el=document.getElementById(id);if(el)el.innerHTML=html;});}function exportHTML(){const blob=new Blob([document.documentElement.outerHTML],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="edited-site.html";a.click();}function resetChanges(){if(confirm("すべての変更をリセットしますか？")){localStorage.removeItem(STORE_KEY);location.reload();}}document.addEventListener("DOMContentLoaded",()=>{let c=0;const sel="h1,h2,h3,h4,h5,p,.hero-sub,.hero-desc,.section-sub,.hero-tag,.section-tag,.tag,.hero-h1,.ed-title,.ed-desc,.product-name,.plan-name";document.querySelectorAll(sel).forEach(el=>{if(!el.closest("#edit-panel")){if(!el.id)el.id="editable-"+(c++);el.setAttribute("data-editable","");}});loadChanges();});</script>
+</body>
+</html>
