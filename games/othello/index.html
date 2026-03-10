@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>オセロ / Othello</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>オセロ</h1>
+
+    <div class="controls">
+      <div class="mode-select">
+        <label>
+          <input type="radio" name="mode" value="pvp" checked>
+          二人対戦
+        </label>
+        <label>
+          <input type="radio" name="mode" value="ai">
+          AI対戦
+        </label>
+      </div>
+      <button id="new-game-btn">ニューゲーム</button>
+    </div>
+
+    <div class="scoreboard">
+      <div class="score black-score">
+        <span class="piece-icon black-icon"></span>
+        <span>黒</span>
+        <span id="black-count" class="count">2</span>
+      </div>
+      <div id="turn-indicator" class="turn-indicator">黒の番</div>
+      <div class="score white-score">
+        <span class="piece-icon white-icon"></span>
+        <span>白</span>
+        <span id="white-count" class="count">2</span>
+      </div>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div id="message" class="message"></div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

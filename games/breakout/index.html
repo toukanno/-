@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>ブロック崩し - Breakout</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="hud">
+      <span id="hud-score">スコア: 0</span>
+      <span id="hud-level">レベル: 1</span>
+      <span id="hud-lives">ライフ: ♥♥♥</span>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <div id="overlay">
+      <div id="overlay-content">
+        <h1 id="overlay-title">ブロック崩し</h1>
+        <p id="overlay-message">クリックまたはスペースでスタート</p>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>

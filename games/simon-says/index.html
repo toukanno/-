@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>サイモンゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">サイモンゲーム</h1>
+
+    <div class="scoreboard">
+      <div class="score-item">
+        <span class="score-label">スコア</span>
+        <span class="score-value" id="score">0</span>
+      </div>
+      <div class="score-item">
+        <span class="score-label">ハイスコア</span>
+        <span class="score-value" id="high-score">0</span>
+      </div>
+    </div>
+
+    <div class="game-board">
+      <button class="pad" id="pad-green" data-color="green" aria-label="緑"></button>
+      <button class="pad" id="pad-red" data-color="red" aria-label="赤"></button>
+      <button class="pad" id="pad-yellow" data-color="yellow" aria-label="黄"></button>
+      <button class="pad" id="pad-blue" data-color="blue" aria-label="青"></button>
+      <div class="center-circle">
+        <button class="start-btn" id="start-btn">スタート</button>
+      </div>
+    </div>
+
+    <div class="status" id="status">スタートを押してください</div>
+
+    <div class="overlay hidden" id="overlay">
+      <div class="game-over-card">
+        <h2>ゲームオーバー</h2>
+        <p>スコア: <span id="final-score">0</span></p>
+        <p class="new-record hidden" id="new-record">新記録!</p>
+        <button class="restart-btn" id="restart-btn">もう一度</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

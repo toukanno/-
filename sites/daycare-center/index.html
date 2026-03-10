@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ひまわり保育園 - 子どもたちの笑顔があふれる保育園。0歳児から5歳児までの保育をおこなっています。">
+  <title>ひまわり保育園 | 子どもたちの笑顔があふれる保育園</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="top">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-icon">&#127803;</span>
+        <span class="logo-text">ひまわり保育園</span>
+      </a>
+      <button class="menu-toggle" aria-label="メニューを開く" onclick="document.querySelector('.nav').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav">
+        <a href="#philosophy">保育理念</a>
+        <a href="#schedule">一日の流れ</a>
+        <a href="#classes">クラス紹介</a>
+        <a href="#events">年間行事</a>
+        <a href="#facility">施設紹介</a>
+        <a href="#enrollment">入園案内</a>
+        <a href="#contact">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-sub">みんなの笑顔がいっぱい</p>
+      <h1 class="hero-title">ひまわり保育園</h1>
+      <p class="hero-desc">子どもたち一人ひとりの個性を大切にし、<br>心も体もすこやかに育む保育を目指しています。</p>
+      <div class="hero-buttons">
+        <a href="#enrollment" class="btn btn-primary">入園案内はこちら</a>
+        <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+      </div>
+    </div>
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+    </div>
+  </section>
+
+  <!-- ========== PHILOSOPHY ========== -->
+  <section class="section philosophy" id="philosophy">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#127793;</span>保育理念</h2>
+      <p class="section-lead">一人ひとりの「やりたい」を大切に、未来へはばたく力を育てます。</p>
+      <div class="philosophy-grid">
+        <div class="philosophy-card">
+          <div class="philosophy-icon">&#128155;</div>
+          <h3>思いやりの心</h3>
+          <p>お友だちや自然とのふれあいを通じて、他者を思いやるやさしい心を育てます。</p>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-icon">&#127775;</div>
+          <h3>自ら考える力</h3>
+          <p>遊びや生活の中で「なぜ？」「どうして？」という好奇心を大切にし、自分で考え行動する力を養います。</p>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-icon">&#127807;</div>
+          <h3>健やかな体</h3>
+          <p>毎日の外遊びや体操を通じて、元気で丈夫な体づくりを目指します。栄養バランスのとれた給食も自慢です。</p>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-icon">&#127912;</div>
+          <h3>豊かな感性</h3>
+          <p>音楽・絵画・造形など、さまざまな表現活動を通じて豊かな感性と創造力を育みます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== DAILY SCHEDULE ========== -->
+  <section class="section schedule" id="schedule">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#9200;</span>一日の流れ</h2>
+      <p class="section-lead">子どもたちの一日をご紹介します。</p>
+      <div class="schedule-columns">
+        <!-- 0-2歳児 -->
+        <div class="schedule-col">
+          <h3 class="schedule-col-title">0〜2歳児</h3>
+          <div class="schedule-timeline">
+            <div class="schedule-item"><span class="time">7:00</span><span class="activity">開園・順次登園</span></div>
+            <div class="schedule-item"><span class="time">9:00</span><span class="activity">朝の会・おやつ</span></div>
+            <div class="schedule-item"><span class="time">9:30</span><span class="activity">お散歩・室内あそび</span></div>
+            <div class="schedule-item"><span class="time">11:00</span><span class="activity">給食</span></div>
+            <div class="schedule-item"><span class="time">12:00</span><span class="activity">お昼寝</span></div>
+            <div class="schedule-item"><span class="time">15:00</span><span class="activity">おやつ</span></div>
+            <div class="schedule-item"><span class="time">15:30</span><span class="activity">自由あそび</span></div>
+            <div class="schedule-item"><span class="time">16:00</span><span class="activity">順次降園</span></div>
+            <div class="schedule-item"><span class="time">19:00</span><span class="activity">延長保育終了・閉園</span></div>
+          </div>
+        </div>
+        <!-- 3-5歳児 -->
+        <div class="schedule-col">
+          <h3 class="schedule-col-title">3〜5歳児</h3>
+          <div class="schedule-timeline">
+            <div class="schedule-item"><span class="time">7:00</span><span class="activity">開園・順次登園</span></div>
+            <div class="schedule-item"><span class="time">9:00</span><span class="activity">朝の会</span></div>
+            <div class="schedule-item"><span class="time">9:30</span><span class="activity">主活動（制作・運動・音楽など）</span></div>
+            <div class="schedule-item"><span class="time">11:30</span><span class="activity">給食</span></div>
+            <div class="schedule-item"><span class="time">13:00</span><span class="activity">お昼寝（年長は午後の活動）</span></div>
+            <div class="schedule-item"><span class="time">15:00</span><span class="activity">おやつ</span></div>
+            <div class="schedule-item"><span class="time">15:30</span><span class="activity">帰りの会・自由あそび</span></div>
+            <div class="schedule-item"><span class="time">16:00</span><span class="activity">順次降園</span></div>
+            <div class="schedule-item"><span class="time">19:00</span><span class="activity">延長保育終了・閉園</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CLASSES ========== -->
+  <section class="section classes" id="classes">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#128118;</span>クラス紹介</h2>
+      <p class="section-lead">年齢に合わせた6つのクラスで、お子さまの成長をサポートします。</p>
+      <div class="classes-grid">
+        <div class="class-card class-0">
+          <div class="class-age">0歳児</div>
+          <h3 class="class-name">たんぽぽ組</h3>
+          <p class="class-capacity">定員: 6名</p>
+          <p class="class-desc">一人ひとりの生活リズムを大切にし、安心できる環境の中で愛情いっぱいに過ごします。</p>
+        </div>
+        <div class="class-card class-1">
+          <div class="class-age">1歳児</div>
+          <h3 class="class-name">ちゅうりっぷ組</h3>
+          <p class="class-capacity">定員: 10名</p>
+          <p class="class-desc">歩く・話すなど成長が著しい時期。探索活動を通じて好奇心を育みます。</p>
+        </div>
+        <div class="class-card class-2">
+          <div class="class-age">2歳児</div>
+          <h3 class="class-name">もも組</h3>
+          <p class="class-capacity">定員: 12名</p>
+          <p class="class-desc">「自分でやりたい！」気持ちを尊重し、基本的な生活習慣を身につけていきます。</p>
+        </div>
+        <div class="class-card class-3">
+          <div class="class-age">3歳児</div>
+          <h3 class="class-name">すみれ組</h3>
+          <p class="class-capacity">定員: 20名</p>
+          <p class="class-desc">お友だちとの関わりが増える時期。集団生活の中でルールや協調性を学びます。</p>
+        </div>
+        <div class="class-card class-4">
+          <div class="class-age">4歳児</div>
+          <h3 class="class-name">さくら組</h3>
+          <p class="class-capacity">定員: 20名</p>
+          <p class="class-desc">自分の考えを言葉で伝える力が育ちます。制作や運動など多彩な活動に取り組みます。</p>
+        </div>
+        <div class="class-card class-5">
+          <div class="class-age">5歳児</div>
+          <h3 class="class-name">ひまわり組</h3>
+          <p class="class-capacity">定員: 20名</p>
+          <p class="class-desc">年長として自信と責任感を持ち、小学校への準備も進めながら園生活を楽しみます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVENTS ========== -->
+  <section class="section events" id="events">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#127880;</span>年間行事</h2>
+      <p class="section-lead">四季折々の行事を通じて、豊かな体験を大切にしています。</p>
+      <div class="events-grid">
+        <div class="event-season spring">
+          <h3>&#127800; 春（4月〜6月）</h3>
+          <ul>
+            <li>入園式・進級式</li>
+            <li>お花見遠足</li>
+            <li>こどもの日の集い</li>
+            <li>保育参観</li>
+            <li>歯科検診・内科検診</li>
+            <li>親子遠足</li>
+          </ul>
+        </div>
+        <div class="event-season summer">
+          <h3>&#127774; 夏（7月〜9月）</h3>
+          <ul>
+            <li>七夕まつり</li>
+            <li>プールあそび</li>
+            <li>夏まつり</li>
+            <li>お泊まり保育（年長）</li>
+            <li>すいか割り</li>
+            <li>引き渡し訓練</li>
+          </ul>
+        </div>
+        <div class="event-season autumn">
+          <h3>&#127810; 秋（10月〜12月）</h3>
+          <ul>
+            <li>運動会</li>
+            <li>秋の遠足（いも掘り）</li>
+            <li>ハロウィンパーティー</li>
+            <li>発表会</li>
+            <li>クリスマス会</li>
+            <li>おもちつき</li>
+          </ul>
+        </div>
+        <div class="event-season winter">
+          <h3>&#9924; 冬（1月〜3月）</h3>
+          <ul>
+            <li>お正月あそび</li>
+            <li>節分（豆まき）</li>
+            <li>作品展</li>
+            <li>ひなまつり</li>
+            <li>お別れ遠足</li>
+            <li>卒園式</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FACILITY ========== -->
+  <section class="section facility" id="facility">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#127968;</span>施設紹介</h2>
+      <p class="section-lead">安全で快適な環境の中で、のびのびと過ごせる施設です。</p>
+      <div class="facility-grid">
+        <div class="facility-card">
+          <div class="facility-img-placeholder">&#127965;</div>
+          <h3>園庭</h3>
+          <p>広々とした園庭には、すべり台やブランコなどの遊具があり、毎日元気に走り回れます。砂場やお花畑もあります。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-img-placeholder">&#128218;</div>
+          <h3>保育室</h3>
+          <p>明るく風通しの良い保育室。年齢に合わせた安全な家具とおもちゃを揃え、床暖房も完備しています。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-img-placeholder">&#127858;</div>
+          <h3>給食室</h3>
+          <p>自園調理の温かい給食を毎日提供。アレルギー対応も行っています。栄養士が献立を作成します。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-img-placeholder">&#127931;</div>
+          <h3>ホール</h3>
+          <p>発表会や体操教室に使える多目的ホール。雨の日もここで思いっきり体を動かせます。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-img-placeholder">&#128214;</div>
+          <h3>絵本コーナー</h3>
+          <p>約1,000冊の絵本を揃えた絵本コーナー。貸し出しも行っており、ご家庭でも楽しめます。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-img-placeholder">&#128656;</div>
+          <h3>駐車場</h3>
+          <p>20台分の駐車スペースを完備。送り迎えの際も安心してご利用いただけます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ENROLLMENT ========== -->
+  <section class="section enrollment" id="enrollment">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#128221;</span>入園案内</h2>
+      <p class="section-lead">ひまわり保育園への入園をご検討中の保護者さまへ。</p>
+      <div class="enrollment-content">
+        <div class="enrollment-info">
+          <table class="enrollment-table">
+            <tr>
+              <th>対象年齢</th>
+              <td>生後57日〜就学前（0歳児〜5歳児）</td>
+            </tr>
+            <tr>
+              <th>定員</th>
+              <td>88名</td>
+            </tr>
+            <tr>
+              <th>開園時間</th>
+              <td>月〜金 7:00〜19:00<br>土 7:00〜18:00</td>
+            </tr>
+            <tr>
+              <th>休園日</th>
+              <td>日曜日・祝日・年末年始（12/29〜1/3）</td>
+            </tr>
+            <tr>
+              <th>保育料</th>
+              <td>お住まいの市区町村の基準に準じます<br>（3歳児以上は無償化対象）</td>
+            </tr>
+            <tr>
+              <th>給食</th>
+              <td>完全給食（主食・副食・おやつ）<br>アレルギー対応あり</td>
+            </tr>
+            <tr>
+              <th>延長保育</th>
+              <td>18:00〜19:00（別途料金）</td>
+            </tr>
+            <tr>
+              <th>見学</th>
+              <td>随時受付中（要予約）<br>お電話またはお問い合わせフォームから</td>
+            </tr>
+          </table>
+        </div>
+        <div class="enrollment-steps">
+          <h3>入園までの流れ</h3>
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>見学のお申し込み</h4>
+              <p>お電話またはお問い合わせフォームよりご予約ください。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>園の見学</h4>
+              <p>実際の保育の様子をご覧いただけます。ご質問もお気軽にどうぞ。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>入園申込</h4>
+              <p>お住まいの市区町村の窓口にて入園申込書をご提出ください。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h4>入園決定・面談</h4>
+              <p>入園が決定しましたら、お子さまの様子をお聞きする面談を行います。</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <div class="step-content">
+              <h4>慣らし保育・入園</h4>
+              <p>お子さまのペースに合わせて少しずつ園生活に慣れていきます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <h2 class="section-title"><span class="title-icon">&#9993;</span>お問い合わせ</h2>
+      <p class="section-lead">ご見学・ご質問など、お気軽にお問い合わせください。</p>
+      <div class="contact-wrapper">
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-icon">&#128205;</span>
+            <div>
+              <strong>住所</strong>
+              <p>〒123-4567<br>東京都ひまわり市花園町1-2-3</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">&#128222;</span>
+            <div>
+              <strong>電話番号</strong>
+              <p>012-345-6789<br>（平日 8:00〜17:00）</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">&#128231;</span>
+            <div>
+              <strong>メール</strong>
+              <p>info@himawari-hoikuen.example.jp</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon">&#128652;</span>
+            <div>
+              <strong>アクセス</strong>
+              <p>ひまわり駅 東口より徒歩5分<br>駐車場20台完備</p>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form" action="#" method="post" onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。送信されました。'); this.reset();">
+          <div class="form-group">
+            <label for="name">お名前 <span class="required">必須</span></label>
+            <input type="text" id="name" name="name" required placeholder="山田 太郎">
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス <span class="required">必須</span></label>
+            <input type="email" id="email" name="email" required placeholder="example@mail.com">
+          </div>
+          <div class="form-group">
+            <label for="phone">電話番号</label>
+            <input type="tel" id="phone" name="phone" placeholder="090-1234-5678">
+          </div>
+          <div class="form-group">
+            <label for="category">お問い合わせ種別 <span class="required">必須</span></label>
+            <select id="category" name="category" required>
+              <option value="" disabled selected>選択してください</option>
+              <option value="visit">見学のお申し込み</option>
+              <option value="enrollment">入園について</option>
+              <option value="general">その他のご質問</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+            <textarea id="message" name="message" rows="5" required placeholder="お問い合わせ内容をご記入ください"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-submit">送信する</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-logo">&#127803; ひまわり保育園</div>
+          <p>子どもたち一人ひとりの個性を大切にし、心も体もすこやかに育む保育を行っています。</p>
+        </div>
+        <div class="footer-links">
+          <h4>園について</h4>
+          <a href="#philosophy">保育理念</a>
+          <a href="#schedule">一日の流れ</a>
+          <a href="#classes">クラス紹介</a>
+          <a href="#events">年間行事</a>
+        </div>
+        <div class="footer-links">
+          <h4>ご案内</h4>
+          <a href="#facility">施設紹介</a>
+          <a href="#enrollment">入園案内</a>
+          <a href="#contact">お問い合わせ</a>
+        </div>
+        <div class="footer-contact">
+          <h4>お問い合わせ</h4>
+          <p>&#128222; 012-345-6789</p>
+          <p>&#128231; info@himawari-hoikuen.example.jp</p>
+          <p>&#128205; 東京都ひまわり市花園町1-2-3</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ひまわり保育園 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#top" class="back-to-top" aria-label="ページトップへ戻る">&#9650;</a>
+
+</body>
+</html>

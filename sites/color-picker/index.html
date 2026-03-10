@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>カラーピッカー & パレットツール</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>カラーピッカー</h1>
+    <p class="subtitle">色の選択・パレット生成・グラデーションツール</p>
+  </header>
+
+  <main>
+    <!-- カラーピッカーセクション -->
+    <section class="picker-section">
+      <div class="picker-area">
+        <div class="canvas-wrap">
+          <canvas id="satBrightCanvas" width="300" height="300"></canvas>
+          <div id="sbCursor" class="cursor"></div>
+        </div>
+        <div class="hue-wrap">
+          <canvas id="hueCanvas" width="30" height="300"></canvas>
+          <div id="hueCursor" class="hue-cursor"></div>
+        </div>
+      </div>
+
+      <!-- カラープレビュー -->
+      <div class="preview-panel">
+        <div id="colorPreview" class="color-preview"></div>
+        <div class="copy-buttons">
+          <button class="copy-btn" data-format="hex" title="HEXをコピー">HEX</button>
+          <button class="copy-btn" data-format="rgb" title="RGBをコピー">RGB</button>
+          <button class="copy-btn" data-format="hsl" title="HSLをコピー">HSL</button>
+        </div>
+
+        <!-- 入力フィールド -->
+        <div class="input-group">
+          <label>HEX</label>
+          <input type="text" id="hexInput" maxlength="7" placeholder="#ff0000">
+        </div>
+        <div class="input-row">
+          <div class="input-group small">
+            <label>R</label>
+            <input type="number" id="rInput" min="0" max="255">
+          </div>
+          <div class="input-group small">
+            <label>G</label>
+            <input type="number" id="gInput" min="0" max="255">
+          </div>
+          <div class="input-group small">
+            <label>B</label>
+            <input type="number" id="bInput" min="0" max="255">
+          </div>
+        </div>
+        <div class="input-row">
+          <div class="input-group small">
+            <label>H</label>
+            <input type="number" id="hInput" min="0" max="360">
+          </div>
+          <div class="input-group small">
+            <label>S</label>
+            <input type="number" id="sInput" min="0" max="100">
+          </div>
+          <div class="input-group small">
+            <label>L</label>
+            <input type="number" id="lInput" min="0" max="100">
+          </div>
+        </div>
+        <button id="saveColorBtn" class="save-btn">色を保存</button>
+      </div>
+    </section>
+
+    <!-- カラーハーモニー -->
+    <section class="section">
+      <h2>カラーハーモニー</h2>
+      <div class="harmony-grid">
+        <div class="harmony-group">
+          <h3>補色</h3>
+          <div id="complementary" class="harmony-swatches"></div>
+        </div>
+        <div class="harmony-group">
+          <h3>類似色</h3>
+          <div id="analogous" class="harmony-swatches"></div>
+        </div>
+        <div class="harmony-group">
+          <h3>トライアド</h3>
+          <div id="triadic" class="harmony-swatches"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- パレット生成 -->
+    <section class="section">
+      <h2>パレット生成</h2>
+      <div class="palette-controls">
+        <select id="paletteMode">
+          <option value="shades">シェード (明暗)</option>
+          <option value="tints">ティント (淡色)</option>
+          <option value="tones">トーン (灰色混合)</option>
+          <option value="random">ランダムハーモニー</option>
+        </select>
+        <button id="generatePalette" class="action-btn">生成</button>
+      </div>
+      <div id="generatedPalette" class="palette-row"></div>
+    </section>
+
+    <!-- 保存した色 -->
+    <section class="section">
+      <h2>保存した色</h2>
+      <div id="savedColors" class="saved-colors"></div>
+      <button id="clearSaved" class="action-btn danger">すべて削除</button>
+    </section>
+
+    <!-- グラデーション生成 -->
+    <section class="section">
+      <h2>グラデーション生成</h2>
+      <div id="gradientPreview" class="gradient-preview"></div>
+      <div class="gradient-controls">
+        <div class="gradient-stop">
+          <label>色1</label>
+          <input type="color" id="gradColor1" value="#ff0000">
+        </div>
+        <div class="gradient-stop">
+          <label>色2</label>
+          <input type="color" id="gradColor2" value="#0000ff">
+        </div>
+        <div class="gradient-stop">
+          <label>方向</label>
+          <select id="gradDirection">
+            <option value="to right">右へ</option>
+            <option value="to left">左へ</option>
+            <option value="to bottom">下へ</option>
+            <option value="to top">上へ</option>
+            <option value="to bottom right">右下へ</option>
+            <option value="to top right">右上へ</option>
+            <option value="135deg">斜め (135°)</option>
+            <option value="circle">円形</option>
+          </select>
+        </div>
+      </div>
+      <div class="css-output">
+        <label>CSS出力</label>
+        <code id="gradientCSS"></code>
+        <button id="copyGradientCSS" class="copy-btn">コピー</button>
+      </div>
+    </section>
+
+    <!-- コントラストチェッカー -->
+    <section class="section">
+      <h2>コントラストチェッカー</h2>
+      <div class="contrast-controls">
+        <div class="contrast-color">
+          <label>前景色</label>
+          <input type="color" id="contrastFg" value="#000000">
+          <span id="contrastFgLabel">#000000</span>
+        </div>
+        <div class="contrast-color">
+          <label>背景色</label>
+          <input type="color" id="contrastBg" value="#ffffff">
+          <span id="contrastBgLabel">#ffffff</span>
+        </div>
+      </div>
+      <div id="contrastPreview" class="contrast-preview">
+        <p class="contrast-large">大きいテキスト Aa</p>
+        <p class="contrast-normal">通常テキスト - The quick brown fox jumps over the lazy dog.</p>
+      </div>
+      <div id="contrastResults" class="contrast-results"></div>
+    </section>
+
+    <!-- プリセットパレット -->
+    <section class="section">
+      <h2>プリセットパレット</h2>
+      <div class="preset-tabs">
+        <button class="preset-tab active" data-preset="material">マテリアル</button>
+        <button class="preset-tab" data-preset="pastel">パステル</button>
+        <button class="preset-tab" data-preset="earth">アースカラー</button>
+        <button class="preset-tab" data-preset="neon">ネオン</button>
+        <button class="preset-tab" data-preset="japanese">和色</button>
+      </div>
+      <div id="presetPalette" class="preset-palette"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>カラーピッカー & パレットツール</p>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

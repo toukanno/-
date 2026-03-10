@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15パズル</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>15パズル</h1>
+
+    <div class="controls">
+      <div class="size-selector">
+        <button class="size-btn" data-size="3">3x3</button>
+        <button class="size-btn active" data-size="4">4x4</button>
+        <button class="size-btn" data-size="5">5x5</button>
+      </div>
+      <button id="shuffle-btn">シャッフル</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">手数</span>
+        <span id="move-count" class="stat-value">0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">タイム</span>
+        <span id="timer" class="stat-value">00:00</span>
+      </div>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div class="best-records">
+      <div class="stat">
+        <span class="stat-label">最少手数</span>
+        <span id="best-moves" class="stat-value">-</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">最速タイム</span>
+        <span id="best-time" class="stat-value">-</span>
+      </div>
+    </div>
+
+    <div id="win-overlay" class="win-overlay hidden">
+      <div class="win-message">
+        <h2>クリア！</h2>
+        <p id="win-stats"></p>
+        <button id="win-close">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

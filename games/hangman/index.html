@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ハングマン</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>ハングマン</h1>
+
+    <div class="score-board">
+      <span class="score win-score">勝ち: <span id="wins">0</span></span>
+      <span class="score lose-score">負け: <span id="losses">0</span></span>
+    </div>
+
+    <div class="game-area">
+      <div class="hangman-svg-wrapper">
+        <svg id="hangman-svg" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- Gallows -->
+          <line x1="20" y1="210" x2="180" y2="210" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round"/>
+          <line x1="60" y1="210" x2="60" y2="20" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round"/>
+          <line x1="60" y1="20" x2="130" y2="20" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round"/>
+          <line x1="130" y1="20" x2="130" y2="45" stroke="#4a4a4a" stroke-width="4" stroke-linecap="round"/>
+          <!-- Body parts (hidden initially) -->
+          <circle id="head" cx="130" cy="62" r="17" stroke="#e74c3c" stroke-width="3" fill="none" class="body-part"/>
+          <line id="body" x1="130" y1="79" x2="130" y2="130" stroke="#e74c3c" stroke-width="3" stroke-linecap="round" class="body-part"/>
+          <line id="left-arm" x1="130" y1="95" x2="105" y2="120" stroke="#e74c3c" stroke-width="3" stroke-linecap="round" class="body-part"/>
+          <line id="right-arm" x1="130" y1="95" x2="155" y2="120" stroke="#e74c3c" stroke-width="3" stroke-linecap="round" class="body-part"/>
+          <line id="left-leg" x1="130" y1="130" x2="105" y2="165" stroke="#e74c3c" stroke-width="3" stroke-linecap="round" class="body-part"/>
+          <line id="right-leg" x1="130" y1="130" x2="155" y2="165" stroke="#e74c3c" stroke-width="3" stroke-linecap="round" class="body-part"/>
+        </svg>
+      </div>
+
+      <div class="game-info">
+        <div class="category" id="category"></div>
+        <div class="word-display" id="word-display"></div>
+        <div class="remaining">残り: <span id="remaining">6</span> 回</div>
+        <div class="message" id="message"></div>
+      </div>
+    </div>
+
+    <div class="keyboard" id="keyboard"></div>
+
+    <button class="new-game-btn" id="new-game-btn">ニューゲーム</button>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

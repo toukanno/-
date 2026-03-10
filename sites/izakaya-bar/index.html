@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>酒場 月見 | Sakaba Tsukimi</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="site-header" id="top">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        <span class="logo-kanji">月見</span>
+        <span class="logo-sub">酒場 SAKABA TSUKIMI</span>
+      </a>
+      <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="#menu">お品書き</a></li>
+          <li><a href="#drinks">お飲み物</a></li>
+          <li><a href="#course">コース</a></li>
+          <li><a href="#atmosphere">店内</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="#reservation" class="nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero Section ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-tagline">一杯の酒、一期の出会い</p>
+      <h1 class="hero-title">酒場 月見</h1>
+      <p class="hero-subtitle">Sakaba Tsukimi</p>
+      <p class="hero-desc">月明かりの下、旬の肴と旨い酒を。<br>心安らぐひとときをお過ごしください。</p>
+      <a href="#reservation" class="btn btn-primary">ご予約はこちら</a>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== Food Menu Section ===== -->
+  <section class="section menu-section" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">MENU</p>
+        <h2 class="section-title">お品書き</h2>
+        <div class="section-divider"><span>&#9670;</span></div>
+        <p class="section-intro">季節の素材を活かした、こだわりの一品をご堪能ください。</p>
+      </div>
+
+      <div class="menu-grid">
+        <!-- Sashimi -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">刺身 <span>Sashimi</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">刺身盛り合わせ（五種）</span><span class="item-price">¥1,680</span></li>
+            <li><span class="item-name">刺身盛り合わせ（三種）</span><span class="item-price">¥1,080</span></li>
+            <li><span class="item-name">本日の鮮魚刺身</span><span class="item-price">¥880</span></li>
+            <li><span class="item-name">炙りしめ鯖</span><span class="item-price">¥680</span></li>
+            <li><span class="item-name">タコわさび</span><span class="item-price">¥480</span></li>
+          </ul>
+        </div>
+
+        <!-- Yakitori -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">焼き鳥 <span>Yakitori</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">焼き鳥盛り合わせ（五本）</span><span class="item-price">¥980</span></li>
+            <li><span class="item-name">ねぎま</span><span class="item-price">¥200</span></li>
+            <li><span class="item-name">つくね（タレ／塩）</span><span class="item-price">¥220</span></li>
+            <li><span class="item-name">鶏皮</span><span class="item-price">¥180</span></li>
+            <li><span class="item-name">砂肝</span><span class="item-price">¥200</span></li>
+            <li><span class="item-name">ぼんじり</span><span class="item-price">¥200</span></li>
+          </ul>
+        </div>
+
+        <!-- Ippin -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">一品料理 <span>A la Carte</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">枝豆</span><span class="item-price">¥380</span></li>
+            <li><span class="item-name">冷やしトマト</span><span class="item-price">¥400</span></li>
+            <li><span class="item-name">だし巻き玉子</span><span class="item-price">¥580</span></li>
+            <li><span class="item-name">ポテトサラダ</span><span class="item-price">¥450</span></li>
+            <li><span class="item-name">鶏の唐揚げ</span><span class="item-price">¥680</span></li>
+            <li><span class="item-name">揚げ出し豆腐</span><span class="item-price">¥520</span></li>
+          </ul>
+        </div>
+
+        <!-- Grilled / Fried -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">焼き物・揚げ物 <span>Grilled &amp; Fried</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">ホッケの開き</span><span class="item-price">¥880</span></li>
+            <li><span class="item-name">イカの丸焼き</span><span class="item-price">¥780</span></li>
+            <li><span class="item-name">豚バラ串焼き</span><span class="item-price">¥580</span></li>
+            <li><span class="item-name">エビフライ</span><span class="item-price">¥780</span></li>
+            <li><span class="item-name">軟骨の唐揚げ</span><span class="item-price">¥480</span></li>
+          </ul>
+        </div>
+
+        <!-- Rice / Noodle -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">〆もの <span>Rice &amp; Noodles</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">焼きおにぎり（二個）</span><span class="item-price">¥380</span></li>
+            <li><span class="item-name">鮭茶漬け</span><span class="item-price">¥580</span></li>
+            <li><span class="item-name">焼きそば</span><span class="item-price">¥680</span></li>
+            <li><span class="item-name">明太子パスタ</span><span class="item-price">¥780</span></li>
+          </ul>
+        </div>
+
+        <!-- Dessert -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">甘味 <span>Dessert</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">抹茶アイス</span><span class="item-price">¥380</span></li>
+            <li><span class="item-name">黒蜜きなこアイス</span><span class="item-price">¥380</span></li>
+            <li><span class="item-name">わらび餅</span><span class="item-price">¥450</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="menu-note">※ 価格はすべて税込です。仕入れ状況により内容が変わる場合がございます。</p>
+    </div>
+  </section>
+
+  <!-- ===== Drink Menu Section ===== -->
+  <section class="section drinks-section" id="drinks">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">DRINKS</p>
+        <h2 class="section-title">お飲み物</h2>
+        <div class="section-divider"><span>&#9670;</span></div>
+        <p class="section-intro">厳選した日本酒・焼酎を中心に、多彩なお酒を取り揃えております。</p>
+      </div>
+
+      <div class="menu-grid">
+        <!-- Beer -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">ビール <span>Beer</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">生ビール（プレミアムモルツ）</span><span class="item-price">¥550</span></li>
+            <li><span class="item-name">瓶ビール（中瓶）</span><span class="item-price">¥600</span></li>
+            <li><span class="item-name">クラフトビール（日替わり）</span><span class="item-price">¥780</span></li>
+            <li><span class="item-name">ノンアルコールビール</span><span class="item-price">¥400</span></li>
+          </ul>
+        </div>
+
+        <!-- Sake -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">日本酒 <span>Sake</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">月見（オリジナル純米酒）</span><span class="item-price">¥680</span></li>
+            <li><span class="item-name">獺祭 純米大吟醸</span><span class="item-price">¥980</span></li>
+            <li><span class="item-name">久保田 千寿</span><span class="item-price">¥780</span></li>
+            <li><span class="item-name">八海山 特別本醸造</span><span class="item-price">¥680</span></li>
+            <li><span class="item-name">季節の地酒（一合）</span><span class="item-price">¥600〜</span></li>
+          </ul>
+        </div>
+
+        <!-- Shochu -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">焼酎 <span>Shochu</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">芋焼酎（黒霧島）</span><span class="item-price">¥500</span></li>
+            <li><span class="item-name">麦焼酎（いいちこ）</span><span class="item-price">¥500</span></li>
+            <li><span class="item-name">米焼酎（白岳）</span><span class="item-price">¥500</span></li>
+            <li><span class="item-name">そば焼酎（雲海）</span><span class="item-price">¥520</span></li>
+            <li class="item-note">ロック・水割り・お湯割り・ソーダ割り</li>
+          </ul>
+        </div>
+
+        <!-- Highball & Whisky -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">ハイボール・ウイスキー <span>Highball &amp; Whisky</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">角ハイボール</span><span class="item-price">¥450</span></li>
+            <li><span class="item-name">メガハイボール</span><span class="item-price">¥680</span></li>
+            <li><span class="item-name">知多ハイボール</span><span class="item-price">¥600</span></li>
+            <li><span class="item-name">各種ウイスキー</span><span class="item-price">¥600〜</span></li>
+          </ul>
+        </div>
+
+        <!-- Sour / Cocktail -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">サワー・カクテル <span>Sour &amp; Cocktail</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">レモンサワー</span><span class="item-price">¥450</span></li>
+            <li><span class="item-name">グレープフルーツサワー</span><span class="item-price">¥450</span></li>
+            <li><span class="item-name">梅酒サワー</span><span class="item-price">¥480</span></li>
+            <li><span class="item-name">カシスオレンジ</span><span class="item-price">¥500</span></li>
+            <li><span class="item-name">ジンリッキー</span><span class="item-price">¥500</span></li>
+          </ul>
+        </div>
+
+        <!-- Soft Drinks -->
+        <div class="menu-category">
+          <h3 class="menu-category-title">ソフトドリンク <span>Soft Drinks</span></h3>
+          <ul class="menu-list">
+            <li><span class="item-name">ウーロン茶</span><span class="item-price">¥300</span></li>
+            <li><span class="item-name">緑茶</span><span class="item-price">¥300</span></li>
+            <li><span class="item-name">ジンジャーエール</span><span class="item-price">¥350</span></li>
+            <li><span class="item-name">コーラ</span><span class="item-price">¥350</span></li>
+            <li><span class="item-name">オレンジジュース</span><span class="item-price">¥350</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Course Menu Section ===== -->
+  <section class="section course-section" id="course">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">COURSE</p>
+        <h2 class="section-title">飲み放題コース</h2>
+        <div class="section-divider"><span>&#9670;</span></div>
+        <p class="section-intro">ご宴会・歓送迎会・女子会にぴったりの飲み放題付きコースをご用意。</p>
+      </div>
+
+      <div class="course-grid">
+        <div class="course-card">
+          <div class="course-badge">人気 No.1</div>
+          <h3 class="course-name">月見コース</h3>
+          <p class="course-price"><span class="yen">¥</span>4,500<span class="tax">（税込）</span></p>
+          <p class="course-detail">2時間飲み放題付き・全8品</p>
+          <ul class="course-items">
+            <li>先付け（季節の前菜三種盛り）</li>
+            <li>刺身盛り合わせ（三種）</li>
+            <li>枝豆</li>
+            <li>だし巻き玉子</li>
+            <li>焼き鳥盛り合わせ（五本）</li>
+            <li>鶏の唐揚げ</li>
+            <li>焼きおにぎり</li>
+            <li>抹茶アイス</li>
+          </ul>
+          <a href="#reservation" class="btn btn-outline">このコースを予約</a>
+        </div>
+
+        <div class="course-card featured">
+          <div class="course-badge">おすすめ</div>
+          <h3 class="course-name">満月コース</h3>
+          <p class="course-price"><span class="yen">¥</span>5,500<span class="tax">（税込）</span></p>
+          <p class="course-detail">2.5時間飲み放題付き・全10品</p>
+          <ul class="course-items">
+            <li>先付け（本日のおばんざい）</li>
+            <li>刺身盛り合わせ（五種）</li>
+            <li>炙りしめ鯖</li>
+            <li>枝豆と冷やしトマト</li>
+            <li>だし巻き玉子</li>
+            <li>焼き鳥盛り合わせ（五本）</li>
+            <li>ホッケの開き</li>
+            <li>揚げ出し豆腐</li>
+            <li>鮭茶漬け</li>
+            <li>わらび餅</li>
+          </ul>
+          <a href="#reservation" class="btn btn-primary">このコースを予約</a>
+        </div>
+
+        <div class="course-card">
+          <div class="course-badge">贅沢</div>
+          <h3 class="course-name">十五夜コース</h3>
+          <p class="course-price"><span class="yen">¥</span>7,000<span class="tax">（税込）</span></p>
+          <p class="course-detail">3時間飲み放題付き（日本酒プレミアム含む）・全12品</p>
+          <ul class="course-items">
+            <li>先付け（季節の三種盛り）</li>
+            <li>本日の鮮魚刺身五種盛り</li>
+            <li>炙りしめ鯖</li>
+            <li>タコわさび</li>
+            <li>だし巻き玉子</li>
+            <li>焼き鳥盛り合わせ（五本）</li>
+            <li>豚バラ串焼き</li>
+            <li>イカの丸焼き</li>
+            <li>エビフライ</li>
+            <li>ポテトサラダ</li>
+            <li>明太子パスタ</li>
+            <li>黒蜜きなこアイスとわらび餅</li>
+          </ul>
+          <a href="#reservation" class="btn btn-outline">このコースを予約</a>
+        </div>
+      </div>
+
+      <p class="menu-note">※ コースは2名様より承ります。前日までにご予約ください。<br>※ 飲み放題はラストオーダー30分前です。</p>
+    </div>
+  </section>
+
+  <!-- ===== Atmosphere / Interior Section ===== -->
+  <section class="section atmosphere-section" id="atmosphere">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">INTERIOR</p>
+        <h2 class="section-title">店内のご案内</h2>
+        <div class="section-divider"><span>&#9670;</span></div>
+      </div>
+
+      <div class="atmosphere-grid">
+        <div class="atmosphere-card">
+          <div class="atmosphere-icon">&#127906;</div>
+          <h3>カウンター席</h3>
+          <p>目の前で調理の様子を楽しめる特等席。おひとり様でもお気軽にどうぞ。全8席。</p>
+        </div>
+        <div class="atmosphere-card">
+          <div class="atmosphere-icon">&#127969;</div>
+          <h3>テーブル席</h3>
+          <p>友人や同僚との語らいにぴったりのテーブル席。2名〜4名様用をご用意。全5卓。</p>
+        </div>
+        <div class="atmosphere-card">
+          <div class="atmosphere-icon">&#128507;</div>
+          <h3>掘りごたつ個室</h3>
+          <p>接待やプライベートな宴会に最適な個室。足を伸ばしてくつろげます。最大12名様。</p>
+        </div>
+        <div class="atmosphere-card">
+          <div class="atmosphere-icon">&#127924;</div>
+          <h3>こだわりの空間</h3>
+          <p>木のぬくもりと間接照明が織りなす、落ち着いた和の雰囲気。月をモチーフにした内装もお楽しみください。</p>
+        </div>
+      </div>
+
+      <div class="atmosphere-banner">
+        <p>席数 <strong>全42席</strong>（カウンター8席・テーブル22席・個室12席）</p>
+        <p>貸切は30名様から承ります。お気軽にご相談ください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Access Section ===== -->
+  <section class="section access-section" id="access">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">ACCESS</p>
+        <h2 class="section-title">アクセス</h2>
+        <div class="section-divider"><span>&#9670;</span></div>
+      </div>
+
+      <div class="access-grid">
+        <div class="access-info">
+          <table class="info-table">
+            <tr>
+              <th>店名</th>
+              <td>酒場 月見（さかば つきみ）</td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td>〒150-0013<br>東京都渋谷区恵比寿1-2-3 月見ビル B1F</td>
+            </tr>
+            <tr>
+              <th>電話</th>
+              <td><a href="tel:03-1234-5678">03-1234-5678</a></td>
+            </tr>
+            <tr>
+              <th>最寄り駅</th>
+              <td>JR恵比寿駅 東口より徒歩3分<br>東京メトロ日比谷線 恵比寿駅 2番出口より徒歩2分</td>
+            </tr>
+            <tr>
+              <th>営業時間</th>
+              <td>
+                <span class="hours-line"><strong>月〜木</strong> 17:00 〜 24:00（L.O. 23:30）</span>
+                <span class="hours-line"><strong>金・祝前日</strong> 17:00 〜 翌1:00（L.O. 0:30）</span>
+                <span class="hours-line"><strong>土</strong> 16:00 〜 翌1:00（L.O. 0:30）</span>
+                <span class="hours-line"><strong>日・祝</strong> 16:00 〜 23:00（L.O. 22:30）</span>
+              </td>
+            </tr>
+            <tr>
+              <th>定休日</th>
+              <td>不定休（年末年始を除く）</td>
+            </tr>
+            <tr>
+              <th>お支払い</th>
+              <td>現金 / クレジットカード / 電子マネー / PayPay</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="access-map">
+          <div class="map-placeholder">
+            <span>&#128205;</span>
+            <p>東京都渋谷区恵比寿1-2-3<br>月見ビル B1F</p>
+            <p class="map-note">JR恵比寿駅 東口より徒歩3分</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reservation Section ===== -->
+  <section class="section reservation-section" id="reservation">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">RESERVATION</p>
+        <h2 class="section-title">ご予約</h2>
+        <div class="section-divider"><span>&#9670;</span></div>
+        <p class="section-intro">お電話またはフォームからご予約を承ります。<br>お急ぎの場合は <a href="tel:03-1234-5678">03-1234-5678</a> までお電話ください。</p>
+      </div>
+
+      <form class="reservation-form" action="#" method="post">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">お名前 <span class="required">必須</span></label>
+            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">お電話番号 <span class="required">必須</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="090-1234-5678" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com">
+          </div>
+          <div class="form-group">
+            <label for="guests">ご人数 <span class="required">必須</span></label>
+            <select id="guests" name="guests" required>
+              <option value="">選択してください</option>
+              <option value="1">1名</option>
+              <option value="2">2名</option>
+              <option value="3">3名</option>
+              <option value="4">4名</option>
+              <option value="5">5名</option>
+              <option value="6">6名</option>
+              <option value="7">7名</option>
+              <option value="8">8名</option>
+              <option value="9">9名</option>
+              <option value="10">10名以上</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">ご来店日 <span class="required">必須</span></label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="time">ご来店時間 <span class="required">必須</span></label>
+            <select id="time" name="time" required>
+              <option value="">選択してください</option>
+              <option value="16:00">16:00</option>
+              <option value="16:30">16:30</option>
+              <option value="17:00">17:00</option>
+              <option value="17:30">17:30</option>
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="course-select">コース</label>
+            <select id="course-select" name="course">
+              <option value="">コースなし（アラカルト）</option>
+              <option value="tsukimi">月見コース ¥4,500</option>
+              <option value="mangetsu">満月コース ¥5,500</option>
+              <option value="jugoya">十五夜コース ¥7,000</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="seat">席のご希望</label>
+            <select id="seat" name="seat">
+              <option value="">おまかせ</option>
+              <option value="counter">カウンター席</option>
+              <option value="table">テーブル席</option>
+              <option value="private">掘りごたつ個室</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label for="message">ご要望・アレルギー等</label>
+          <textarea id="message" name="message" rows="4" placeholder="ご要望やアレルギー情報がございましたらご記入ください。"></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary btn-large">予約を送信する</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <p class="footer-logo">月見</p>
+          <p class="footer-name">酒場 月見 Sakaba Tsukimi</p>
+          <p class="footer-address">東京都渋谷区恵比寿1-2-3 月見ビルB1F</p>
+          <p class="footer-phone"><a href="tel:03-1234-5678">03-1234-5678</a></p>
+        </div>
+        <div class="footer-nav">
+          <ul>
+            <li><a href="#menu">お品書き</a></li>
+            <li><a href="#drinks">お飲み物</a></li>
+            <li><a href="#course">コース</a></li>
+            <li><a href="#atmosphere">店内</a></li>
+            <li><a href="#access">アクセス</a></li>
+            <li><a href="#reservation">ご予約</a></li>
+          </ul>
+        </div>
+        <div class="footer-hours">
+          <p class="footer-hours-title">営業時間</p>
+          <p>月〜木 17:00 - 24:00</p>
+          <p>金・祝前 17:00 - 翌1:00</p>
+          <p>土 16:00 - 翌1:00</p>
+          <p>日・祝 16:00 - 23:00</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 酒場 月見 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('#main-nav');
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', !expanded);
+      nav.classList.toggle('open');
+    });
+
+    // Close nav on link click
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('open');
+      });
+    });
+
+    // Header background on scroll
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = 70;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

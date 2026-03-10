@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マインスイーパー</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <h1>マインスイーパー</h1>
+        <div id="difficulty">
+            <button class="diff-btn active" data-level="beginner">初級</button>
+            <button class="diff-btn" data-level="intermediate">中級</button>
+            <button class="diff-btn" data-level="expert">上級</button>
+        </div>
+        <div id="panel">
+            <div id="mine-counter" class="lcd">010</div>
+            <button id="smiley">&#128578;</button>
+            <div id="timer" class="lcd">000</div>
+        </div>
+        <div id="board"></div>
+        <div id="message"></div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>関数電卓</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="dark">
+  <div class="calculator-container">
+    <header class="toolbar">
+      <button id="theme-toggle" class="icon-btn" title="テーマ切替">
+        <span class="icon-sun">&#9788;</span>
+        <span class="icon-moon">&#9790;</span>
+      </button>
+      <span class="title">関数電卓</span>
+      <button id="history-toggle" class="icon-btn" title="履歴">&#9776;</button>
+    </header>
+
+    <div class="display">
+      <div class="display-previous" id="display-previous"></div>
+      <div class="display-current-row">
+        <div class="display-current" id="display-current">0</div>
+        <button id="copy-btn" class="copy-btn" title="コピー">&#x2398;</button>
+      </div>
+    </div>
+
+    <div class="mode-toggle-row">
+      <button id="mode-toggle" class="mode-toggle-btn">関数モード</button>
+    </div>
+
+    <div class="scientific-panel" id="scientific-panel">
+      <div class="sci-buttons">
+        <button class="btn sci" data-action="leftParen">(</button>
+        <button class="btn sci" data-action="rightParen">)</button>
+        <button class="btn sci" data-action="pi">&pi;</button>
+        <button class="btn sci" data-action="euler">e</button>
+        <button class="btn sci" data-action="sin">sin</button>
+        <button class="btn sci" data-action="cos">cos</button>
+        <button class="btn sci" data-action="tan">tan</button>
+        <button class="btn sci" data-action="log">log</button>
+        <button class="btn sci" data-action="ln">ln</button>
+        <button class="btn sci" data-action="sqrt">&radic;</button>
+        <button class="btn sci" data-action="square">x&sup2;</button>
+        <button class="btn sci" data-action="cube">x&sup3;</button>
+      </div>
+    </div>
+
+    <div class="buttons-grid">
+      <button class="btn func" data-action="clear">AC</button>
+      <button class="btn func" data-action="clearEntry">CE</button>
+      <button class="btn func" data-action="percent">%</button>
+      <button class="btn op" data-action="divide">&divide;</button>
+
+      <button class="btn num" data-action="digit" data-value="7">7</button>
+      <button class="btn num" data-action="digit" data-value="8">8</button>
+      <button class="btn num" data-action="digit" data-value="9">9</button>
+      <button class="btn op" data-action="multiply">&times;</button>
+
+      <button class="btn num" data-action="digit" data-value="4">4</button>
+      <button class="btn num" data-action="digit" data-value="5">5</button>
+      <button class="btn num" data-action="digit" data-value="6">6</button>
+      <button class="btn op" data-action="subtract">&minus;</button>
+
+      <button class="btn num" data-action="digit" data-value="1">1</button>
+      <button class="btn num" data-action="digit" data-value="2">2</button>
+      <button class="btn num" data-action="digit" data-value="3">3</button>
+      <button class="btn op" data-action="add">+</button>
+
+      <button class="btn num" data-action="negate">&plusmn;</button>
+      <button class="btn num" data-action="digit" data-value="0">0</button>
+      <button class="btn num" data-action="decimal">.</button>
+      <button class="btn eq" data-action="equals">=</button>
+
+      <button class="btn func backspace-btn" data-action="backspace">&#9003;</button>
+    </div>
+
+    <aside class="history-panel" id="history-panel">
+      <div class="history-header">
+        <span>履歴</span>
+        <button id="history-clear" class="history-clear-btn">クリア</button>
+      </div>
+      <ul id="history-list" class="history-list"></ul>
+      <div class="history-empty" id="history-empty">履歴はありません</div>
+    </aside>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
