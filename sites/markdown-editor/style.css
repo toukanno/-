@@ -1,0 +1,448 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --header-height: 48px;
+  --toolbar-height: 40px;
+  --mobile-tabs-height: 40px;
+}
+
+/* ===== Light Theme ===== */
+.light {
+  --bg: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e8e8e8;
+  --text: #1a1a1a;
+  --text-secondary: #555555;
+  --border: #d0d0d0;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --header-bg: #f8f9fa;
+  --toolbar-bg: #f0f1f3;
+  --editor-bg: #ffffff;
+  --preview-bg: #fafafa;
+  --btn-bg: #e2e8f0;
+  --btn-hover: #cbd5e1;
+  --code-bg: #f1f5f9;
+  --blockquote-border: #3b82f6;
+  --blockquote-bg: #eff6ff;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Dark Theme ===== */
+.dark {
+  --bg: #1e1e1e;
+  --bg-secondary: #252526;
+  --bg-tertiary: #333333;
+  --text: #d4d4d4;
+  --text-secondary: #999999;
+  --border: #404040;
+  --accent: #3b82f6;
+  --accent-hover: #60a5fa;
+  --header-bg: #252526;
+  --toolbar-bg: #2d2d2d;
+  --editor-bg: #1e1e1e;
+  --preview-bg: #252526;
+  --btn-bg: #3c3c3c;
+  --btn-hover: #505050;
+  --code-bg: #2d2d2d;
+  --blockquote-border: #3b82f6;
+  --blockquote-bg: #1e293b;
+  --shadow: rgba(0, 0, 0, 0.3);
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.2s, color 0.2s;
+}
+
+/* ===== Header ===== */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 12px;
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.header-left h1 {
+  font-size: 16px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+#word-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  margin-right: 4px;
+}
+
+.header-btn {
+  padding: 4px 10px;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--btn-bg);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.header-btn:hover {
+  background: var(--btn-hover);
+}
+
+/* ===== Toolbar ===== */
+#toolbar {
+  display: flex;
+  align-items: center;
+  height: var(--toolbar-height);
+  padding: 0 8px;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid var(--border);
+  gap: 4px;
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.tool-btn {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: var(--btn-bg);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.tool-btn:hover {
+  background: var(--btn-hover);
+}
+
+.toolbar-sep {
+  width: 1px;
+  height: 20px;
+  background: var(--border);
+  margin: 0 4px;
+  flex-shrink: 0;
+}
+
+/* ===== Mobile Tabs ===== */
+#mobile-tabs {
+  display: none;
+  flex-shrink: 0;
+  height: var(--mobile-tabs-height);
+  border-bottom: 1px solid var(--border);
+  background: var(--toolbar-bg);
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+
+/* ===== Main Layout ===== */
+#main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.pane {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Editor ===== */
+#editor {
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: "Cascadia Code", "Fira Code", "Source Code Pro", "Consolas", monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  background: var(--editor-bg);
+  color: var(--text);
+  tab-size: 2;
+}
+
+#editor::placeholder {
+  color: var(--text-secondary);
+}
+
+/* ===== Divider ===== */
+#divider {
+  width: 4px;
+  background: var(--border);
+  cursor: col-resize;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+#divider:hover,
+#divider.dragging {
+  background: var(--accent);
+}
+
+/* ===== Preview ===== */
+#preview-pane {
+  background: var(--preview-bg);
+  overflow-y: auto;
+}
+
+#preview {
+  padding: 16px 24px;
+  font-size: 15px;
+  line-height: 1.8;
+  word-wrap: break-word;
+}
+
+/* ===== Preview Typography ===== */
+#preview h1 {
+  font-size: 2em;
+  margin: 0.6em 0 0.4em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--border);
+}
+
+#preview h2 {
+  font-size: 1.5em;
+  margin: 0.5em 0 0.3em;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid var(--border);
+}
+
+#preview h3 {
+  font-size: 1.25em;
+  margin: 0.5em 0 0.3em;
+}
+
+#preview p {
+  margin: 0.6em 0;
+}
+
+#preview strong {
+  font-weight: 700;
+}
+
+#preview em {
+  font-style: italic;
+}
+
+#preview del {
+  text-decoration: line-through;
+  color: var(--text-secondary);
+}
+
+#preview a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+#preview a:hover {
+  text-decoration: underline;
+}
+
+#preview img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin: 0.5em 0;
+}
+
+#preview code {
+  background: var(--code-bg);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: "Cascadia Code", "Fira Code", "Source Code Pro", monospace;
+  font-size: 0.9em;
+}
+
+#preview pre {
+  background: var(--code-bg);
+  padding: 12px 16px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0.8em 0;
+  border: 1px solid var(--border);
+}
+
+#preview pre code {
+  background: none;
+  padding: 0;
+  font-size: 0.88em;
+  line-height: 1.6;
+}
+
+#preview blockquote {
+  border-left: 4px solid var(--blockquote-border);
+  background: var(--blockquote-bg);
+  padding: 8px 16px;
+  margin: 0.8em 0;
+  border-radius: 0 4px 4px 0;
+}
+
+#preview blockquote p {
+  margin: 0.3em 0;
+}
+
+#preview ul, #preview ol {
+  padding-left: 1.8em;
+  margin: 0.5em 0;
+}
+
+#preview li {
+  margin: 0.25em 0;
+}
+
+#preview hr {
+  border: none;
+  border-top: 2px solid var(--border);
+  margin: 1.5em 0;
+}
+
+/* ===== Fullscreen ===== */
+#app.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+
+/* ===== Responsive: Mobile ===== */
+@media (max-width: 768px) {
+  .header-right {
+    gap: 4px;
+  }
+
+  .header-btn {
+    padding: 4px 6px;
+    font-size: 12px;
+  }
+
+  #word-count {
+    display: none;
+  }
+
+  #toolbar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #mobile-tabs {
+    display: flex;
+  }
+
+  #divider {
+    display: none;
+  }
+
+  #main {
+    position: relative;
+  }
+
+  .pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  #editor-pane {
+    z-index: 2;
+  }
+
+  #preview-pane {
+    z-index: 1;
+  }
+
+  #editor-pane.hidden {
+    z-index: 0;
+    visibility: hidden;
+  }
+
+  #preview-pane.hidden {
+    z-index: 0;
+    visibility: hidden;
+  }
+}
+
+/* ===== Scrollbar (Webkit) ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ===== Word count mobile display ===== */
+@media (max-width: 768px) {
+  #word-count-mobile {
+    display: block;
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2px 0;
+    background: var(--toolbar-bg);
+    border-bottom: 1px solid var(--border);
+  }
+}

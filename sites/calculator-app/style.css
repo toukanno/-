@@ -1,0 +1,494 @@
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans",
+    "Noto Sans JP", sans-serif;
+}
+
+/* ===== Dark Theme (default) ===== */
+[data-theme="dark"] {
+  --bg: #1c1c1e;
+  --container-bg: #2c2c2e;
+  --display-bg: #1c1c1e;
+  --display-text: #ffffff;
+  --display-prev: #8e8e93;
+  --btn-num-bg: #3a3a3c;
+  --btn-num-text: #ffffff;
+  --btn-func-bg: #4a4a4c;
+  --btn-func-text: #ffffff;
+  --btn-op-bg: #ff9f0a;
+  --btn-op-text: #ffffff;
+  --btn-eq-bg: #ff9f0a;
+  --btn-eq-text: #ffffff;
+  --btn-sci-bg: #2c2c2e;
+  --btn-sci-text: #ff9f0a;
+  --btn-sci-border: #3a3a3c;
+  --btn-hover: rgba(255, 255, 255, 0.08);
+  --toolbar-bg: #2c2c2e;
+  --toolbar-text: #8e8e93;
+  --history-bg: #2c2c2e;
+  --history-border: #3a3a3c;
+  --history-item-hover: #3a3a3c;
+  --shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  --mode-btn-bg: #3a3a3c;
+  --mode-btn-text: #ff9f0a;
+  --copy-btn-text: #8e8e93;
+}
+
+/* ===== Light Theme ===== */
+[data-theme="light"] {
+  --bg: #f2f2f7;
+  --container-bg: #ffffff;
+  --display-bg: #ffffff;
+  --display-text: #1c1c1e;
+  --display-prev: #8e8e93;
+  --btn-num-bg: #e8e8ed;
+  --btn-num-text: #1c1c1e;
+  --btn-func-bg: #d1d1d6;
+  --btn-func-text: #1c1c1e;
+  --btn-op-bg: #ff9f0a;
+  --btn-op-text: #ffffff;
+  --btn-eq-bg: #ff9f0a;
+  --btn-eq-text: #ffffff;
+  --btn-sci-bg: #f2f2f7;
+  --btn-sci-text: #ff9f0a;
+  --btn-sci-border: #d1d1d6;
+  --btn-hover: rgba(0, 0, 0, 0.05);
+  --toolbar-bg: #ffffff;
+  --toolbar-text: #8e8e93;
+  --history-bg: #ffffff;
+  --history-border: #e5e5ea;
+  --history-item-hover: #f2f2f7;
+  --shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  --mode-btn-bg: #e8e8ed;
+  --mode-btn-text: #ff9f0a;
+  --copy-btn-text: #8e8e93;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  transition: background 0.3s;
+}
+
+/* ===== Container ===== */
+.calculator-container {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: var(--container-bg);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+/* ===== Toolbar ===== */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--toolbar-bg);
+  color: var(--toolbar-text);
+  transition: background 0.3s, color 0.3s;
+}
+
+.toolbar .title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--display-text);
+  transition: color 0.3s;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--toolbar-text);
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.3s;
+}
+
+.icon-btn:hover {
+  background: var(--btn-hover);
+}
+
+[data-theme="dark"] .icon-sun { display: inline; }
+[data-theme="dark"] .icon-moon { display: none; }
+[data-theme="light"] .icon-sun { display: none; }
+[data-theme="light"] .icon-moon { display: inline; }
+
+/* ===== Display ===== */
+.display {
+  background: var(--display-bg);
+  padding: 16px 20px 12px;
+  transition: background 0.3s;
+}
+
+.display-previous {
+  color: var(--display-prev);
+  font-size: 16px;
+  text-align: right;
+  min-height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.display-current-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.display-current {
+  color: var(--display-text);
+  font-size: 48px;
+  font-weight: 300;
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+  min-width: 0;
+  transition: color 0.3s;
+}
+
+.copy-btn {
+  background: none;
+  border: none;
+  color: var(--copy-btn-text);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.3s;
+}
+
+.copy-btn:hover {
+  background: var(--btn-hover);
+}
+
+.copy-btn.copied {
+  color: #30d158;
+}
+
+/* ===== Mode Toggle ===== */
+.mode-toggle-row {
+  padding: 0 16px 8px;
+  background: var(--display-bg);
+  transition: background 0.3s;
+}
+
+.mode-toggle-btn {
+  background: var(--mode-btn-bg);
+  color: var(--mode-btn-text);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.2s, color 0.3s;
+}
+
+.mode-toggle-btn:hover {
+  filter: brightness(1.1);
+}
+
+.mode-toggle-btn.active {
+  background: var(--btn-op-bg);
+  color: #ffffff;
+}
+
+/* ===== Scientific Panel ===== */
+.scientific-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+  background: var(--display-bg);
+  padding: 0 12px;
+}
+
+.scientific-panel.open {
+  max-height: 200px;
+  padding: 0 12px 10px;
+}
+
+.sci-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.btn.sci {
+  background: var(--btn-sci-bg);
+  color: var(--btn-sci-text);
+  border: 1px solid var(--btn-sci-border);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.15s, transform 0.1s, color 0.3s, border-color 0.3s;
+}
+
+.btn.sci:hover {
+  filter: brightness(1.15);
+}
+
+.btn.sci:active {
+  transform: scale(0.95);
+}
+
+/* ===== Standard Buttons Grid ===== */
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px 12px 16px;
+  position: relative;
+}
+
+.btn {
+  border: none;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 50px;
+  cursor: pointer;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font);
+  transition: background 0.15s, transform 0.1s, color 0.3s;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.93);
+}
+
+.btn.num {
+  background: var(--btn-num-bg);
+  color: var(--btn-num-text);
+}
+
+.btn.num:hover {
+  filter: brightness(1.15);
+}
+
+.btn.func {
+  background: var(--btn-func-bg);
+  color: var(--btn-func-text);
+  font-size: 18px;
+}
+
+.btn.func:hover {
+  filter: brightness(1.15);
+}
+
+.btn.op {
+  background: var(--btn-op-bg);
+  color: var(--btn-op-text);
+  font-size: 26px;
+}
+
+.btn.op:hover {
+  filter: brightness(1.1);
+}
+
+.btn.op.active {
+  background: #ffffff;
+  color: var(--btn-op-bg);
+}
+
+.btn.eq {
+  background: var(--btn-eq-bg);
+  color: var(--btn-eq-text);
+  font-size: 28px;
+}
+
+.btn.eq:hover {
+  filter: brightness(1.1);
+}
+
+.backspace-btn {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  border-radius: 14px;
+  padding: 10px;
+  font-size: 18px;
+}
+
+/* ===== History Panel ===== */
+.history-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--history-bg);
+  transform: translateX(100%);
+  transition: transform 0.3s ease, background 0.3s;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.history-panel.open {
+  transform: translateX(0);
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--display-text);
+  border-bottom: 1px solid var(--history-border);
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.history-clear-btn {
+  background: none;
+  border: none;
+  color: #ff453a;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: var(--font);
+}
+
+.history-clear-btn:hover {
+  background: rgba(255, 69, 58, 0.1);
+}
+
+.history-list {
+  list-style: none;
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.history-list li {
+  padding: 12px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--history-border);
+  transition: background 0.15s, border-color 0.3s;
+}
+
+.history-list li:hover {
+  background: var(--history-item-hover);
+}
+
+.history-list li .expr {
+  font-size: 14px;
+  color: var(--display-prev);
+  margin-bottom: 4px;
+  transition: color 0.3s;
+}
+
+.history-list li .result {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--display-text);
+  transition: color 0.3s;
+}
+
+.history-empty {
+  display: none;
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--display-prev);
+  font-size: 15px;
+  transition: color 0.3s;
+}
+
+.history-empty.visible {
+  display: block;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 420px) {
+  .calculator-container {
+    border-radius: 0;
+    max-width: 100%;
+    min-height: 100vh;
+  }
+
+  .history-panel {
+    border-radius: 0;
+  }
+
+  .display-current {
+    font-size: 40px;
+  }
+
+  .btn {
+    font-size: 20px;
+  }
+
+  .btn.op {
+    font-size: 24px;
+  }
+
+  .buttons-grid {
+    gap: 8px;
+    padding: 8px 10px 14px;
+  }
+
+  .sci-buttons {
+    gap: 6px;
+  }
+}
+
+@media (min-width: 421px) {
+  .calculator-container {
+    margin: 20px;
+  }
+}
+
+/* ===== Scrollbar (for history) ===== */
+.history-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: var(--display-prev);
+  border-radius: 4px;
+}
+
+/* ===== Animations ===== */
+@keyframes flash-copy {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.copy-btn.copied {
+  animation: flash-copy 0.4s ease;
+}
