@@ -3,6 +3,8 @@
 Claude APIを使って、未実装のGitHubリポジトリを自動で開発するシステムです。
 毎日1回自動実行し、コードが空のリポジトリを最大3つ選んで実装します。
 
+必要に応じて、環境変数で「全リポジトリ対象モード」に切り替えできます。
+
 ## セットアップ
 
 ### 1. このリポジトリをGitHubに作成
@@ -24,6 +26,8 @@ git push -u origin main
 |---|---|
 | `ANTHROPIC_API_KEY` | [Anthropic Console](https://console.anthropic.com/) で取得 |
 | `REPO_ACCESS_TOKEN` | GitHubのPersonal Access Token (`repo` スコープ) |
+| `GITHUB_USERNAME` | 対象のGitHubユーザー名（省略時: `toukanno`） |
+| `DEVELOP_ALL_REPOS` | `true` にすると上限なしで全未実装リポジトリを開発（省略時: `false`） |
 
 ### 3. GitHub Actions を有効化
 
@@ -51,6 +55,15 @@ Actions タブ → `Auto Develop Repositories` → `Run workflow`
 
 ```python
 MAX_REPOS_PER_RUN = 3  # 1回の実行で開発する最大リポジトリ数
+```
+
+### 全リポジトリを対象にする
+
+デフォルトでは1回の実行で最大3リポジトリまでですが、以下を設定すると全未実装リポジトリを対象にできます。
+
+```bash
+export DEVELOP_ALL_REPOS=true
+python develop_repos.py
 ```
 
 `auto-develop.yml` のcron式を変更してスケジュールを調整:
