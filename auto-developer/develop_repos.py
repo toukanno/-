@@ -29,6 +29,7 @@ HEADERS = {
 
 # 1回の実行で開発するリポジトリ数の上限 (API節約のため)
 MAX_REPOS_PER_RUN = 3
+DEVELOP_ALL_REPOS = os.environ.get("DEVELOP_ALL_REPOS", "false").lower() in ("1", "true", "yes", "on")
 
 
 def get_all_repos() -> list[dict]:
@@ -168,13 +169,17 @@ def develop_repo(repo: dict) -> int:
 
 def main():
     print(f"=== repo-auto-developer 起動 (user: {GITHUB_USERNAME}) ===\n")
+    if DEVELOP_ALL_REPOS:
+        print("実行モード: 全リポジトリを対象に開発します (DEVELOP_ALL_REPOS=true)")
+    else:
+        print(f"実行モード: 最大 {MAX_REPOS_PER_RUN} リポジトリまで開発します")
 
     repos = get_all_repos()
     print(f"リポジトリ数: {len(repos)}\n")
 
     developed = 0
     for repo in repos:
-        if developed >= MAX_REPOS_PER_RUN:
+        if not DEVELOP_ALL_REPOS and developed >= MAX_REPOS_PER_RUN:
             print(f"\n上限 ({MAX_REPOS_PER_RUN} repos) に達したため終了")
             break
 
