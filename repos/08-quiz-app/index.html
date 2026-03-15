@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #4f46e5, #7c3aed); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .card { background: white; border-radius: 20px; padding: 40px; width: 540px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .progress { height: 6px; background: #e0e7ff; border-radius: 3px; margin-bottom: 24px; }
+    .progress-bar { height: 100%; background: #6366f1; border-radius: 3px; transition: width 0.3s; }
+    .meta { display: flex; justify-content: space-between; margin-bottom: 24px; font-size: 0.85rem; color: #6b7280; }
+    .timer { color: #ef4444; font-weight: bold; }
+    .question { font-size: 1.2rem; font-weight: bold; color: #1a1a2e; margin-bottom: 28px; line-height: 1.5; }
+    .options { display: grid; gap: 12px; }
+    .opt { padding: 16px 20px; border: 2px solid #e0e7ff; border-radius: 12px; cursor: pointer; transition: all 0.15s; font-size: 0.95rem; text-align: left; background: white; }
+    .opt:hover { border-color: #6366f1; background: #f5f3ff; }
+    .opt.correct { border-color: #22c55e; background: #f0fdf4; color: #166534; }
+    .opt.wrong { border-color: #ef4444; background: #fef2f2; color: #991b1b; }
+    .result { text-align: center; }
+    .result .score { font-size: 4rem; font-weight: bold; color: #6366f1; margin: 16px 0; }
+    .result p { color: #6b7280; margin-bottom: 24px; }
+    .restart-btn { background: #6366f1; color: white; border: none; padding: 14px 32px; border-radius: 30px; font-size: 1rem; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="card" id="quizCard">
+    <div class="progress"><div class="progress-bar" id="progressBar" style="width: 0%"></div></div>
+    <div class="meta"><span id="qNum">問 1 / 5</span><span class="timer" id="timer">⏱ 15</span></div>
+    <div class="question" id="question"></div>
+    <div class="options" id="options"></div>
+  </div>
+  <script>
+    const quizzes = [
+      { q: 'HTMLの正式名称は？', opts: ['HyperText Markup Language', 'High Text Maker Language', 'Hyper Tool Markup Logic', 'Home Text Markup Level'], ans: 0 },
+      { q: 'CSSで要素を横並びにするには？', opts: ['display: block', 'display: flex', 'display: inline', 'display: grid-row'], ans: 1 },
+      { q: 'JavaScriptで配列の長さを取得するプロパティは？', opts: ['size', 'count', 'length', 'total'], ans: 2 },
+      { q: 'git でコミットするコマンドは？', opts: ['git push', 'git commit', 'git save', 'git add'], ans: 1 },
+      { q: 'HTTPのステータスコード 404 は？', opts: ['サーバーエラー', 'リダイレクト', 'Not Found', '認証エラー'], ans: 2 },
+    ];
+    let current = 0, score = 0, timer, timeLeft;
+    function startTimer() {
+      timeLeft = 15;
+      document.getElementById('timer').textContent = '⏱ ' + timeLeft;
+      timer = setInterval(() => {
+        timeLeft--;
+        document.getElementById('timer').textContent = '⏱ ' + timeLeft;
+        if (timeLeft <= 0) { clearInterval(timer); nextQ(); }
+      }, 1000);
+    }
+    function renderQ() {
+      if (current >= quizzes.length) { showResult(); return; }
+      const q = quizzes[current];
+      document.getElementById('progressBar').style.width = (current / quizzes.length * 100) + '%';
+      document.getElementById('qNum').textContent = `問 ${current + 1} / ${quizzes.length}`;
+      document.getElementById('question').textContent = q.q;
+      document.getElementById('options').innerHTML = q.opts.map((o, i) =>
+        `<button class="opt" onclick="answer(${i})">${o}</button>`).join('');
+      startTimer();
+    }
+    function answer(i) {
+      clearInterval(timer);
+      const q = quizzes[current];
+      const opts = document.querySelectorAll('.opt');
+      opts.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (idx === q.ans) btn.classList.add('correct');
+        else if (idx === i) btn.classList.add('wrong');
+      });
+      if (i === q.ans) score++;
+      setTimeout(nextQ, 1200);
+    }
+    function nextQ() { current++; renderQ(); }
+    function showResult() {
+      document.getElementById('quizCard').innerHTML = `<div class="result">
+        <h2>クイズ終了！</h2>
+        <div class="score">${score} / ${quizzes.length}</div>
+        <p>${score === quizzes.length ? '満点！素晴らしい！' : score >= 3 ? 'よくできました！' : 'もう一度挑戦しよう！'}</p>
+        <button class="restart-btn" onclick="location.reload()">もう一度</button>
+      </div>`;
+    }
+    renderQ();
+  </script>
+</body>
+</html>
