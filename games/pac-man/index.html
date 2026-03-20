@@ -4,33 +4,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pac-Man</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     background: #000;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(0,0,180,0.25) 0%, transparent 60%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    font-family: 'Courier New', monospace;
+    font-family: 'Orbitron', monospace;
     color: #ffff00;
+    padding: 16px;
   }
-  h1 { font-size: 2em; margin-bottom: 8px; text-shadow: 0 0 15px #ff0; }
-  #hud { display: flex; gap: 40px; margin-bottom: 8px; font-size: 1.1em; }
-  canvas { border: 2px solid #00f; box-shadow: 0 0 20px #00f4; }
-  #controls { margin-top: 8px; font-size: 0.85em; color: #666; }
+  h1 {
+    font-size: 2.2em; font-weight: 900; margin-bottom: 14px;
+    text-shadow: 0 0 20px #ff0, 0 0 40px rgba(255,255,0,0.3);
+    letter-spacing: 4px;
+  }
+  #hud {
+    display: flex; gap: 16px; margin-bottom: 12px;
+  }
+  .hud-card {
+    background: rgba(255,255,0,0.05); border: 1px solid rgba(255,255,0,0.2);
+    border-radius: 8px; padding: 8px 18px; text-align: center;
+  }
+  .hud-card .lbl { font-size: 0.55em; letter-spacing: 2px; color: rgba(255,255,0,0.45); margin-bottom: 3px; }
+  .hud-card .val { font-size: 1.4em; font-weight: 700; color: #fff; }
+  .hud-card.hi .val { color: #ff0; text-shadow: 0 0 10px #ff0; }
+  canvas { border: 1px solid rgba(0,0,220,0.6); box-shadow: 0 0 30px rgba(0,0,200,0.4), 0 0 60px rgba(0,0,100,0.2); border-radius: 4px; }
+  #controls { margin-top: 10px; font-size: 0.6em; color: rgba(255,255,255,0.25); letter-spacing: 1px; }
 </style>
 </head>
 <body>
 <h1>👻 PAC-MAN</h1>
 <div id="hud">
-  <span>スコア: <span id="score">0</span></span>
-  <span>残機: <span id="lives">3</span></span>
-  <span>レベル: <span id="level">1</span></span>
+  <div class="hud-card hi"><div class="lbl">SCORE</div><div class="val" id="score">0</div></div>
+  <div class="hud-card"><div class="lbl">LIVES</div><div class="val" id="lives">3</div></div>
+  <div class="hud-card"><div class="lbl">LEVEL</div><div class="val" id="level">1</div></div>
 </div>
 <canvas id="canvas"></canvas>
-<div id="controls">↑↓←→ または WASD で操作</div>
+<div id="controls">↑↓←→ / WASD で操作 · クリックまたはキーでスタート</div>
 
 <script>
 const canvas = document.getElementById('canvas');
