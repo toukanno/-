@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRコード生成ツール</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>QRコード生成ツール</h1>
+            <p class="subtitle">テキストやURLからQRコードを簡単に作成</p>
+        </header>
+
+        <main>
+            <div class="panel input-panel">
+                <h2>入力設定</h2>
+
+                <div class="form-group">
+                    <label for="input-type">入力タイプ</label>
+                    <select id="input-type">
+                        <option value="url">URL</option>
+                        <option value="text">テキスト</option>
+                        <option value="email">メール</option>
+                        <option value="phone">電話番号</option>
+                        <option value="wifi">WiFi</option>
+                    </select>
+                </div>
+
+                <div id="input-fields">
+                    <div class="form-group" id="field-main">
+                        <label for="input-text" id="input-label">URL</label>
+                        <textarea id="input-text" rows="3" placeholder="https://example.com"></textarea>
+                    </div>
+
+                    <!-- WiFi専用フィールド -->
+                    <div class="wifi-fields" id="wifi-fields" style="display:none;">
+                        <div class="form-group">
+                            <label for="wifi-ssid">ネットワーク名 (SSID)</label>
+                            <input type="text" id="wifi-ssid" placeholder="MyNetwork">
+                        </div>
+                        <div class="form-group">
+                            <label for="wifi-password">パスワード</label>
+                            <input type="text" id="wifi-password" placeholder="password123">
+                        </div>
+                        <div class="form-group">
+                            <label for="wifi-encryption">暗号化方式</label>
+                            <select id="wifi-encryption">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">なし</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="wifi-hidden"> ステルスSSID
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="qr-size">サイズ</label>
+                    <select id="qr-size">
+                        <option value="small">小 (200x200)</option>
+                        <option value="medium" selected>中 (300x300)</option>
+                        <option value="large">大 (400x400)</option>
+                    </select>
+                </div>
+
+                <div class="color-row">
+                    <div class="form-group">
+                        <label for="fg-color">前景色</label>
+                        <input type="color" id="fg-color" value="#000000">
+                    </div>
+                    <div class="form-group">
+                        <label for="bg-color">背景色</label>
+                        <input type="color" id="bg-color" value="#ffffff">
+                    </div>
+                </div>
+
+                <button id="generate-btn" class="btn btn-primary">QRコード生成</button>
+            </div>
+
+            <div class="panel output-panel">
+                <h2>QRコード</h2>
+                <div id="qr-output" class="qr-output">
+                    <p class="placeholder-text">左の設定を入力して「QRコード生成」をクリックしてください</p>
+                </div>
+                <canvas id="qr-canvas" style="display:none;"></canvas>
+                <div id="action-buttons" class="action-buttons" style="display:none;">
+                    <button id="download-btn" class="btn btn-secondary">ダウンロード (PNG)</button>
+                    <button id="print-btn" class="btn btn-secondary">印刷</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 QRコード生成ツール - 外部ライブラリ不要・完全セルフコンテインド</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

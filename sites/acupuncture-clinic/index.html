@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="和漢堂 鍼灸院 - 東洋医学の知恵と現代の技術を融合した鍼灸治療。肩こり・腰痛・頭痛・冷え性・美容鍼・不妊治療など、お身体のお悩みに寄り添います。">
+  <title>和漢堂 鍼灸院 | 心と身体を整える東洋医学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== Header ========== -->
+  <header class="header" id="top">
+    <div class="header-inner">
+      <a href="#top" class="logo">
+        和漢堂
+        <small>WAKANDO SHINKYU-IN</small>
+      </a>
+      <nav>
+        <button class="menu-toggle" aria-label="メニューを開く" onclick="document.querySelector('.nav-list').classList.toggle('active')">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-list">
+          <li><a href="#treatments">施術メニュー</a></li>
+          <li><a href="#about">鍼灸について</a></li>
+          <li><a href="#therapist">院長紹介</a></li>
+          <li><a href="#flow">施術の流れ</a></li>
+          <li><a href="#pricing">料金</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="#reservation" class="nav-cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== Hero ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge">東洋医学 × 現代の技術</div>
+      <h1>
+        和漢堂 鍼灸院
+        <small>WAKANDO SHINKYU-IN</small>
+      </h1>
+      <p class="hero-tagline">
+        一本の鍼に、千年の知恵を。<br>
+        あなたの「自ら治る力」を引き出す<br>
+        伝統の鍼灸治療
+      </p>
+      <div class="hero-actions">
+        <a href="#reservation" class="btn btn-primary">予約する</a>
+        <a href="#treatments" class="btn btn-outline">施術メニューを見る</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      SCROLL
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ========== Treatment Menu ========== -->
+  <section class="section" id="treatments">
+    <div class="container">
+      <h2 class="section-title">施術メニュー</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">TREATMENT MENU</p>
+
+      <div class="treatment-grid">
+        <!-- 肩こり -->
+        <div class="treatment-card">
+          <div class="treatment-icon">&#x1F9D8;</div>
+          <h3>肩こり・首こり</h3>
+          <p>デスクワークや姿勢の偏りによる慢性的な肩こりに。筋緊張を緩め、血流を改善して根本から楽にします。</p>
+        </div>
+        <!-- 腰痛 -->
+        <div class="treatment-card">
+          <div class="treatment-icon">&#x1F4AA;</div>
+          <h3>腰痛</h3>
+          <p>急性のぎっくり腰から慢性腰痛まで対応。深部の筋肉にアプローチし、痛みの原因を取り除きます。</p>
+        </div>
+        <!-- 頭痛 -->
+        <div class="treatment-card">
+          <div class="treatment-icon">&#x2728;</div>
+          <h3>頭痛・めまい</h3>
+          <p>緊張型頭痛や片頭痛に対して、首・肩周りのツボを刺激し、頭部への血流を整えます。</p>
+        </div>
+        <!-- 冷え性 -->
+        <div class="treatment-card">
+          <div class="treatment-icon">&#x1F33F;</div>
+          <h3>冷え性・むくみ</h3>
+          <p>お灸と鍼の併用で全身の気血の巡りを促進。内臓から温め、体質改善を目指します。</p>
+        </div>
+        <!-- 美容鍼 -->
+        <div class="treatment-card">
+          <div class="treatment-icon">&#x1F338;</div>
+          <h3>美容鍼</h3>
+          <p>お顔のたるみ・くすみ・ほうれい線に。極細鍼で肌のコラーゲン生成を促し、内側から輝く素肌へ。</p>
+        </div>
+        <!-- 不妊治療 -->
+        <div class="treatment-card">
+          <div class="treatment-icon">&#x1F49B;</div>
+          <h3>不妊治療サポート</h3>
+          <p>子宮・卵巣の血流改善とホルモンバランスの調整を行い、妊娠しやすい身体づくりをお手伝いします。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== About Acupuncture ========== -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <h2 class="section-title">鍼灸について</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">ABOUT ACUPUNCTURE</p>
+
+      <div class="about-content">
+        <div class="about-image">&#x2F29;</div>
+        <div class="about-text">
+          <h3>二千年の歴史を持つ<br>自然治癒の医学</h3>
+          <p>
+            鍼灸は、中国に起源を持ち日本で独自の発展を遂げた伝統医学です。
+            身体に存在する360以上のツボ（経穴）を鍼やお灸で刺激することで、
+            気・血・水の流れを整え、人が本来持っている自然治癒力を高めます。
+          </p>
+          <p>
+            当院では、日本式の繊細な鍼技術を用い、痛みをほとんど感じない
+            心地よい施術を心がけています。使用する鍼はすべて使い捨ての
+            ディスポーザブル鍼で、衛生面も万全です。
+          </p>
+          <p>
+            WHO（世界保健機関）も鍼灸の有効性を認めており、
+            肩こりや腰痛だけでなく、自律神経の乱れ、不眠、
+            ストレスなど幅広い症状に効果が期待できます。
+          </p>
+          <div class="about-features">
+            <div class="about-feature">使い捨て鍼で衛生的</div>
+            <div class="about-feature">痛みの少ない日本式</div>
+            <div class="about-feature">WHO認定の有効性</div>
+            <div class="about-feature">副作用が少ない</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Therapist Profile ========== -->
+  <section class="section" id="therapist">
+    <div class="container">
+      <h2 class="section-title">院長紹介</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">THERAPIST</p>
+
+      <div class="therapist-card">
+        <div class="therapist-photo">
+          &#x1F9D1;&#x200D;&#x2695;&#xFE0F;
+          <span class="therapist-photo-label">PHOTO</span>
+        </div>
+        <div class="therapist-info">
+          <h3 class="therapist-name">山田 和彦</h3>
+          <p class="therapist-title">鍼灸師・あん摩マッサージ指圧師 ／ 院長</p>
+          <p>
+            東京医療専門学校卒業後、都内の鍼灸院で10年間の臨床経験を積み、
+            2018年に和漢堂 鍼灸院を開院。延べ15,000人以上の施術実績を持つ。
+          </p>
+          <p>
+            「痛みを取るだけでなく、痛みが出ない身体をつくる」をモットーに、
+            一人ひとりの体質と生活習慣に合わせたオーダーメイドの施術を提供しています。
+            特に美容鍼と不妊治療のサポートに力を入れており、多くの患者様から
+            信頼をいただいております。
+          </p>
+          <div class="therapist-credentials">
+            <span class="credential-tag">はり師免許</span>
+            <span class="credential-tag">きゅう師免許</span>
+            <span class="credential-tag">あん摩マッサージ指圧師免許</span>
+            <span class="credential-tag">日本鍼灸師会会員</span>
+            <span class="credential-tag">臨床経験18年</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Treatment Flow ========== -->
+  <section class="section flow-section" id="flow">
+    <div class="container">
+      <h2 class="section-title">施術の流れ</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">TREATMENT FLOW</p>
+
+      <div class="flow-steps">
+        <!-- Step 1 -->
+        <div class="flow-step">
+          <div class="flow-number">
+            STEP
+            <strong>01</strong>
+          </div>
+          <h3>受付</h3>
+          <p>ご来院されましたら受付にお声がけください。初診の方は問診票のご記入をお願いいたします。</p>
+          <span class="flow-duration">約5分</span>
+        </div>
+        <!-- Step 2 -->
+        <div class="flow-step">
+          <div class="flow-number">
+            STEP
+            <strong>02</strong>
+          </div>
+          <h3>問診・カウンセリング</h3>
+          <p>現在のお悩みや体調、生活習慣などを丁寧にお伺いし、最適な施術プランをご提案いたします。</p>
+          <span class="flow-duration">約15分</span>
+        </div>
+        <!-- Step 3 -->
+        <div class="flow-step">
+          <div class="flow-number">
+            STEP
+            <strong>03</strong>
+          </div>
+          <h3>施術</h3>
+          <p>お身体の状態に合わせて鍼・灸・マッサージを組み合わせ、丁寧に施術を行います。</p>
+          <span class="flow-duration">約40分</span>
+        </div>
+        <!-- Step 4 -->
+        <div class="flow-step">
+          <div class="flow-number">
+            STEP
+            <strong>04</strong>
+          </div>
+          <h3>アフターケア</h3>
+          <p>施術後の注意点や日常生活でのセルフケア方法をお伝えし、次回のご予約を承ります。</p>
+          <span class="flow-duration">約10分</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Pricing ========== -->
+  <section class="section" id="pricing">
+    <div class="container">
+      <h2 class="section-title">料金案内</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">PRICING</p>
+
+      <div class="pricing-table">
+        <div class="pricing-header">
+          <span>施術メニュー</span>
+          <span>施術時間</span>
+          <span>料金（税込）</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">鍼灸治療（全身）</span>
+          <span>約60分</span>
+          <span class="price">&yen;7,700</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">鍼灸治療（局所）</span>
+          <span>約40分</span>
+          <span class="price">&yen;5,500</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">美容鍼</span>
+          <span>約50分</span>
+          <span class="price">&yen;8,800</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">美容鍼プレミアム</span>
+          <span>約70分</span>
+          <span class="price">&yen;12,100</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">不妊治療サポート</span>
+          <span>約60分</span>
+          <span class="price">&yen;8,800</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">お灸治療</span>
+          <span>約30分</span>
+          <span class="price">&yen;4,400</span>
+        </div>
+        <div class="pricing-row">
+          <span class="treatment-name">小児はり</span>
+          <span>約20分</span>
+          <span class="price">&yen;2,200</span>
+        </div>
+      </div>
+
+      <p class="pricing-note">
+        ※ 初診の方は別途カウンセリング料がかかります
+        <br>
+        <span class="pricing-initial">初診料 &yen;1,100</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== Testimonials ========== -->
+  <section class="section testimonials-section" id="testimonials">
+    <div class="container">
+      <h2 class="section-title">患者様の声</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">TESTIMONIALS</p>
+
+      <div class="testimonials-grid">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>長年悩んでいた慢性的な肩こりが、3回の施術でかなり楽になりました。先生が丁寧に原因を説明してくださり、安心して治療を受けられました。</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">T.S</div>
+            <div>
+              <div class="testimonial-author-name">T.S 様</div>
+              <div class="testimonial-author-detail">40代女性 ・ 肩こり</div>
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>美容鍼を受けてから、肌のハリが明らかに違います。友人にも「最近顔色が良いね」と言われるようになり、月1回のメンテナンスが楽しみです。</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M.K</div>
+            <div>
+              <div class="testimonial-author-name">M.K 様</div>
+              <div class="testimonial-author-detail">30代女性 ・ 美容鍼</div>
+            </div>
+          </div>
+        </div>
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>不妊治療と並行して通い始め、半年後に妊娠することができました。体の冷えが改善され、体調全体が良くなったことを実感しています。</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">A.Y</div>
+            <div>
+              <div class="testimonial-author-name">A.Y 様</div>
+              <div class="testimonial-author-detail">30代女性 ・ 不妊治療サポート</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Access & Hours ========== -->
+  <section class="section" id="access">
+    <div class="container">
+      <h2 class="section-title">アクセス・診療時間</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">ACCESS &amp; HOURS</p>
+
+      <div class="access-grid">
+        <!-- Map placeholder -->
+        <div class="access-map">
+          <div class="access-map-icon">&#x1F4CD;</div>
+          <span>Google Map をここに埋め込み</span>
+          <span style="font-size: 0.78rem; opacity: 0.7;">実際の住所に合わせて設定してください</span>
+        </div>
+
+        <!-- Details -->
+        <div class="access-details">
+          <h3>和漢堂 鍼灸院</h3>
+
+          <div class="access-info-item">
+            <div class="access-info-icon">&#x1F3E0;</div>
+            <div class="access-info-text">
+              <strong>所在地</strong>
+              <span>〒150-0001 東京都渋谷区神宮前3-15-8 和漢堂ビル2F</span>
+            </div>
+          </div>
+
+          <div class="access-info-item">
+            <div class="access-info-icon">&#x1F689;</div>
+            <div class="access-info-text">
+              <strong>最寄り駅</strong>
+              <span>東京メトロ銀座線「外苑前」駅 徒歩5分</span>
+            </div>
+          </div>
+
+          <div class="access-info-item">
+            <div class="access-info-icon">&#x260E;</div>
+            <div class="access-info-text">
+              <strong>お電話</strong>
+              <span>03-1234-5678</span>
+            </div>
+          </div>
+
+          <div class="access-info-item">
+            <div class="access-info-icon">&#x1F4E7;</div>
+            <div class="access-info-text">
+              <strong>メール</strong>
+              <span>info@wakando-shinkyuin.jp</span>
+            </div>
+          </div>
+
+          <!-- Hours table -->
+          <table class="hours-table">
+            <thead>
+              <tr>
+                <th>診療時間</th>
+                <th>月</th>
+                <th>火</th>
+                <th>水</th>
+                <th>木</th>
+                <th>金</th>
+                <th>土</th>
+                <th>日</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>9:00〜12:30</td>
+                <td class="hours-open">○</td>
+                <td class="hours-open">○</td>
+                <td class="hours-open">○</td>
+                <td class="hours-closed">休</td>
+                <td class="hours-open">○</td>
+                <td class="hours-open">○</td>
+                <td class="hours-closed">休</td>
+              </tr>
+              <tr>
+                <td>14:30〜19:00</td>
+                <td class="hours-open">○</td>
+                <td class="hours-open">○</td>
+                <td class="hours-open">○</td>
+                <td class="hours-closed">休</td>
+                <td class="hours-open">○</td>
+                <td class="hours-open">△</td>
+                <td class="hours-closed">休</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.78rem; color: var(--color-text-light); margin-top: 8px;">
+            ※ △ 土曜午後は14:30〜17:00<br>
+            ※ 木曜・日曜・祝日は休診
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Reservation Form ========== -->
+  <section class="section reservation-section" id="reservation">
+    <div class="container">
+      <h2 class="section-title">ご予約</h2>
+      <hr class="section-divider">
+      <p class="section-subtitle">RESERVATION</p>
+
+      <form class="reservation-form" action="#" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">お名前 <span class="required">必須</span></label>
+            <input type="text" id="name" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label for="kana">フリガナ <span class="required">必須</span></label>
+            <input type="text" id="kana" name="kana" placeholder="ヤマダ タロウ" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tel">お電話番号 <span class="required">必須</span></label>
+            <input type="tel" id="tel" name="tel" placeholder="090-1234-5678" required>
+          </div>
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" placeholder="example@mail.com">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">ご希望日 <span class="required">必須</span></label>
+            <input type="date" id="date" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="time">ご希望時間帯 <span class="required">必須</span></label>
+            <select id="time" name="time" required>
+              <option value="" disabled selected>選択してください</option>
+              <option value="09:00">09:00〜</option>
+              <option value="10:00">10:00〜</option>
+              <option value="11:00">11:00〜</option>
+              <option value="14:30">14:30〜</option>
+              <option value="15:30">15:30〜</option>
+              <option value="16:30">16:30〜</option>
+              <option value="17:30">17:30〜</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="treatment">ご希望メニュー <span class="required">必須</span></label>
+          <select id="treatment" name="treatment" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="whole">鍼灸治療（全身）</option>
+            <option value="local">鍼灸治療（局所）</option>
+            <option value="beauty">美容鍼</option>
+            <option value="beauty-premium">美容鍼プレミアム</option>
+            <option value="fertility">不妊治療サポート</option>
+            <option value="moxa">お灸治療</option>
+            <option value="child">小児はり</option>
+            <option value="other">その他・相談したい</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="visit">来院歴</label>
+          <select id="visit" name="visit">
+            <option value="first">初めて（初診）</option>
+            <option value="revisit">2回目以降（再診）</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">ご要望・お身体の状態など</label>
+          <textarea id="message" name="message" placeholder="気になる症状やご質問がございましたらお気軽にご記入ください。"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-submit">予約を送信する</button>
+        <p class="form-privacy">送信いただいた個人情報は、ご予約・ご連絡の目的にのみ使用いたします。</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo">
+            和漢堂
+            <small>WAKANDO SHINKYU-IN</small>
+          </span>
+          <p>
+            東洋医学の知恵と現代の技術を融合し、<br>
+            心と身体の健康をトータルでサポートいたします。
+          </p>
+        </div>
+
+        <div>
+          <h4>メニュー</h4>
+          <ul class="footer-links">
+            <li><a href="#treatments">施術メニュー</a></li>
+            <li><a href="#about">鍼灸について</a></li>
+            <li><a href="#therapist">院長紹介</a></li>
+            <li><a href="#flow">施術の流れ</a></li>
+            <li><a href="#pricing">料金案内</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>お問い合わせ</h4>
+          <ul class="footer-contact">
+            <li>&#x260E; 03-1234-5678</li>
+            <li>&#x1F4E7; info@wakando-shinkyuin.jp</li>
+            <li>&#x1F3E0; 東京都渋谷区神宮前3-15-8</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2026 和漢堂 鍼灸院 All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

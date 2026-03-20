@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四目並べ - Connect Four</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>四目並べ</h1>
+
+    <div class="controls">
+      <div class="mode-selector">
+        <button id="btn-2p" class="mode-btn active" onclick="setMode('2p')">2人対戦</button>
+        <button id="btn-ai" class="mode-btn" onclick="setMode('ai')">AI対戦</button>
+      </div>
+      <button id="btn-new-game" class="new-game-btn" onclick="newGame()">新しいゲーム</button>
+    </div>
+
+    <div class="scoreboard">
+      <div class="score red-score">
+        <span class="score-disc red-disc"></span>
+        <span class="score-label">赤</span>
+        <span id="score-red" class="score-value">0</span>
+      </div>
+      <div class="score draw-score">
+        <span class="score-label">引分</span>
+        <span id="score-draw" class="score-value">0</span>
+      </div>
+      <div class="score yellow-score">
+        <span class="score-disc yellow-disc"></span>
+        <span class="score-label">黄</span>
+        <span id="score-yellow" class="score-value">0</span>
+      </div>
+    </div>
+
+    <div id="status" class="status">赤のターン</div>
+
+    <div class="board-wrapper">
+      <div id="hover-row" class="hover-row"></div>
+      <div id="board" class="board"></div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

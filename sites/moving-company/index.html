@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>スマイル引越センター | 笑顔で届ける、新生活。</title>
+  <meta name="description" content="スマイル引越センターは、単身からファミリー・オフィス移転まで対応する引越し専門会社です。無料お見積りはお気軽にどうぞ。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo">
+        スマイル引越センター
+        <span>SMILE MOVING CENTER</span>
+      </a>
+      <nav>
+        <ul class="nav-list" id="navList">
+          <li><a href="#services">サービス</a></li>
+          <li><a href="#estimate">料金目安</a></li>
+          <li><a href="#flow">ご利用の流れ</a></li>
+          <li><a href="#reviews">お客様の声</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#contact" class="btn btn-orange" style="padding:8px 24px;font-size:0.85rem;">無料見積り</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="container">
+      <h1>笑顔で届ける、<br>あなたの新生活。</h1>
+      <p>創業20年、年間10,000件以上の引越し実績。<br>丁寧・安心・スピーディーなサービスをお届けします。</p>
+      <div class="hero-badges">
+        <span class="hero-badge">顧客満足度 98.5%</span>
+        <span class="hero-badge">最短翌日対応</span>
+        <span class="hero-badge">全国対応</span>
+      </div>
+      <a href="#contact" class="btn btn-white">無料お見積りはこちら</a>
+    </div>
+  </section>
+
+  <!-- ===== Services ===== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-title">
+        <h2>サービスプラン</h2>
+        <p>お客様のニーズに合わせた最適なプランをご用意しています</p>
+        <span class="accent-line"></span>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">&#x1F4E6;</div>
+          <h3>単身パック</h3>
+          <p>一人暮らしの方に最適。必要最低限の荷物をコンパクトにお届けします。</p>
+          <div class="price">19,800円〜 <small>(税込)</small></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#x1F3E0;</div>
+          <h3>ファミリープラン</h3>
+          <p>ご家族でのお引越しに。大型家具や家電もお任せください。梱包資材も無料です。</p>
+          <div class="price">49,800円〜 <small>(税込)</small></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#x1F3E2;</div>
+          <h3>オフィス移転</h3>
+          <p>オフィスの移転を最小限のダウンタイムで。什器・OA機器も安全に搬送します。</p>
+          <div class="price">98,000円〜 <small>(税込)</small></div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#x1F69A;</div>
+          <h3>長距離引越し</h3>
+          <p>県外・遠方への引越しもお任せください。中継なしの直送便で安心です。</p>
+          <div class="price">59,800円〜 <small>(税込)</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Price Estimate ===== -->
+  <section class="section section-alt" id="estimate">
+    <div class="container">
+      <div class="section-title">
+        <h2>かんたん料金シミュレーション</h2>
+        <p>引越しの概要を入力して、おおよその料金をご確認いただけます</p>
+        <span class="accent-line"></span>
+      </div>
+      <div class="estimate-box">
+        <p>以下の情報をご入力ください。スタッフより詳細なお見積りをお送りいたします。</p>
+        <form class="estimate-form" onsubmit="return false;">
+          <div class="form-group">
+            <label>引越し元 <span class="required">必須</span></label>
+            <select>
+              <option value="">都道府県を選択</option>
+              <option>北海道</option><option>東京都</option><option>神奈川県</option>
+              <option>大阪府</option><option>愛知県</option><option>福岡県</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>引越し先 <span class="required">必須</span></label>
+            <select>
+              <option value="">都道府県を選択</option>
+              <option>北海道</option><option>東京都</option><option>神奈川県</option>
+              <option>大阪府</option><option>愛知県</option><option>福岡県</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>間取り <span class="required">必須</span></label>
+            <select>
+              <option value="">選択してください</option>
+              <option>ワンルーム・1K</option>
+              <option>1DK・1LDK</option>
+              <option>2DK・2LDK</option>
+              <option>3DK・3LDK</option>
+              <option>4LDK以上</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>ご希望日</label>
+            <input type="date">
+          </div>
+          <div class="form-group full">
+            <button type="button" class="btn btn-orange" onclick="alert('ありがとうございます！スタッフよりご連絡いたします。')">概算を確認する</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Flow ===== -->
+  <section class="section" id="flow">
+    <div class="container">
+      <div class="section-title">
+        <h2>ご利用の流れ</h2>
+        <p>お問い合わせから引越し完了まで、5つのステップで安心サポート</p>
+        <span class="accent-line"></span>
+      </div>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="flow-step-number">1</div>
+          <h4>お見積り</h4>
+          <p>WEB・お電話で<br>お気軽にご相談</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">&#x25B6;</div>
+        <div class="flow-step">
+          <div class="flow-step-number">2</div>
+          <h4>訪問見積り</h4>
+          <p>スタッフがご自宅へ<br>伺い正確に算出</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">&#x25B6;</div>
+        <div class="flow-step">
+          <div class="flow-step-number">3</div>
+          <h4>梱包</h4>
+          <p>梱包資材を無料提供<br>おまかせも可能</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">&#x25B6;</div>
+        <div class="flow-step">
+          <div class="flow-step-number">4</div>
+          <h4>運搬</h4>
+          <p>専門スタッフが<br>丁寧にお届け</p>
+        </div>
+        <div class="flow-arrow" aria-hidden="true">&#x25B6;</div>
+        <div class="flow-step">
+          <div class="flow-step-number">5</div>
+          <h4>設置</h4>
+          <p>家具の配置・<br>組立てまで対応</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Reviews ===== -->
+  <section class="section section-alt" id="reviews">
+    <div class="container">
+      <div class="section-title">
+        <h2>お客様の声</h2>
+        <p>実際にご利用いただいたお客様からの感想をご紹介します</p>
+        <span class="accent-line"></span>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">T.S</div>
+            <div class="review-meta">
+              <h4>田中さま</h4>
+              <span class="review-info">東京都 / 単身パック</span>
+            </div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>初めての一人暮らしで不安でしたが、スタッフの方がとても親切で安心しました。作業もテキパキしていて、予定より早く終わりました。</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">M.Y</div>
+            <div class="review-meta">
+              <h4>山本さま</h4>
+              <span class="review-info">大阪府 / ファミリープラン</span>
+            </div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p>子ども2人を連れての引越しで大変でしたが、梱包から設置まで全部お任せできて助かりました。大型家具も傷一つなく運んでもらえました。</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-avatar">K.I</div>
+            <div class="review-meta">
+              <h4>伊藤さま</h4>
+              <span class="review-info">福岡県 / 長距離引越し</span>
+            </div>
+          </div>
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+          <p>福岡から東京への長距離でしたが、荷物が全て無事に届きました。見積りも分かりやすく、追加料金もなかったので安心でした。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ ===== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-title">
+        <h2>よくある質問</h2>
+        <p>お客様からよくいただくご質問にお答えします</p>
+        <span class="accent-line"></span>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-question">見積りは本当に無料ですか？</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">はい、お見積りは完全無料です。訪問見積りも無料で行っておりますので、お気軽にお申し込みください。お見積り後のキャンセルも費用は一切かかりません。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">引越し当日に追加料金が発生することはありますか？</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">事前のお見積り内容に変更がない限り、追加料金は発生しません。万が一、当日に荷物の増加など変更がある場合は、事前にご相談いただければ対応いたします。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">ダンボールなどの梱包資材はもらえますか？</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">はい、ご契約いただいたお客様にはダンボール最大50枚、ガムテープ、緩衝材などの梱包資材を無料でお届けします。使用済みダンボールの回収も無料です。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">エアコンの取り外し・取り付けは対応していますか？</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">はい、エアコンの取り外し・取り付け工事も承っております。専門の技術者が対応いたしますので、安心してお任せください。別途オプション料金がかかります。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">荷物の一時預かりは可能ですか？</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">はい、自社倉庫にてお荷物の一時預かりサービスを行っております。建替えやリフォーム時にも便利です。料金はお荷物の量と期間によりますので、お気軽にご相談ください。</div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">キャンセル料はかかりますか？</button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">引越し予定日の3日前まではキャンセル料は無料です。2日前で20%、前日で30%、当日で50%のキャンセル料が発生いたします。日程変更はお早めにご連絡ください。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact Form ===== -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <h2>無料お見積りフォーム</h2>
+        <p>24時間受付中。最短30分以内にご連絡いたします</p>
+        <span class="accent-line"></span>
+      </div>
+      <div class="contact-form-wrap">
+        <p>以下のフォームにご記入ください。担当スタッフよりご連絡差し上げます。</p>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="form-group">
+            <label>お名前 <span class="required">必須</span></label>
+            <input type="text" placeholder="例：山田 太郎">
+          </div>
+          <div class="form-group">
+            <label>電話番号 <span class="required">必須</span></label>
+            <input type="tel" placeholder="例：090-1234-5678">
+          </div>
+          <div class="form-group">
+            <label>メールアドレス <span class="required">必須</span></label>
+            <input type="email" placeholder="例：yamada@example.com">
+          </div>
+          <div class="form-group">
+            <label>引越し希望日</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label>引越し元住所 <span class="required">必須</span></label>
+            <input type="text" placeholder="例：東京都新宿区西新宿1-1-1">
+          </div>
+          <div class="form-group">
+            <label>引越し先住所 <span class="required">必須</span></label>
+            <input type="text" placeholder="例：神奈川県横浜市中区本町1-1-1">
+          </div>
+          <div class="form-group">
+            <label>間取り</label>
+            <select>
+              <option value="">選択してください</option>
+              <option>ワンルーム・1K</option>
+              <option>1DK・1LDK</option>
+              <option>2DK・2LDK</option>
+              <option>3DK・3LDK</option>
+              <option>4LDK以上</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>ご利用プラン</label>
+            <select>
+              <option value="">選択してください</option>
+              <option>単身パック</option>
+              <option>ファミリープラン</option>
+              <option>オフィス移転</option>
+              <option>長距離引越し</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>ご要望・ご質問</label>
+            <textarea placeholder="例：ピアノの運搬をお願いしたい、エアコンの取り外しも希望 など"></textarea>
+          </div>
+          <div class="form-group full">
+            <button type="button" class="btn btn-orange" onclick="alert('お見積りのご依頼ありがとうございます！\n担当スタッフより24時間以内にご連絡いたします。')">無料お見積りを依頼する</button>
+          </div>
+          <p class="privacy-note">※ ご入力いただいた個人情報は、お見積り対応のみに使用し、第三者に提供することはございません。</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <div class="footer-logo">スマイル引越センター</div>
+          <p>創業20年の実績と信頼。お客様の大切な荷物を、笑顔とともにお届けします。単身からオフィス移転まで、どんな引越しもお任せください。</p>
+        </div>
+        <div>
+          <h4>サイトマップ</h4>
+          <div class="footer-links">
+            <a href="#services">サービス</a>
+            <a href="#estimate">料金目安</a>
+            <a href="#flow">ご利用の流れ</a>
+            <a href="#reviews">お客様の声</a>
+            <a href="#faq">よくある質問</a>
+            <a href="#contact">無料見積り</a>
+          </div>
+        </div>
+        <div>
+          <h4>お問い合わせ</h4>
+          <div class="footer-info">
+            <p class="footer-phone">0120-SMILE-00</p>
+            <p>受付時間：8:00〜20:00（年中無休）</p>
+            <p>〒160-0023<br>東京都新宿区西新宿1-1-1<br>スマイルビル3F</p>
+            <p>info@smile-moving.co.jp</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 スマイル引越センター All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JavaScript ===== -->
+  <script>
+    // Hamburger menu toggle
+    document.getElementById('hamburger').addEventListener('click', function () {
+      document.getElementById('navList').classList.toggle('open');
+    });
+
+    // Close menu on link click (mobile)
+    document.querySelectorAll('.nav-list a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        document.getElementById('navList').classList.remove('open');
+      });
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var item = this.parentElement;
+        var wasOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(function (el) {
+          el.classList.remove('open');
+        });
+        // Toggle current
+        if (!wasOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

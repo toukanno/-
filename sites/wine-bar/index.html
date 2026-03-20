@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ワインバー ボルドー | Wine Bar Bordeaux</title>
+  <meta name="description" content="東京・六本木の隠れ家ワインバー。厳選されたワインと極上の料理をお楽しみください。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="#hero" class="logo">
+        <span class="logo-icon">&#127863;</span>
+        <span class="logo-text">ボルドー</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="#wines" class="nav-link">ワインリスト</a>
+        <a href="#food" class="nav-link">フードメニュー</a>
+        <a href="#sommelier" class="nav-link">ソムリエ</a>
+        <a href="#interior" class="nav-link">店内</a>
+        <a href="#events" class="nav-link">イベント</a>
+        <a href="#reservation" class="nav-link nav-link--cta">ご予約</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-subtitle">Wine Bar</p>
+      <h1 class="hero-title">ワインバー ボルドー</h1>
+      <div class="hero-divider">
+        <span class="divider-diamond">&#9830;</span>
+      </div>
+      <p class="hero-description">
+        厳選されたワインと洗練された空間で<br>
+        至福のひとときをお過ごしください
+      </p>
+      <div class="hero-actions">
+        <a href="#wines" class="btn btn--primary">ワインリストを見る</a>
+        <a href="#reservation" class="btn btn--outline">ご予約はこちら</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="hero-scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ========== WINE LIST ========== -->
+  <section class="section wines" id="wines">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Wine List</p>
+        <h2 class="section-title">ワインリスト</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+        <p class="section-description">世界各地から厳選した200種類以上のワインをご用意しております</p>
+      </div>
+
+      <div class="wine-grid">
+        <!-- Red Wine -->
+        <div class="wine-card">
+          <div class="wine-card-icon">&#127863;</div>
+          <h3 class="wine-card-title">赤ワイン</h3>
+          <p class="wine-card-subtitle">Red Wine</p>
+          <ul class="wine-card-list">
+            <li>
+              <span class="wine-name">シャトー・マルゴー 2015</span>
+              <span class="wine-price">&yen;18,000</span>
+            </li>
+            <li>
+              <span class="wine-name">オーパス・ワン 2018</span>
+              <span class="wine-price">&yen;45,000</span>
+            </li>
+            <li>
+              <span class="wine-name">バローロ リゼルヴァ 2016</span>
+              <span class="wine-price">&yen;12,000</span>
+            </li>
+            <li>
+              <span class="wine-name">ピノ・ノワール ブルゴーニュ</span>
+              <span class="wine-price">&yen;8,500</span>
+            </li>
+            <li>
+              <span class="wine-name">カベルネ・ソーヴィニヨン ナパ</span>
+              <span class="wine-price">&yen;9,800</span>
+            </li>
+          </ul>
+          <p class="wine-card-note">他80種類以上ご用意</p>
+        </div>
+
+        <!-- White Wine -->
+        <div class="wine-card">
+          <div class="wine-card-icon">&#129346;</div>
+          <h3 class="wine-card-title">白ワイン</h3>
+          <p class="wine-card-subtitle">White Wine</p>
+          <ul class="wine-card-list">
+            <li>
+              <span class="wine-name">シャブリ グランクリュ 2019</span>
+              <span class="wine-price">&yen;14,000</span>
+            </li>
+            <li>
+              <span class="wine-name">ムルソー プルミエクリュ</span>
+              <span class="wine-price">&yen;16,500</span>
+            </li>
+            <li>
+              <span class="wine-name">リースリング グランクリュ</span>
+              <span class="wine-price">&yen;7,800</span>
+            </li>
+            <li>
+              <span class="wine-name">ソーヴィニヨン・ブラン ロワール</span>
+              <span class="wine-price">&yen;6,500</span>
+            </li>
+            <li>
+              <span class="wine-name">甲州 グレイス 2021</span>
+              <span class="wine-price">&yen;5,800</span>
+            </li>
+          </ul>
+          <p class="wine-card-note">他60種類以上ご用意</p>
+        </div>
+
+        <!-- Sparkling -->
+        <div class="wine-card">
+          <div class="wine-card-icon">&#127870;</div>
+          <h3 class="wine-card-title">スパークリング</h3>
+          <p class="wine-card-subtitle">Sparkling Wine</p>
+          <ul class="wine-card-list">
+            <li>
+              <span class="wine-name">ドン・ペリニヨン 2012</span>
+              <span class="wine-price">&yen;38,000</span>
+            </li>
+            <li>
+              <span class="wine-name">クリュッグ グランド・キュヴェ</span>
+              <span class="wine-price">&yen;32,000</span>
+            </li>
+            <li>
+              <span class="wine-name">モエ・エ・シャンドン ブリュット</span>
+              <span class="wine-price">&yen;12,000</span>
+            </li>
+            <li>
+              <span class="wine-name">フランチャコルタ ブリュット</span>
+              <span class="wine-price">&yen;8,500</span>
+            </li>
+            <li>
+              <span class="wine-name">カヴァ ブリュット ナチュレ</span>
+              <span class="wine-price">&yen;5,000</span>
+            </li>
+          </ul>
+          <p class="wine-card-note">他30種類以上ご用意</p>
+        </div>
+
+        <!-- Rose -->
+        <div class="wine-card">
+          <div class="wine-card-icon">&#127801;</div>
+          <h3 class="wine-card-title">ロゼ</h3>
+          <p class="wine-card-subtitle">Rose Wine</p>
+          <ul class="wine-card-list">
+            <li>
+              <span class="wine-name">バンドール ロゼ 2020</span>
+              <span class="wine-price">&yen;9,500</span>
+            </li>
+            <li>
+              <span class="wine-name">タヴェル ロゼ 2021</span>
+              <span class="wine-price">&yen;7,200</span>
+            </li>
+            <li>
+              <span class="wine-name">プロヴァンス ロゼ</span>
+              <span class="wine-price">&yen;6,800</span>
+            </li>
+            <li>
+              <span class="wine-name">サンセール ロゼ</span>
+              <span class="wine-price">&yen;8,000</span>
+            </li>
+            <li>
+              <span class="wine-name">ロゼ・ダンジュー</span>
+              <span class="wine-price">&yen;5,500</span>
+            </li>
+          </ul>
+          <p class="wine-card-note">他20種類以上ご用意</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOD MENU ========== -->
+  <section class="section food" id="food">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Food Menu</p>
+        <h2 class="section-title">フードメニュー</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+        <p class="section-description">ワインとの相性を追求した、こだわりの料理をご提供いたします</p>
+      </div>
+
+      <div class="food-grid">
+        <div class="food-card">
+          <div class="food-card-image" aria-label="チーズ盛り合わせの写真">
+            <div class="food-card-image-placeholder">
+              <span>&#129472;</span>
+            </div>
+          </div>
+          <div class="food-card-body">
+            <h3 class="food-card-title">チーズ盛り合わせ</h3>
+            <p class="food-card-subtitle">Assorted Cheese Platter</p>
+            <p class="food-card-desc">フランス・イタリアを中心に厳選した5種のチーズ。季節のハチミツとドライフルーツを添えて。</p>
+            <span class="food-card-price">&yen;2,800</span>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-card-image" aria-label="生ハムの写真">
+            <div class="food-card-image-placeholder">
+              <span>&#129385;</span>
+            </div>
+          </div>
+          <div class="food-card-body">
+            <h3 class="food-card-title">生ハム</h3>
+            <p class="food-card-subtitle">Prosciutto di Parma</p>
+            <p class="food-card-desc">24ヶ月熟成のパルマ産プロシュート。メロンとルッコラのサラダ仕立て。</p>
+            <span class="food-card-price">&yen;2,200</span>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-card-image" aria-label="フォアグラの写真">
+            <div class="food-card-image-placeholder">
+              <span>&#127860;</span>
+            </div>
+          </div>
+          <div class="food-card-body">
+            <h3 class="food-card-title">フォアグラ</h3>
+            <p class="food-card-subtitle">Foie Gras Poele</p>
+            <p class="food-card-desc">フランス・ランド産フォアグラのポワレ。イチジクのコンフィチュールとブリオッシュ添え。</p>
+            <span class="food-card-price">&yen;3,800</span>
+          </div>
+        </div>
+
+        <div class="food-card">
+          <div class="food-card-image" aria-label="パスタの写真">
+            <div class="food-card-image-placeholder">
+              <span>&#127837;</span>
+            </div>
+          </div>
+          <div class="food-card-body">
+            <h3 class="food-card-title">パスタ</h3>
+            <p class="food-card-subtitle">Truffle Pasta</p>
+            <p class="food-card-desc">黒トリュフと自家製手打ちタリアテッレ。パルミジャーノ・レッジャーノの泡を添えて。</p>
+            <span class="food-card-price">&yen;3,200</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="food-more">
+        <p>その他、季節のアミューズ、メインディッシュ、デザートもご用意しております。</p>
+        <p class="food-more-note">アレルギーをお持ちの方はスタッフまでお申し付けください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SOMMELIER ========== -->
+  <section class="section sommelier" id="sommelier">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Sommelier</p>
+        <h2 class="section-title">ソムリエ紹介</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+      </div>
+
+      <div class="sommelier-content">
+        <div class="sommelier-portrait">
+          <div class="sommelier-portrait-frame">
+            <div class="sommelier-portrait-placeholder">
+              <span>&#128100;</span>
+            </div>
+          </div>
+        </div>
+        <div class="sommelier-info">
+          <h3 class="sommelier-name">田中 雅人</h3>
+          <p class="sommelier-title-role">チーフソムリエ / Chief Sommelier</p>
+          <div class="sommelier-credentials">
+            <span class="credential-badge">日本ソムリエ協会認定ソムリエ</span>
+            <span class="credential-badge">A.S.I. International Sommelier</span>
+            <span class="credential-badge">WSET Diploma</span>
+          </div>
+          <p class="sommelier-bio">
+            フランス・ボルドーで5年間修業を積み、帰国後は都内の名店で研鑽を重ねてまいりました。
+            お客様一人ひとりの好みやお料理に合わせた、最適なワインをご提案いたします。
+          </p>
+          <p class="sommelier-bio">
+            「ワインは人と人をつなぐもの」をモットーに、初めての方にも気軽にお楽しみいただける
+            ワインの世界をご案内いたします。お気軽にお声がけください。
+          </p>
+          <blockquote class="sommelier-quote">
+            <p>一杯のワインには、その土地の風土と造り手の情熱が詰まっています。<br>その物語をお伝えすることが、私の喜びです。</p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== INTERIOR ========== -->
+  <section class="section interior" id="interior">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Interior</p>
+        <h2 class="section-title">店内の雰囲気</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+        <p class="section-description">落ち着いた大人の空間で、特別な時間をお過ごしください</p>
+      </div>
+
+      <div class="interior-grid">
+        <div class="interior-item interior-item--large">
+          <div class="interior-placeholder">
+            <span>&#127863;</span>
+            <p>カウンター席</p>
+          </div>
+          <div class="interior-overlay">
+            <h4>カウンター席</h4>
+            <p>ソムリエとの会話を楽しみながら、至福の一杯を。全8席。</p>
+          </div>
+        </div>
+        <div class="interior-item">
+          <div class="interior-placeholder">
+            <span>&#128715;</span>
+            <p>テーブル席</p>
+          </div>
+          <div class="interior-overlay">
+            <h4>テーブル席</h4>
+            <p>ゆったりとしたテーブルで、大切な方との時間を。2名～4名様。</p>
+          </div>
+        </div>
+        <div class="interior-item">
+          <div class="interior-placeholder">
+            <span>&#127942;</span>
+            <p>ワインセラー</p>
+          </div>
+          <div class="interior-overlay">
+            <h4>ワインセラー</h4>
+            <p>温度・湿度管理されたセラーで、200種以上のワインを保管。</p>
+          </div>
+        </div>
+        <div class="interior-item">
+          <div class="interior-placeholder">
+            <span>&#128276;</span>
+            <p>個室</p>
+          </div>
+          <div class="interior-overlay">
+            <h4>プライベートルーム</h4>
+            <p>接待やお祝いに。完全個室を2部屋ご用意。最大8名様。</p>
+          </div>
+        </div>
+        <div class="interior-item">
+          <div class="interior-placeholder">
+            <span>&#127926;</span>
+            <p>ラウンジ</p>
+          </div>
+          <div class="interior-overlay">
+            <h4>ラウンジエリア</h4>
+            <p>ジャズが流れるラウンジで、寛ぎのひとときを。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="interior-features">
+        <div class="feature">
+          <div class="feature-icon">&#128694;</div>
+          <h4>全席禁煙</h4>
+          <p>快適な空間のため、全席禁煙とさせていただいております。</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#127926;</div>
+          <h4>生演奏</h4>
+          <p>金・土曜日はジャズの生演奏をお楽しみいただけます。</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">&#128378;</div>
+          <h4>Wi-Fi完備</h4>
+          <p>高速Wi-Fiを無料でご利用いただけます。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVENTS ========== -->
+  <section class="section events" id="events">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Events</p>
+        <h2 class="section-title">イベント</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+        <p class="section-description">ワインの魅力をより深く知る、特別なイベントを開催しています</p>
+      </div>
+
+      <div class="events-grid">
+        <div class="event-card">
+          <div class="event-date">
+            <span class="event-month">3月</span>
+            <span class="event-day">21</span>
+          </div>
+          <div class="event-body">
+            <span class="event-tag">定期開催</span>
+            <h3 class="event-title">ワインテイスティング会</h3>
+            <p class="event-desc">毎月第3土曜日開催。テーマに沿った6種類のワインを、ソムリエの解説とともにテイスティング。初心者の方も大歓迎です。</p>
+            <div class="event-meta">
+              <span>&#128337; 15:00～17:00</span>
+              <span>&#128176; &yen;8,000（税込・軽食付き）</span>
+              <span>&#128101; 定員12名</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-date">
+            <span class="event-month">4月</span>
+            <span class="event-day">5</span>
+          </div>
+          <div class="event-body">
+            <span class="event-tag">特別企画</span>
+            <h3 class="event-title">春のロゼワインフェア</h3>
+            <p class="event-desc">プロヴァンスを中心とした厳選ロゼワイン10種を特別価格でご提供。春の訪れをロゼワインとともにお祝いしましょう。</p>
+            <div class="event-meta">
+              <span>&#128337; 18:00～22:00</span>
+              <span>&#128176; グラス &yen;1,200～</span>
+              <span>&#128197; 4月1日～14日</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-date">
+            <span class="event-month">4月</span>
+            <span class="event-day">19</span>
+          </div>
+          <div class="event-body">
+            <span class="event-tag">ワークショップ</span>
+            <h3 class="event-title">ワインとチーズのマリアージュ講座</h3>
+            <p class="event-desc">ワインとチーズの組み合わせの基本を学ぶ体験型講座。5種のワインと5種のチーズで、相性の科学を探ります。</p>
+            <div class="event-meta">
+              <span>&#128337; 14:00～16:30</span>
+              <span>&#128176; &yen;10,000（税込）</span>
+              <span>&#128101; 定員8名</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="event-card">
+          <div class="event-date">
+            <span class="event-month">5月</span>
+            <span class="event-day">10</span>
+          </div>
+          <div class="event-body">
+            <span class="event-tag">ディナー</span>
+            <h3 class="event-title">ワインメーカーズディナー</h3>
+            <p class="event-desc">フランス・ブルゴーニュから来日する造り手を囲むスペシャルディナー。全5皿のコースに合わせた特別なワインをお楽しみください。</p>
+            <div class="event-meta">
+              <span>&#128337; 19:00～22:00</span>
+              <span>&#128176; &yen;25,000（税込・ワイン5杯付き）</span>
+              <span>&#128101; 定員20名</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== RESERVATION ========== -->
+  <section class="section reservation" id="reservation">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Reservation</p>
+        <h2 class="section-title">ご予約</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+        <p class="section-description">お電話またはフォームにてご予約を承っております</p>
+      </div>
+
+      <div class="reservation-content">
+        <div class="reservation-phone">
+          <p class="reservation-phone-label">お電話でのご予約</p>
+          <a href="tel:03-1234-5678" class="reservation-phone-number">03-1234-5678</a>
+          <p class="reservation-phone-hours">受付時間: 14:00～23:00</p>
+        </div>
+
+        <div class="reservation-divider-wrap">
+          <div class="reservation-divider-line"></div>
+          <span class="reservation-divider-text">or</span>
+          <div class="reservation-divider-line"></div>
+        </div>
+
+        <form class="reservation-form" action="#" method="post" onsubmit="event.preventDefault(); alert('ご予約ありがとうございます。確認のご連絡を差し上げます。'); this.reset();">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-name">お名前 <span class="required">*</span></label>
+              <input type="text" id="res-name" name="name" required placeholder="山田 太郎">
+            </div>
+            <div class="form-group">
+              <label for="res-email">メールアドレス <span class="required">*</span></label>
+              <input type="email" id="res-email" name="email" required placeholder="example@email.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-phone">電話番号 <span class="required">*</span></label>
+              <input type="tel" id="res-phone" name="phone" required placeholder="090-1234-5678">
+            </div>
+            <div class="form-group">
+              <label for="res-guests">人数 <span class="required">*</span></label>
+              <select id="res-guests" name="guests" required>
+                <option value="">選択してください</option>
+                <option value="1">1名</option>
+                <option value="2">2名</option>
+                <option value="3">3名</option>
+                <option value="4">4名</option>
+                <option value="5">5名</option>
+                <option value="6">6名</option>
+                <option value="7">7名</option>
+                <option value="8">8名以上</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="res-date">ご希望日 <span class="required">*</span></label>
+              <input type="date" id="res-date" name="date" required>
+            </div>
+            <div class="form-group">
+              <label for="res-time">ご希望時間 <span class="required">*</span></label>
+              <select id="res-time" name="time" required>
+                <option value="">選択してください</option>
+                <option value="17:00">17:00</option>
+                <option value="17:30">17:30</option>
+                <option value="18:00">18:00</option>
+                <option value="18:30">18:30</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-group--full">
+            <label for="res-seat">お席のご希望</label>
+            <select id="res-seat" name="seat">
+              <option value="">指定なし</option>
+              <option value="counter">カウンター席</option>
+              <option value="table">テーブル席</option>
+              <option value="private">個室</option>
+            </select>
+          </div>
+          <div class="form-group form-group--full">
+            <label for="res-message">ご要望・備考</label>
+            <textarea id="res-message" name="message" rows="4" placeholder="アレルギー、記念日のお祝い等ございましたらお知らせください。"></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn--primary btn--large">予約を送信する</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ACCESS ========== -->
+  <section class="section access" id="access">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Access &amp; Hours</p>
+        <h2 class="section-title">アクセス・営業時間</h2>
+        <div class="section-divider"><span class="divider-diamond">&#9830;</span></div>
+      </div>
+
+      <div class="access-content">
+        <div class="access-map">
+          <div class="map-placeholder">
+            <span>&#128205;</span>
+            <p>Google Map</p>
+            <p class="map-address-preview">東京都港区六本木7-0-0 ボルドービル B1F</p>
+          </div>
+        </div>
+        <div class="access-info">
+          <div class="access-block">
+            <h3>所在地</h3>
+            <p>〒106-0032<br>東京都港区六本木7-0-0<br>ボルドービル B1F</p>
+          </div>
+          <div class="access-block">
+            <h3>アクセス</h3>
+            <p>東京メトロ日比谷線「六本木駅」2番出口より徒歩3分<br>
+               都営大江戸線「六本木駅」4b出口より徒歩5分</p>
+          </div>
+          <div class="access-block">
+            <h3>営業時間</h3>
+            <table class="hours-table">
+              <tr>
+                <td>火～木曜日</td>
+                <td>17:00 ～ 24:00（L.O. 23:30）</td>
+              </tr>
+              <tr>
+                <td>金・土曜日</td>
+                <td>17:00 ～ 翌1:00（L.O. 24:30）</td>
+              </tr>
+              <tr>
+                <td>日曜・祝日</td>
+                <td>16:00 ～ 23:00（L.O. 22:30）</td>
+              </tr>
+            </table>
+            <p class="hours-note">定休日: 月曜日（祝日の場合は翌火曜日）</p>
+          </div>
+          <div class="access-block">
+            <h3>お問い合わせ</h3>
+            <p>TEL: <a href="tel:03-1234-5678">03-1234-5678</a><br>
+               Email: <a href="mailto:info@winebar-bordeaux.jp">info@winebar-bordeaux.jp</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="logo-icon">&#127863;</span>
+          <span class="footer-brand-name">ワインバー ボルドー</span>
+          <p class="footer-brand-tagline">Wine Bar Bordeaux</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>メニュー</h4>
+            <a href="#wines">ワインリスト</a>
+            <a href="#food">フードメニュー</a>
+          </div>
+          <div class="footer-col">
+            <h4>店舗情報</h4>
+            <a href="#sommelier">ソムリエ</a>
+            <a href="#interior">店内</a>
+          </div>
+          <div class="footer-col">
+            <h4>ご利用案内</h4>
+            <a href="#events">イベント</a>
+            <a href="#reservation">ご予約</a>
+            <a href="#access">アクセス</a>
+          </div>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+            <a href="#" class="social-link" aria-label="Facebook">Facebook</a>
+            <a href="#" class="social-link" aria-label="LINE">LINE</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ワインバー ボルドー. All rights reserved.</p>
+        <p class="footer-legal">
+          <a href="#">プライバシーポリシー</a>
+          <a href="#">特定商取引法に基づく表記</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('nav');
+    const header = document.getElementById('header');
+
+    menuToggle.addEventListener('click', function() {
+      nav.classList.toggle('nav--open');
+      menuToggle.classList.toggle('menu-toggle--open');
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('.nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('nav--open');
+        menuToggle.classList.remove('menu-toggle--open');
+      });
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+    });
+  </script>
+
+</body>
+</html>

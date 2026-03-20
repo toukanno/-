@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チェス</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>チェス</h1>
+      <div id="turn-indicator">白の番</div>
+      <div id="status-message"></div>
+    </header>
+
+    <div id="main-layout">
+      <div id="left-panel">
+        <div id="captured-black" class="captured-area">
+          <h3>白の取った駒</h3>
+          <div class="captured-pieces"></div>
+        </div>
+      </div>
+
+      <div id="board-container">
+        <div id="board"></div>
+        <div id="promotion-modal" class="hidden">
+          <div id="promotion-choices"></div>
+        </div>
+      </div>
+
+      <div id="right-panel">
+        <div id="captured-white" class="captured-area">
+          <h3>黒の取った駒</h3>
+          <div class="captured-pieces"></div>
+        </div>
+
+        <div id="controls">
+          <button id="btn-new-game">新しいゲーム</button>
+          <button id="btn-undo">一手戻る</button>
+        </div>
+
+        <div id="history-panel">
+          <h3>棋譜</h3>
+          <div id="move-history"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

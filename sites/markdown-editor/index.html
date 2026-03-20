@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdownエディタ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="light">
+    <!-- Header -->
+    <header id="header">
+      <div class="header-left">
+        <h1>Markdownエディタ</h1>
+      </div>
+      <div class="header-right">
+        <span id="word-count" class="stat">0 文字 / 0 単語</span>
+        <button id="btn-copy" class="header-btn" title="Markdownをコピー">📋 コピー</button>
+        <button id="btn-export" class="header-btn" title="HTMLとしてエクスポート">💾 エクスポート</button>
+        <button id="btn-fullscreen" class="header-btn" title="全画面モード">⛶ 全画面</button>
+        <button id="btn-theme" class="header-btn" title="テーマ切替">🌙 ダーク</button>
+      </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div id="toolbar">
+      <button class="tool-btn" data-action="h1" title="見出し1">H1</button>
+      <button class="tool-btn" data-action="h2" title="見出し2">H2</button>
+      <button class="tool-btn" data-action="h3" title="見出し3">H3</button>
+      <span class="toolbar-sep"></span>
+      <button class="tool-btn" data-action="bold" title="太字"><b>B</b></button>
+      <button class="tool-btn" data-action="italic" title="斜体"><i>I</i></button>
+      <button class="tool-btn" data-action="strike" title="取り消し線"><s>S</s></button>
+      <span class="toolbar-sep"></span>
+      <button class="tool-btn" data-action="ul" title="箇条書き">• リスト</button>
+      <button class="tool-btn" data-action="ol" title="番号付きリスト">1. リスト</button>
+      <button class="tool-btn" data-action="blockquote" title="引用">&gt; 引用</button>
+      <span class="toolbar-sep"></span>
+      <button class="tool-btn" data-action="code" title="インラインコード">`コード`</button>
+      <button class="tool-btn" data-action="codeblock" title="コードブロック">```ブロック```</button>
+      <span class="toolbar-sep"></span>
+      <button class="tool-btn" data-action="link" title="リンク">🔗 リンク</button>
+      <button class="tool-btn" data-action="image" title="画像">🖼 画像</button>
+      <button class="tool-btn" data-action="hr" title="水平線">― 水平線</button>
+    </div>
+
+    <!-- Mobile tabs -->
+    <div id="mobile-tabs">
+      <button class="tab-btn active" data-tab="editor">編集</button>
+      <button class="tab-btn" data-tab="preview">プレビュー</button>
+    </div>
+
+    <!-- Main content -->
+    <main id="main">
+      <div id="editor-pane" class="pane">
+        <textarea id="editor" placeholder="ここにMarkdownを入力してください..." spellcheck="false"></textarea>
+      </div>
+      <div id="divider"></div>
+      <div id="preview-pane" class="pane">
+        <div id="preview"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

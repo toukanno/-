@@ -1,0 +1,355 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --board-blue: #1565c0;
+  --board-blue-dark: #0d47a1;
+  --red: #e53935;
+  --red-light: #ff6f60;
+  --yellow: #fdd835;
+  --yellow-light: #ffff6b;
+  --bg: #0a1929;
+  --text: #e0e0e0;
+  --cell-size: 70px;
+  --gap: 6px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 600px;
+  width: 100%;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--red), var(--yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.mode-selector {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid var(--board-blue);
+}
+
+.mode-btn {
+  padding: 8px 20px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.mode-btn.active {
+  background: var(--board-blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+.mode-btn:hover:not(.active) {
+  background: rgba(21, 101, 192, 0.3);
+}
+
+.new-game-btn {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--board-blue);
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.new-game-btn:hover {
+  background: var(--board-blue-dark);
+}
+
+.new-game-btn:active {
+  transform: scale(0.96);
+}
+
+/* Scoreboard */
+.scoreboard {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.score {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.1rem;
+}
+
+.score-disc {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.red-disc {
+  background: var(--red);
+  box-shadow: 0 0 6px var(--red);
+}
+
+.yellow-disc {
+  background: var(--yellow);
+  box-shadow: 0 0 6px var(--yellow);
+}
+
+.score-label {
+  font-weight: 600;
+}
+
+.score-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Status */
+.status {
+  font-size: 1.2rem;
+  font-weight: 600;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+.status.red-turn {
+  color: var(--red-light);
+}
+
+.status.yellow-turn {
+  color: var(--yellow-light);
+}
+
+.status.win {
+  font-size: 1.4rem;
+  animation: pulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.6; }
+}
+
+/* Board */
+.board-wrapper {
+  position: relative;
+}
+
+.hover-row {
+  display: grid;
+  grid-template-columns: repeat(7, var(--cell-size));
+  gap: var(--gap);
+  padding: 0 12px;
+  height: 40px;
+  margin-bottom: 4px;
+}
+
+.hover-indicator {
+  width: var(--cell-size);
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hover-indicator::after {
+  content: '▼';
+  font-size: 1.4rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+  color: var(--red);
+}
+
+.hover-indicator.show::after {
+  opacity: 0.8;
+}
+
+.hover-indicator.yellow-turn::after {
+  color: var(--yellow);
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(7, var(--cell-size));
+  grid-template-rows: repeat(6, var(--cell-size));
+  gap: var(--gap);
+  background: var(--board-blue);
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.cell {
+  width: var(--cell-size);
+  height: var(--cell-size);
+  border-radius: 50%;
+  background: var(--bg);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.cell:hover {
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.4), 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.cell.disabled {
+  cursor: default;
+}
+
+.cell .piece {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transform: translateY(-600px);
+  opacity: 0;
+}
+
+.cell .piece.drop {
+  opacity: 1;
+  animation: dropPiece 0.4s cubic-bezier(0.2, 0, 0.6, 1.1) forwards;
+}
+
+.cell .piece.red {
+  background: radial-gradient(circle at 35% 35%, var(--red-light), var(--red));
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cell .piece.yellow {
+  background: radial-gradient(circle at 35% 35%, var(--yellow-light), var(--yellow));
+  box-shadow: inset 0 -3px 6px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cell .piece.winning {
+  animation: winGlow 0.6s ease-in-out infinite alternate;
+}
+
+.cell .piece.winning.red {
+  box-shadow: 0 0 16px var(--red), 0 0 32px var(--red), inset 0 -3px 6px rgba(0, 0, 0, 0.3);
+}
+
+.cell .piece.winning.yellow {
+  box-shadow: 0 0 16px var(--yellow), 0 0 32px var(--yellow), inset 0 -3px 6px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes dropPiece {
+  0% {
+    transform: translateY(-600px);
+    opacity: 1;
+  }
+  70% {
+    transform: translateY(5px);
+  }
+  85% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes winGlow {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  :root {
+    --cell-size: 44px;
+    --gap: 4px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .board {
+    padding: 8px;
+    border-radius: 8px;
+  }
+
+  .scoreboard {
+    gap: 20px;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  .mode-btn {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+  }
+
+  .new-game-btn {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+  }
+
+  .hover-row {
+    height: 30px;
+  }
+
+  .hover-indicator::after {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  :root {
+    --cell-size: 38px;
+    --gap: 3px;
+  }
+}

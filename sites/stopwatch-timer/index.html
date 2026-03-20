@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ストップウォッチ & タイマー</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header-title">時計ツール</h1>
+      <button class="fullscreen-btn" id="fullscreenBtn" aria-label="全画面表示">
+        <svg class="icon-expand" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>
+        </svg>
+        <svg class="icon-compress hidden" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 14h3a2 2 0 012 2v3m10-5h-3a2 2 0 01-2-2V5m0 14v-3a2 2 0 012-2h3M4 10h3a2 2 0 002-2V5"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Tabs -->
+    <nav class="tabs" role="tablist">
+      <button class="tab active" id="tabStopwatch" role="tab" aria-selected="true" data-target="stopwatch">
+        ストップウォッチ
+      </button>
+      <button class="tab" id="tabTimer" role="tab" aria-selected="false" data-target="timer">
+        タイマー
+      </button>
+    </nav>
+
+    <!-- Stopwatch Panel -->
+    <section class="panel active" id="stopwatch" role="tabpanel">
+      <div class="display-container">
+        <div class="time-display" id="stopwatchDisplay">00:00:00<span class="ms">.00</span></div>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="stopwatchStartStop">スタート</button>
+        <button class="btn btn-secondary" id="stopwatchLap" disabled>ラップ</button>
+        <button class="btn btn-danger" id="stopwatchReset" disabled>リセット</button>
+      </div>
+      <div class="laps-container" id="lapsContainer">
+        <table class="laps-table" id="lapsTable">
+          <thead>
+            <tr>
+              <th>ラップ</th>
+              <th>スプリット</th>
+              <th>合計</th>
+            </tr>
+          </thead>
+          <tbody id="lapsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Timer Panel -->
+    <section class="panel" id="timer" role="tabpanel">
+      <div class="timer-setup" id="timerSetup">
+        <div class="wheel-group">
+          <div class="wheel-wrapper">
+            <button class="wheel-arrow up" data-wheel="hours" data-dir="up">&#9650;</button>
+            <div class="wheel-value" id="wheelHours">00</div>
+            <button class="wheel-arrow down" data-wheel="hours" data-dir="down">&#9660;</button>
+            <div class="wheel-label">時間</div>
+          </div>
+          <span class="wheel-sep">:</span>
+          <div class="wheel-wrapper">
+            <button class="wheel-arrow up" data-wheel="minutes" data-dir="up">&#9650;</button>
+            <div class="wheel-value" id="wheelMinutes">05</div>
+            <button class="wheel-arrow down" data-wheel="minutes" data-dir="down">&#9660;</button>
+            <div class="wheel-label">分</div>
+          </div>
+          <span class="wheel-sep">:</span>
+          <div class="wheel-wrapper">
+            <button class="wheel-arrow up" data-wheel="seconds" data-dir="up">&#9650;</button>
+            <div class="wheel-value" id="wheelSeconds">00</div>
+            <button class="wheel-arrow down" data-wheel="seconds" data-dir="down">&#9660;</button>
+            <div class="wheel-label">秒</div>
+          </div>
+        </div>
+        <div class="presets">
+          <button class="preset-btn" data-minutes="1">1分</button>
+          <button class="preset-btn" data-minutes="3">3分</button>
+          <button class="preset-btn" data-minutes="5">5分</button>
+          <button class="preset-btn" data-minutes="10">10分</button>
+          <button class="preset-btn" data-minutes="30">30分</button>
+        </div>
+      </div>
+      <div class="display-container hidden" id="timerDisplayContainer">
+        <div class="time-display timer-display" id="timerDisplay">00:05:00</div>
+        <div class="timer-progress-ring">
+          <svg viewBox="0 0 200 200" class="progress-svg">
+            <circle class="progress-bg" cx="100" cy="100" r="90"/>
+            <circle class="progress-fill" id="progressFill" cx="100" cy="100" r="90"/>
+          </svg>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn btn-primary" id="timerStartPause">スタート</button>
+        <button class="btn btn-danger" id="timerReset">リセット</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

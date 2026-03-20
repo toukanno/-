@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タイピングゲーム</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>タイピングゲーム</h1>
+    </header>
+
+    <!-- Settings Screen -->
+    <div id="settings-screen" class="screen active">
+      <div class="setting-group">
+        <label>難易度</label>
+        <div class="button-row">
+          <button class="option-btn" data-difficulty="easy">かんたん</button>
+          <button class="option-btn selected" data-difficulty="normal">ふつう</button>
+          <button class="option-btn" data-difficulty="hard">むずかしい</button>
+        </div>
+      </div>
+      <div class="setting-group">
+        <label>制限時間</label>
+        <div class="button-row">
+          <button class="option-btn" data-time="30">30秒</button>
+          <button class="option-btn selected" data-time="60">60秒</button>
+          <button class="option-btn" data-time="120">120秒</button>
+        </div>
+      </div>
+      <button id="start-btn" class="primary-btn">開始</button>
+      <div id="high-score-display" class="high-score-info"></div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+      <div class="game-hud">
+        <div class="hud-item">
+          <span class="hud-label">残り時間</span>
+          <span id="timer" class="hud-value">60</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">WPM</span>
+          <span id="live-wpm" class="hud-value">0</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">正確率</span>
+          <span id="live-accuracy" class="hud-value">100%</span>
+        </div>
+      </div>
+
+      <div id="text-display" class="text-display"></div>
+
+      <input
+        type="text"
+        id="input-field"
+        class="input-field"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="ここに入力..."
+      >
+      <div class="game-controls">
+        <button id="restart-btn" class="secondary-btn">リスタート</button>
+      </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="results-screen" class="screen">
+      <h2>結果</h2>
+      <div class="results-grid">
+        <div class="result-card">
+          <span class="result-label">WPM</span>
+          <span id="result-wpm" class="result-value">0</span>
+        </div>
+        <div class="result-card">
+          <span class="result-label">正確率</span>
+          <span id="result-accuracy" class="result-value">0%</span>
+        </div>
+        <div class="result-card">
+          <span class="result-label">正しい文字数</span>
+          <span id="result-correct" class="result-value">0</span>
+        </div>
+        <div class="result-card">
+          <span class="result-label">間違い文字数</span>
+          <span id="result-wrong" class="result-value">0</span>
+        </div>
+        <div class="result-card">
+          <span class="result-label">入力した単語数</span>
+          <span id="result-words" class="result-value">0</span>
+        </div>
+        <div class="result-card highlight">
+          <span class="result-label">ハイスコア (WPM)</span>
+          <span id="result-highscore" class="result-value">0</span>
+        </div>
+      </div>
+      <div id="new-record" class="new-record hidden">新記録!</div>
+      <div class="result-actions">
+        <button id="retry-btn" class="primary-btn">もう一度</button>
+        <button id="back-btn" class="secondary-btn">設定に戻る</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

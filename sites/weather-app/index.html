@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天気ダッシュボード</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app" class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1 class="logo">天気ダッシュボード</h1>
+        <div id="datetime" class="datetime"></div>
+      </div>
+      <div class="header-right">
+        <div class="search-box">
+          <input type="text" id="search-input" placeholder="都市名を検索..." autocomplete="off">
+          <button id="search-btn" class="search-btn">検索</button>
+          <div id="search-suggestions" class="search-suggestions hidden"></div>
+        </div>
+        <button id="unit-toggle" class="unit-toggle">℃ / ℉</button>
+      </div>
+    </header>
+
+    <!-- Preset Cities -->
+    <nav class="city-nav">
+      <button class="city-btn active" data-city="tokyo">東京</button>
+      <button class="city-btn" data-city="osaka">大阪</button>
+      <button class="city-btn" data-city="nagoya">名古屋</button>
+      <button class="city-btn" data-city="sapporo">札幌</button>
+      <button class="city-btn" data-city="fukuoka">福岡</button>
+      <button class="city-btn" data-city="okinawa">沖縄</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Current Weather -->
+      <section class="current-weather glass">
+        <div class="current-top">
+          <div class="current-info">
+            <h2 id="city-name" class="city-name">東京</h2>
+            <p id="weather-desc" class="weather-desc">晴れ</p>
+          </div>
+          <div class="current-icon-wrap">
+            <span id="weather-icon" class="weather-icon">☀️</span>
+          </div>
+        </div>
+        <div class="current-temp-row">
+          <span id="current-temp" class="current-temp">22</span>
+          <span id="current-unit" class="current-unit">℃</span>
+        </div>
+        <div class="current-details">
+          <div class="detail-item">
+            <span class="detail-label">体感温度</span>
+            <span id="feels-like" class="detail-value">20℃</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">湿度</span>
+            <span id="humidity" class="detail-value">55%</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">風速</span>
+            <span id="wind" class="detail-value">3.2 m/s</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">気圧</span>
+            <span id="pressure" class="detail-value">1013 hPa</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">視程</span>
+            <span id="visibility" class="detail-value">10 km</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">UV指数</span>
+            <span id="uv-index" class="detail-value">5</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hourly Forecast -->
+      <section class="hourly-section glass">
+        <h3 class="section-title">時間ごとの予報</h3>
+        <div id="hourly-chart" class="hourly-chart"></div>
+      </section>
+
+      <!-- 7-Day Forecast -->
+      <section class="forecast-section glass">
+        <h3 class="section-title">7日間の天気予報</h3>
+        <div id="forecast-cards" class="forecast-cards"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

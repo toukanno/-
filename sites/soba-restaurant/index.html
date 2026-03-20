@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>蕎麦処 風月庵 | 手打ちそばの名店</title>
+  <meta name="description" content="蕎麦処 風月庵 ― 石臼挽き自家製粉の手打ちそばを、落ち着いた和の空間でお召し上がりいただけます。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-logo">風月庵</div>
+      <nav class="header-nav" id="nav">
+        <ul>
+          <li><a href="#hero" onclick="closeNav()">ホーム</a></li>
+          <li><a href="#menu" onclick="closeNav()">品書き</a></li>
+          <li><a href="#kodawari" onclick="closeNav()">こだわり</a></li>
+          <li><a href="#about" onclick="closeNav()">お店について</a></li>
+          <li><a href="#access" onclick="closeNav()">アクセス</a></li>
+        </ul>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニューを開く" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== Hero ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="sub">― 手打ちそば ―</p>
+      <h1>蕎麦処<br>風月庵</h1>
+      <p class="tagline">一本一本、丹精を込めて打つ蕎麦。<br>素材の香りと、季節の移ろいをお楽しみください。</p>
+    </div>
+    <div class="hero-scroll">SCROLL</div>
+  </section>
+
+  <!-- ===== Menu ===== -->
+  <section class="menu" id="menu">
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>品書き</h2>
+        <span class="en">Menu</span>
+      </div>
+      <div class="menu-grid">
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-name">もりそば</div>
+            <p class="menu-card-desc">冷水で締めた蕎麦を、辛汁でお召し上がりいただく定番の一品。蕎麦本来の風味をお楽しみください。</p>
+          </div>
+          <div class="menu-card-price">&yen;750</div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-name">ざるそば</div>
+            <p class="menu-card-desc">海苔の香りが蕎麦の風味を引き立てます。竹ざるに盛り付けた上品な一皿。</p>
+          </div>
+          <div class="menu-card-price">&yen;850</div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-name">かけそば</div>
+            <p class="menu-card-desc">丁寧に引いた天然だしの温かいつゆで、心も体も温まる素朴な味わい。</p>
+          </div>
+          <div class="menu-card-price">&yen;700</div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-name">天ぷらそば</div>
+            <p class="menu-card-desc">旬の野菜と海老の天ぷらを添えて。揚げたてのさくさくとした食感をお楽しみください。</p>
+          </div>
+          <div class="menu-card-price">&yen;1,200</div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-name">鴨南蛮そば</div>
+            <p class="menu-card-desc">合鴨の旨味が溶け込んだ贅沢なつゆ。焼き葱の甘みと共にお召し上がりください。</p>
+          </div>
+          <div class="menu-card-price">&yen;1,300</div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-card-name">山菜そば</div>
+            <p class="menu-card-desc">山の恵みをふんだんに。わらび、ぜんまい、こごみなど、季節の山菜を取り合わせました。</p>
+          </div>
+          <div class="menu-card-price">&yen;950</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Kodawari ===== -->
+  <section class="kodawari" id="kodawari">
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>こだわり</h2>
+        <span class="en">Our Craft</span>
+      </div>
+      <div class="kodawari-grid">
+
+        <div class="kodawari-item">
+          <span class="kodawari-icon" aria-hidden="true">&#x26C7;</span>
+          <h3>石臼挽き自家製粉</h3>
+          <p>毎朝、石臼でゆっくりと蕎麦の実を挽いています。低速回転で熱を抑え、蕎麦本来の豊かな香りと風味を最大限に引き出します。</p>
+        </div>
+
+        <div class="kodawari-item">
+          <span class="kodawari-icon" aria-hidden="true">&#x2618;</span>
+          <h3>厳選そば粉</h3>
+          <p>北海道・幌加内や長野・戸隠など、国内有数の産地から厳選した玄蕎麦を使用。季節ごとに最も状態の良い蕎麦粉を吟味しています。</p>
+        </div>
+
+        <div class="kodawari-item">
+          <span class="kodawari-icon" aria-hidden="true">&#x2668;</span>
+          <h3>天然だし</h3>
+          <p>枕崎産の本枯節と利尻昆布を贅沢に使い、丹念に引いた一番だし。化学調味料を一切使わず、素材そのものの深い旨味をお届けします。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== About ===== -->
+  <section class="about" id="about">
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>お店について</h2>
+        <span class="en">About Us</span>
+      </div>
+      <div class="about-body">
+        <p>蕎麦処 風月庵は、昭和四十三年の創業以来、半世紀以上にわたり手打ちそば一筋に歩んでまいりました。初代店主・長谷川 風月が「本物の蕎麦をもっと身近に」との想いで開いたこの小さな店は、今も変わらぬ志を受け継いでおります。</p>
+        <p>蕎麦の実の選定から製粉、打ち、茹で、そしてつゆに至るまで、一切の妥協を許さぬ手仕事。それは、目の前のお客様に最高の一枚をお届けしたいという、ただそれだけの想いからです。</p>
+        <p>四季折々の食材を取り入れながら、日本の蕎麦文化を次の世代へとつないでまいります。どうぞごゆっくり、風月庵の蕎麦をお楽しみください。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Access ===== -->
+  <section class="access" id="access">
+    <div class="section-inner">
+      <div class="section-title">
+        <h2>アクセス</h2>
+        <span class="en">Access</span>
+      </div>
+      <div class="access-grid">
+        <div class="access-info">
+          <dl>
+            <dt>所在地</dt>
+            <dd>〒160-0022<br>東京都新宿区新宿三丁目12-8 風月ビル 1F</dd>
+
+            <dt>電話番号</dt>
+            <dd>03-1234-5678</dd>
+
+            <dt>営業時間</dt>
+            <dd>
+              昼の部　11:00 ～ 15:00（L.O. 14:30）<br>
+              夜の部　17:00 ～ 21:00（L.O. 20:30）
+            </dd>
+
+            <dt>定休日</dt>
+            <dd>毎週水曜日・第三木曜日</dd>
+
+            <dt>最寄り駅</dt>
+            <dd>東京メトロ丸ノ内線 新宿三丁目駅 C4出口より徒歩3分<br>JR新宿駅 東口より徒歩8分</dd>
+
+            <dt>お席</dt>
+            <dd>カウンター 6席 ／ テーブル 16席 ／ 座敷 8席</dd>
+          </dl>
+        </div>
+        <div class="access-map" aria-label="地図">
+          地図はこちらに表示されます
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="footer-logo">蕎麦処 風月庵</div>
+    <p>東京都新宿区新宿三丁目12-8 風月ビル 1F<br>TEL 03-1234-5678</p>
+    <p class="footer-copy">&copy; 蕎麦処 風月庵 All Rights Reserved.</p>
+  </footer>
+
+  <!-- ===== Script ===== -->
+  <script>
+    function toggleNav() {
+      document.getElementById('nav').classList.toggle('open');
+    }
+    function closeNav() {
+      document.getElementById('nav').classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>

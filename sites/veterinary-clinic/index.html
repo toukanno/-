@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="さくら動物病院 - 大切な家族の健康を守ります。一般診療・予防接種・健康診断・手術・トリミング・ペットホテル">
+  <title>さくら動物病院 | 大切な家族の健康を守ります</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ========== Header ========== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">
+        <span class="header__logo-icon">&#x1F338;</span>
+        <span class="header__logo-text">さくら動物病院</span>
+      </a>
+      <button class="header__hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="header__nav" id="nav">
+        <ul class="header__nav-list">
+          <li><a href="#hero" class="header__nav-link">ホーム</a></li>
+          <li><a href="#services" class="header__nav-link">診療案内</a></li>
+          <li><a href="#doctor" class="header__nav-link">院長紹介</a></li>
+          <li><a href="#facility" class="header__nav-link">施設紹介</a></li>
+          <li><a href="#access" class="header__nav-link">アクセス</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== Hero ========== -->
+  <section class="hero" id="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="hero__subtitle">Sakura Animal Hospital</p>
+      <h1 class="hero__title">大切な家族の<br>健康を守ります</h1>
+      <p class="hero__description">
+        地域に根ざしたホームドクターとして、<br class="sp-only">
+        動物たちの健やかな毎日をサポートします。
+      </p>
+      <div class="hero__buttons">
+        <a href="#contact" class="btn btn--primary">ご予約・お問い合わせ</a>
+        <a href="#services" class="btn btn--outline">診療案内を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Services ========== -->
+  <section class="services section" id="services">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__label">Services</p>
+        <h2 class="section__title">診療案内</h2>
+        <p class="section__description">
+          当院では幅広い診療科目で、ペットの健康を総合的にサポートいたします。
+        </p>
+      </div>
+      <div class="services__grid">
+        <div class="service-card">
+          <div class="service-card__icon">&#x1FA7A;</div>
+          <h3 class="service-card__title">一般診療</h3>
+          <p class="service-card__text">
+            内科・外科・皮膚科・眼科・歯科など、幅広い症状に対応いたします。些細なことでもお気軽にご相談ください。
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">&#x1F489;</div>
+          <h3 class="service-card__title">予防接種</h3>
+          <p class="service-card__text">
+            混合ワクチン・狂犬病予防注射・フィラリア予防など、各種予防医療を行っております。
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">&#x1F4CB;</div>
+          <h3 class="service-card__title">健康診断</h3>
+          <p class="service-card__text">
+            血液検査・レントゲン・超音波検査など、総合的な健康チェックで病気の早期発見に努めます。
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">&#x1F3E5;</div>
+          <h3 class="service-card__title">手術</h3>
+          <p class="service-card__text">
+            避妊・去勢手術をはじめ、各種外科手術に対応。最新の設備と技術で安全な手術を行います。
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">&#x2702;&#xFE0F;</div>
+          <h3 class="service-card__title">トリミング</h3>
+          <p class="service-card__text">
+            経験豊富なトリマーが、ワンちゃんの個性に合わせたカットスタイルをご提案いたします。
+          </p>
+        </div>
+        <div class="service-card">
+          <div class="service-card__icon">&#x1F3E0;</div>
+          <h3 class="service-card__title">ペットホテル</h3>
+          <p class="service-card__text">
+            旅行やお出かけの際に、獣医師が常駐する安心のペットホテルをご利用いただけます。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Doctor ========== -->
+  <section class="doctor section section--alt" id="doctor">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__label">Doctor</p>
+        <h2 class="section__title">院長紹介</h2>
+      </div>
+      <div class="doctor__content">
+        <div class="doctor__photo">
+          <div class="doctor__photo-placeholder">
+            <span>&#x1F468;&#x200D;&#x2695;&#xFE0F;</span>
+          </div>
+        </div>
+        <div class="doctor__info">
+          <p class="doctor__position">院長・獣医師</p>
+          <h3 class="doctor__name">田中 太郎<span class="doctor__name-reading">たなか たろう</span></h3>
+          <div class="doctor__bio">
+            <p>
+              東京農工大学農学部獣医学科を卒業後、都内の動物病院で10年間の勤務医経験を経て、
+              2015年にさくら動物病院を開院いたしました。
+            </p>
+            <p>
+              「動物たちとご家族に寄り添う医療」をモットーに、丁寧な診察と分かりやすい説明を心がけております。
+              お気軽にご相談ください。
+            </p>
+          </div>
+          <ul class="doctor__credentials">
+            <li>日本獣医師会会員</li>
+            <li>日本小動物獣医師会（JSAVA）会員</li>
+            <li>獣医腫瘍科認定医 II 種</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Facility ========== -->
+  <section class="facility section" id="facility">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__label">Facility</p>
+        <h2 class="section__title">施設紹介</h2>
+        <p class="section__description">
+          清潔で快適な院内環境と、最新の医療設備を整えております。
+        </p>
+      </div>
+      <div class="facility__grid">
+        <div class="facility-card">
+          <div class="facility-card__image">
+            <span>&#x1F4A1;</span>
+            <p>待合室</p>
+          </div>
+          <p class="facility-card__text">広々とした明るい待合室で、リラックスしてお待ちいただけます。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-card__image">
+            <span>&#x1F52C;</span>
+            <p>診察室</p>
+          </div>
+          <p class="facility-card__text">2つの診察室を完備。プライバシーに配慮した個室タイプです。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-card__image">
+            <span>&#x2695;&#xFE0F;</span>
+            <p>手術室</p>
+          </div>
+          <p class="facility-card__text">最新の設備を備えた清潔な手術室で、安全な手術を行います。</p>
+        </div>
+        <div class="facility-card">
+          <div class="facility-card__image">
+            <span>&#x1F6CF;&#xFE0F;</span>
+            <p>入院室</p>
+          </div>
+          <p class="facility-card__text">犬舎・猫舎を分離し、ストレスの少ない入院環境を整えています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Hours / Schedule ========== -->
+  <section class="hours section section--alt" id="hours">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__label">Hours</p>
+        <h2 class="section__title">診療時間</h2>
+      </div>
+      <div class="hours__wrapper">
+        <table class="hours__table">
+          <thead>
+            <tr>
+              <th>診療時間</th>
+              <th>月</th>
+              <th>火</th>
+              <th>水</th>
+              <th>木</th>
+              <th>金</th>
+              <th>土</th>
+              <th class="hours__sunday">日・祝</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="hours__period">9:00 - 12:00</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__closed">&#x2014;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__open">&#x25CB;</td>
+            </tr>
+            <tr>
+              <td class="hours__period">16:00 - 19:00</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__closed">&#x2014;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__open">&#x25CB;</td>
+              <td class="hours__half">&#x25B3;</td>
+              <td class="hours__closed">&#x2014;</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="hours__notes">
+          <li>&#x25CB; 診療 ／ &#x25B3; 午前のみ（〜17:00） ／ &#x2014; 休診</li>
+          <li>水曜日は休診日です。</li>
+          <li>日曜・祝日は午前のみの診療となります。</li>
+          <li>受付は診療終了の30分前までにお越しください。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Emergency ========== -->
+  <section class="emergency section" id="emergency">
+    <div class="container">
+      <div class="emergency__inner">
+        <div class="emergency__icon">&#x1F6A8;</div>
+        <div class="emergency__content">
+          <h2 class="emergency__title">夜間・緊急の場合</h2>
+          <p class="emergency__text">
+            診療時間外の急患につきましては、下記の夜間救急病院をご利用ください。<br>
+            当院の患者様には、可能な限り電話でのご相談も承っております。
+          </p>
+          <div class="emergency__contacts">
+            <div class="emergency__contact-item">
+              <p class="emergency__contact-label">当院への緊急連絡</p>
+              <a href="tel:03-1234-5678" class="emergency__phone">03-1234-5678</a>
+            </div>
+            <div class="emergency__contact-item">
+              <p class="emergency__contact-label">夜間救急動物病院</p>
+              <a href="tel:03-9876-5432" class="emergency__phone">03-9876-5432</a>
+              <p class="emergency__contact-note">（受付時間：21:00〜翌6:00）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Access ========== -->
+  <section class="access section section--alt" id="access">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__label">Access</p>
+        <h2 class="section__title">アクセス</h2>
+      </div>
+      <div class="access__content">
+        <div class="access__map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.828030263164!2d139.76454931525882!3d35.68123618019432!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bfbd89f700b%3A0x277c49ba34ed38!2z5p2x5Lqs6aeF!5e0!3m2!1sja!2sjp!4v1600000000000"
+            width="100%"
+            height="400"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="さくら動物病院の地図">
+          </iframe>
+        </div>
+        <div class="access__info">
+          <dl class="access__details">
+            <div class="access__detail-row">
+              <dt>住所</dt>
+              <dd>〒160-0022<br>東京都新宿区新宿3丁目1-1 さくらビル1F</dd>
+            </div>
+            <div class="access__detail-row">
+              <dt>電話番号</dt>
+              <dd><a href="tel:03-1234-5678">03-1234-5678</a></dd>
+            </div>
+            <div class="access__detail-row">
+              <dt>最寄駅</dt>
+              <dd>JR新宿駅 東口より徒歩5分<br>東京メトロ丸ノ内線 新宿駅 B13出口より徒歩3分</dd>
+            </div>
+            <div class="access__detail-row">
+              <dt>駐車場</dt>
+              <dd>医院前に3台分の専用駐車場あり</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Contact ========== -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section__header">
+        <p class="section__label">Contact</p>
+        <h2 class="section__title">ご予約・お問い合わせ</h2>
+        <p class="section__description">
+          お電話またはフォームからお気軽にお問い合わせください。<br>
+          ご予約はお電話でも承っております。
+        </p>
+      </div>
+      <div class="contact__wrapper">
+        <div class="contact__phone-block">
+          <p class="contact__phone-label">お電話でのご予約</p>
+          <a href="tel:03-1234-5678" class="contact__phone-number">03-1234-5678</a>
+          <p class="contact__phone-hours">受付時間：診療時間内</p>
+        </div>
+        <form class="contact__form" action="#" method="post">
+          <div class="form__row">
+            <div class="form__group">
+              <label for="name" class="form__label">お名前 <span class="form__required">必須</span></label>
+              <input type="text" id="name" name="name" class="form__input" placeholder="山田 花子" required>
+            </div>
+            <div class="form__group">
+              <label for="pet-name" class="form__label">ペットのお名前</label>
+              <input type="text" id="pet-name" name="pet-name" class="form__input" placeholder="ポチ">
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="form__group">
+              <label for="email" class="form__label">メールアドレス <span class="form__required">必須</span></label>
+              <input type="email" id="email" name="email" class="form__input" placeholder="example@email.com" required>
+            </div>
+            <div class="form__group">
+              <label for="phone" class="form__label">電話番号</label>
+              <input type="tel" id="phone" name="phone" class="form__input" placeholder="03-1234-5678">
+            </div>
+          </div>
+          <div class="form__group">
+            <label for="pet-type" class="form__label">ペットの種類</label>
+            <select id="pet-type" name="pet-type" class="form__select">
+              <option value="">選択してください</option>
+              <option value="dog">犬</option>
+              <option value="cat">猫</option>
+              <option value="rabbit">うさぎ</option>
+              <option value="hamster">ハムスター</option>
+              <option value="bird">鳥</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="inquiry-type" class="form__label">お問い合わせ種別</label>
+            <select id="inquiry-type" name="inquiry-type" class="form__select">
+              <option value="">選択してください</option>
+              <option value="reservation">診察予約</option>
+              <option value="vaccination">予防接種</option>
+              <option value="checkup">健康診断</option>
+              <option value="trimming">トリミング</option>
+              <option value="hotel">ペットホテル</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+          <div class="form__group">
+            <label for="message" class="form__label">お問い合わせ内容 <span class="form__required">必須</span></label>
+            <textarea id="message" name="message" class="form__textarea" rows="6" placeholder="症状やご質問など、お気軽にご記入ください。" required></textarea>
+          </div>
+          <div class="form__submit">
+            <button type="submit" class="btn btn--primary btn--large">送信する</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Footer ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <p class="footer__logo">&#x1F338; さくら動物病院</p>
+          <p class="footer__address">
+            〒160-0022<br>
+            東京都新宿区新宿3丁目1-1 さくらビル1F<br>
+            TEL: <a href="tel:03-1234-5678">03-1234-5678</a>
+          </p>
+        </div>
+        <div class="footer__links">
+          <h4 class="footer__heading">メニュー</h4>
+          <ul>
+            <li><a href="#hero">ホーム</a></li>
+            <li><a href="#services">診療案内</a></li>
+            <li><a href="#doctor">院長紹介</a></li>
+            <li><a href="#facility">施設紹介</a></li>
+            <li><a href="#access">アクセス</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <h4 class="footer__heading">診療案内</h4>
+          <ul>
+            <li><a href="#services">一般診療</a></li>
+            <li><a href="#services">予防接種</a></li>
+            <li><a href="#services">健康診断</a></li>
+            <li><a href="#services">手術</a></li>
+            <li><a href="#services">トリミング</a></li>
+            <li><a href="#services">ペットホテル</a></li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <h4 class="footer__heading">診療時間</h4>
+          <p class="footer__hours">
+            午前 9:00 - 12:00<br>
+            午後 16:00 - 19:00<br>
+            <span class="footer__closed">休診日：水曜日</span>
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2024 さくら動物病院. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== Back to Top ========== -->
+  <a href="#header" class="back-to-top" id="backToTop" aria-label="ページトップへ戻る">&#x2191;</a>
+
+  <script>
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+
+    hamburger.addEventListener('click', () => {
+      const isOpen = nav.classList.toggle('is-open');
+      hamburger.classList.toggle('is-open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close mobile nav when a link is clicked
+    nav.querySelectorAll('.header__nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Sticky header shadow on scroll
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('header--scrolled', window.scrollY > 50);
+    });
+
+    // Back to top button visibility
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('is-visible', window.scrollY > 600);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerHeight = header.offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Simple scroll-in animation
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.service-card, .facility-card, .doctor__content, .access__content, .contact__form').forEach(el => {
+      el.classList.add('animate-in');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

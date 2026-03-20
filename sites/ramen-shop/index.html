@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>麺屋 龍 | こだわりの一杯をあなたに</title>
+  <meta name="description" content="麺屋 龍 - 自家製麺と厳選素材で作る本格ラーメン。醤油、味噌、塩、つけ麺をご用意しております。">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Serif+JP:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="header__logo">
+        <span class="header__logo-sub">らーめん</span>
+        <span class="header__logo-main">麺屋 龍</span>
+      </a>
+      <button class="header__hamburger" id="hamburger" aria-label="メニューを開く" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="header__nav" id="nav">
+        <ul class="header__nav-list">
+          <li><a href="#hero" class="header__nav-link">ホーム</a></li>
+          <li><a href="#menu" class="header__nav-link">メニュー</a></li>
+          <li><a href="#features" class="header__nav-link">こだわり</a></li>
+          <li><a href="#access" class="header__nav-link">アクセス</a></li>
+          <li><a href="#contact" class="header__nav-link header__nav-link--cta">ご予約</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__overlay"></div>
+    <div class="container hero__inner">
+      <p class="hero__sub">Since 2005</p>
+      <h1 class="hero__title">一杯に、<br>魂を込めて。</h1>
+      <p class="hero__desc">厳選された素材と職人の技が織りなす<br>至極の一杯をご堪能ください。</p>
+      <a href="#menu" class="hero__btn">メニューを見る</a>
+    </div>
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== MENU ===== -->
+  <section class="menu" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-header__en">MENU</p>
+        <h2 class="section-header__ja">お品書き</h2>
+        <div class="section-header__line"></div>
+      </div>
+      <div class="menu__grid">
+
+        <article class="menu-card">
+          <div class="menu-card__img-wrap">
+            <div class="menu-card__img menu-card__img--shoyu"></div>
+          </div>
+          <div class="menu-card__body">
+            <div class="menu-card__badge">人気 No.1</div>
+            <h3 class="menu-card__name">醤油ラーメン</h3>
+            <p class="menu-card__desc">鶏ガラと魚介のWスープに自家製醤油ダレを合わせた、当店自慢の看板メニュー。</p>
+            <p class="menu-card__price">&yen;850</p>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card__img-wrap">
+            <div class="menu-card__img menu-card__img--miso"></div>
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">味噌ラーメン</h3>
+            <p class="menu-card__desc">三種の味噌をブレンドした濃厚スープ。野菜の甘みと味噌の旨味が絶妙に調和。</p>
+            <p class="menu-card__price">&yen;900</p>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card__img-wrap">
+            <div class="menu-card__img menu-card__img--shio"></div>
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">塩ラーメン</h3>
+            <p class="menu-card__desc">透き通った黄金スープに天然塩の旨味。素材の味を最大限に引き出した淡麗系の一杯。</p>
+            <p class="menu-card__price">&yen;850</p>
+          </div>
+        </article>
+
+        <article class="menu-card">
+          <div class="menu-card__img-wrap">
+            <div class="menu-card__img menu-card__img--tsukemen"></div>
+          </div>
+          <div class="menu-card__body">
+            <h3 class="menu-card__name">つけ麺</h3>
+            <p class="menu-card__desc">極太自家製麺を濃厚魚介豚骨つけ汁でいただく。麺の小麦の香りが際立つ逸品。</p>
+            <p class="menu-card__price">&yen;950</p>
+          </div>
+        </article>
+
+        <article class="menu-card menu-card--featured">
+          <div class="menu-card__img-wrap">
+            <div class="menu-card__img menu-card__img--chashu"></div>
+          </div>
+          <div class="menu-card__body">
+            <div class="menu-card__badge menu-card__badge--premium">店主おすすめ</div>
+            <h3 class="menu-card__name">チャーシュー麺</h3>
+            <p class="menu-card__desc">低温調理で仕上げた極上チャーシューを贅沢に盛り付けた特別な一杯。醤油・味噌・塩からお選びいただけます。</p>
+            <p class="menu-card__price">&yen;1,100</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="menu__note">
+        <p>※ 大盛り +&yen;100 / 替え玉 &yen;150 / 味玉トッピング +&yen;120</p>
+        <p>※ 全てのラーメンに味玉・海苔・ネギのトッピングが可能です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-header__en">COMMITMENT</p>
+        <h2 class="section-header__ja">三つのこだわり</h2>
+        <div class="section-header__line"></div>
+      </div>
+      <div class="features__grid">
+
+        <article class="feature-card">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M8 40 C8 20, 56 20, 56 40" stroke-linecap="round"/>
+              <line x1="20" y1="40" x2="20" y2="52"/>
+              <line x1="32" y1="40" x2="32" y2="56"/>
+              <line x1="44" y1="40" x2="44" y2="52"/>
+              <ellipse cx="32" cy="40" rx="26" ry="4"/>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">自家製麺</h3>
+          <p class="feature-card__desc">
+            毎朝店内の製麺室で打つ自家製麺。小麦の風味を最大限に活かすため、
+            季節や湿度に合わせて配合を微調整。もちもちとした食感とのど越しの良さを両立させています。
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="32" cy="36" r="16"/>
+              <path d="M24 36 C24 28, 40 28, 40 36" stroke-linecap="round"/>
+              <line x1="32" y1="20" x2="32" y2="12"/>
+              <line x1="22" y1="23" x2="17" y2="16"/>
+              <line x1="42" y1="23" x2="47" y2="16"/>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">厳選素材</h3>
+          <p class="feature-card__desc">
+            全国各地から厳選した食材のみを使用。チャーシューには銘柄豚を、
+            鶏ガラは朝引きの地鶏を使用。妥協のない素材選びが深い味わいの秘訣です。
+          </p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-card__icon">
+            <svg viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2">
+              <ellipse cx="32" cy="44" rx="22" ry="8"/>
+              <path d="M10 44 L10 36 C10 28, 54 28, 54 36 L54 44"/>
+              <path d="M20 28 C20 16, 26 12, 26 12" stroke-linecap="round"/>
+              <path d="M32 28 C32 14, 32 10, 32 10" stroke-linecap="round"/>
+              <path d="M44 28 C44 16, 38 12, 38 12" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">秘伝スープ</h3>
+          <p class="feature-card__desc">
+            創業以来二十年、継ぎ足し続ける秘伝のスープ。
+            丸二日間かけてじっくり煮込んだ濃厚な旨味は、一口飲めば違いがわかる奥深い味わいです。
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ACCESS ===== -->
+  <section class="access" id="access">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-header__en">ACCESS</p>
+        <h2 class="section-header__ja">店舗情報</h2>
+        <div class="section-header__line"></div>
+      </div>
+      <div class="access__grid">
+        <div class="access__map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.828030551498!2d139.7671248!3d35.6812362!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bfbd89f700b%3A0x277c49ba34ed38!2z5p2x5Lqs6aeF!5e0!3m2!1sja!2sjp!4v1700000000000!5m2!1sja!2sjp"
+            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="麺屋 龍の地図">
+          </iframe>
+        </div>
+        <div class="access__info">
+          <table class="access__table">
+            <tbody>
+              <tr>
+                <th>店名</th>
+                <td>麺屋 龍（めんや りゅう）</td>
+              </tr>
+              <tr>
+                <th>住所</th>
+                <td>〒100-0005<br>東京都千代田区丸の内1-9-1<br>龍ビル 1F</td>
+              </tr>
+              <tr>
+                <th>電話</th>
+                <td><a href="tel:03-1234-5678">03-1234-5678</a></td>
+              </tr>
+              <tr>
+                <th>営業時間</th>
+                <td>
+                  昼の部 11:00〜15:00（L.O. 14:30）<br>
+                  夜の部 17:00〜22:00（L.O. 21:30）
+                </td>
+              </tr>
+              <tr>
+                <th>定休日</th>
+                <td>毎週水曜日・年末年始</td>
+              </tr>
+              <tr>
+                <th>座席数</th>
+                <td>カウンター10席 / テーブル12席</td>
+              </tr>
+              <tr>
+                <th>アクセス</th>
+                <td>JR東京駅 丸の内南口より徒歩3分<br>地下鉄丸ノ内線 東京駅より徒歩5分</td>
+              </tr>
+              <tr>
+                <th>お支払い</th>
+                <td>現金 / クレジットカード / 電子マネー / QRコード決済</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-header__en">CONTACT</p>
+        <h2 class="section-header__ja">お問い合わせ</h2>
+        <div class="section-header__line"></div>
+      </div>
+      <p class="contact__lead">ご予約・お問い合わせは、お電話またはこちらのフォームよりお気軽にどうぞ。</p>
+      <form class="contact__form" action="#" method="post">
+        <div class="contact__form-row">
+          <div class="contact__form-group">
+            <label class="contact__label" for="name">お名前 <span class="contact__required">必須</span></label>
+            <input class="contact__input" type="text" id="name" name="name" placeholder="山田 太郎" required>
+          </div>
+          <div class="contact__form-group">
+            <label class="contact__label" for="email">メールアドレス <span class="contact__required">必須</span></label>
+            <input class="contact__input" type="email" id="email" name="email" placeholder="example@mail.com" required>
+          </div>
+        </div>
+        <div class="contact__form-row">
+          <div class="contact__form-group">
+            <label class="contact__label" for="phone">電話番号</label>
+            <input class="contact__input" type="tel" id="phone" name="phone" placeholder="03-1234-5678">
+          </div>
+          <div class="contact__form-group">
+            <label class="contact__label" for="category">お問い合わせ種別</label>
+            <select class="contact__input contact__select" id="category" name="category">
+              <option value="">選択してください</option>
+              <option value="reservation">ご予約</option>
+              <option value="inquiry">お問い合わせ</option>
+              <option value="catering">ケータリング</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+        </div>
+        <div class="contact__form-group contact__form-group--full">
+          <label class="contact__label" for="message">お問い合わせ内容 <span class="contact__required">必須</span></label>
+          <textarea class="contact__input contact__textarea" id="message" name="message" rows="6" placeholder="ご予約の場合は、ご希望の日時・人数をご記入ください。" required></textarea>
+        </div>
+        <div class="contact__form-submit">
+          <button class="contact__btn" type="submit">送信する</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <p class="footer__logo-sub">らーめん</p>
+        <p class="footer__logo-main">麺屋 龍</p>
+        <p class="footer__tagline">こだわりの一杯をあなたに</p>
+      </div>
+      <nav class="footer__nav">
+        <h4 class="footer__nav-title">ナビゲーション</h4>
+        <ul class="footer__nav-list">
+          <li><a href="#hero">ホーム</a></li>
+          <li><a href="#menu">メニュー</a></li>
+          <li><a href="#features">こだわり</a></li>
+          <li><a href="#access">アクセス</a></li>
+          <li><a href="#contact">お問い合わせ</a></li>
+        </ul>
+      </nav>
+      <div class="footer__hours">
+        <h4 class="footer__nav-title">営業時間</h4>
+        <p>昼の部 11:00〜15:00</p>
+        <p>夜の部 17:00〜22:00</p>
+        <p class="footer__closed">定休日：毎週水曜日</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>&copy; 2025 麺屋 龍. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky header shadow
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('header--scrolled', window.scrollY > 50);
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const nav = document.getElementById('nav');
+    hamburger.addEventListener('click', () => {
+      const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !expanded);
+      hamburger.classList.toggle('is-active');
+      nav.classList.toggle('is-open');
+      document.body.classList.toggle('no-scroll');
+    });
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.header__nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('is-active');
+        nav.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('no-scroll');
+      });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const offset = header.offsetHeight;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Scroll-triggered fade-in
+    const observerOptions = { threshold: 0.15 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    document.querySelectorAll('.menu-card, .feature-card, .access__info, .access__map, .contact__form').forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>

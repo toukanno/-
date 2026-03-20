@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>オートガレージ信頼 | 中古車販売・車検・整備</title>
+  <meta name="description" content="オートガレージ信頼は厳選された高品質中古車を取り揃えております。車検・整備・買取査定もお任せください。">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">&#9881;</span>
+        <span class="logo-text">オートガレージ<strong>信頼</strong></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav" id="nav">
+        <a href="#cars">在庫一覧</a>
+        <a href="#services">サービス</a>
+        <a href="#why">選ばれる理由</a>
+        <a href="#reviews">お客様の声</a>
+        <a href="#access">アクセス</a>
+        <a href="#contact" class="nav-cta">お問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="hero-sub">信頼と実績の中古車ディーラー</p>
+      <h1>あなたにぴったりの<br>一台がここに。</h1>
+      <p class="hero-desc">厳選された高品質中古車を常時200台以上ご用意。<br>購入からアフターサービスまで安心のサポート体制。</p>
+      <div class="hero-actions">
+        <a href="#cars" class="btn btn-primary">在庫を見る</a>
+        <a href="#contact" class="btn btn-outline">無料相談する</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">2,500<small>+</small></span><span class="stat-label">販売実績</span></div>
+        <div class="stat"><span class="stat-num">98<small>%</small></span><span class="stat-label">顧客満足度</span></div>
+        <div class="stat"><span class="stat-num">15<small>年</small></span><span class="stat-label">営業実績</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SEARCH FILTER ========== -->
+  <section class="search-section" id="search">
+    <div class="container">
+      <div class="search-box">
+        <h2 class="search-title">お車を探す</h2>
+        <form class="search-form">
+          <div class="search-field">
+            <label for="maker">メーカー</label>
+            <select id="maker">
+              <option value="">すべて</option>
+              <option>トヨタ</option>
+              <option>ホンダ</option>
+              <option>日産</option>
+              <option>マツダ</option>
+              <option>スバル</option>
+              <option>スズキ</option>
+              <option>ダイハツ</option>
+              <option>三菱</option>
+              <option>レクサス</option>
+              <option>BMW</option>
+              <option>メルセデス・ベンツ</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label for="price">価格帯</label>
+            <select id="price">
+              <option value="">指定なし</option>
+              <option>〜50万円</option>
+              <option>50万円〜100万円</option>
+              <option>100万円〜200万円</option>
+              <option>200万円〜300万円</option>
+              <option>300万円〜500万円</option>
+              <option>500万円〜</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label for="year">年式</label>
+            <select id="year">
+              <option value="">指定なし</option>
+              <option>2024年〜</option>
+              <option>2022年〜2023年</option>
+              <option>2020年〜2021年</option>
+              <option>2018年〜2019年</option>
+              <option>2015年〜2017年</option>
+              <option>〜2014年</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary search-btn">検索する</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FEATURED CARS ========== -->
+  <section class="section cars-section" id="cars">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">LINEUP</span>
+        <h2>おすすめ在庫車両</h2>
+        <p>厳選された良質な中古車をご紹介いたします</p>
+      </div>
+      <div class="car-grid">
+
+        <article class="car-card">
+          <div class="car-img">
+            <span class="car-badge">人気</span>
+            <div class="car-img-placeholder">
+              <span>&#128663;</span>
+              <small>PHOTO</small>
+            </div>
+          </div>
+          <div class="car-info">
+            <h3>トヨタ アルファード 2.5L S</h3>
+            <div class="car-meta">
+              <span>2023年式</span>
+              <span>1.2万km</span>
+              <span>AT</span>
+            </div>
+            <p class="car-price"><small>本体価格</small>398<span>万円</span></p>
+            <a href="#contact" class="btn btn-sm">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-img">
+            <span class="car-badge new">新着</span>
+            <div class="car-img-placeholder">
+              <span>&#128663;</span>
+              <small>PHOTO</small>
+            </div>
+          </div>
+          <div class="car-info">
+            <h3>ホンダ フィット e:HEV HOME</h3>
+            <div class="car-meta">
+              <span>2022年式</span>
+              <span>2.8万km</span>
+              <span>CVT</span>
+            </div>
+            <p class="car-price"><small>本体価格</small>189<span>万円</span></p>
+            <a href="#contact" class="btn btn-sm">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-img">
+            <div class="car-img-placeholder">
+              <span>&#128663;</span>
+              <small>PHOTO</small>
+            </div>
+          </div>
+          <div class="car-info">
+            <h3>日産 セレナ e-POWER XV</h3>
+            <div class="car-meta">
+              <span>2021年式</span>
+              <span>3.5万km</span>
+              <span>AT</span>
+            </div>
+            <p class="car-price"><small>本体価格</small>265<span>万円</span></p>
+            <a href="#contact" class="btn btn-sm">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-img">
+            <span class="car-badge sale">特価</span>
+            <div class="car-img-placeholder">
+              <span>&#128663;</span>
+              <small>PHOTO</small>
+            </div>
+          </div>
+          <div class="car-info">
+            <h3>マツダ CX-5 XD L Package</h3>
+            <div class="car-meta">
+              <span>2020年式</span>
+              <span>4.1万km</span>
+              <span>AT</span>
+            </div>
+            <p class="car-price"><small>本体価格</small>228<span>万円</span></p>
+            <a href="#contact" class="btn btn-sm">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-img">
+            <div class="car-img-placeholder">
+              <span>&#128663;</span>
+              <small>PHOTO</small>
+            </div>
+          </div>
+          <div class="car-info">
+            <h3>スバル レヴォーグ GT-H EX</h3>
+            <div class="car-meta">
+              <span>2023年式</span>
+              <span>0.8万km</span>
+              <span>CVT</span>
+            </div>
+            <p class="car-price"><small>本体価格</small>328<span>万円</span></p>
+            <a href="#contact" class="btn btn-sm">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="car-card">
+          <div class="car-img">
+            <span class="car-badge new">新着</span>
+            <div class="car-img-placeholder">
+              <span>&#128663;</span>
+              <small>PHOTO</small>
+            </div>
+          </div>
+          <div class="car-info">
+            <h3>レクサス NX 350h F SPORT</h3>
+            <div class="car-meta">
+              <span>2022年式</span>
+              <span>1.5万km</span>
+              <span>CVT</span>
+            </div>
+            <p class="car-price"><small>本体価格</small>498<span>万円</span></p>
+            <a href="#contact" class="btn btn-sm">詳細を見る</a>
+          </div>
+        </article>
+
+      </div>
+      <div class="section-footer">
+        <a href="#" class="btn btn-primary">在庫一覧をすべて見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section class="section services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">SERVICE</span>
+        <h2>サービス一覧</h2>
+        <p>お車に関することは何でもご相談ください</p>
+      </div>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <div class="service-icon">&#128663;</div>
+          <h3>中古車販売</h3>
+          <p>厳しい品質基準をクリアした良質な中古車のみを販売。全車保証付きで安心してお乗りいただけます。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">&#128295;</div>
+          <h3>車検・整備</h3>
+          <p>国家資格を持つ整備士が丁寧に点検・整備。車検はもちろん、日常のメンテナンスもお任せください。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">&#128178;</div>
+          <h3>買取査定</h3>
+          <p>高価買取に自信あり。他社と比較していただいてOK。無料出張査定も承ります。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">&#127937;</div>
+          <h3>カスタム</h3>
+          <p>エアロパーツ、ホイール、車高調など、お好みに合わせたカスタマイズをご提案いたします。</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">&#128737;</div>
+          <h3>保険</h3>
+          <p>自動車保険のご相談もお気軽に。お客様に最適なプランをご提案し、万が一の事故にも迅速に対応。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== WHY CHOOSE US ========== -->
+  <section class="section why-section" id="why">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">WHY US</span>
+        <h2>選ばれる理由</h2>
+        <p>オートガレージ信頼が多くのお客様にご支持いただいている理由</p>
+      </div>
+      <div class="why-grid">
+
+        <div class="why-card">
+          <div class="why-number">01</div>
+          <h3>全車第三者機関鑑定済み</h3>
+          <p>日本自動車鑑定協会（JAAA）による鑑定書付き。修復歴や走行距離の改ざんなし。安心してお選びいただけます。</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-number">02</div>
+          <h3>最長3年保証</h3>
+          <p>ご購入後も安心の最長3年保証をご用意。エンジン・ミッションなど主要部品をカバーいたします。</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-number">03</div>
+          <h3>明朗会計・安心価格</h3>
+          <p>諸費用を含めた総額表示を徹底。隠れた追加費用は一切ございません。見積もり無料。</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-number">04</div>
+          <h3>自社整備工場完備</h3>
+          <p>認証工場を併設し、納車前の点検整備からアフターメンテナンスまで一貫対応。迅速な修理が可能です。</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-number">05</div>
+          <h3>全国納車対応</h3>
+          <p>北海道から沖縄まで全国どこでも納車可能。陸送費のお見積りもお気軽にどうぞ。</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-number">06</div>
+          <h3>豊富なローンプラン</h3>
+          <p>頭金0円から、最長120回払いまで柔軟なお支払いプランをご用意。審査もスピーディーに対応。</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REVIEWS ========== -->
+  <section class="section reviews-section" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">VOICE</span>
+        <h2>お客様の声</h2>
+        <p>ご購入いただいたお客様からの嬉しいお言葉</p>
+      </div>
+      <div class="reviews-grid">
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">「初めての車購入で不安でしたが、スタッフの方が丁寧に説明してくださり、安心して決めることができました。アフターフォローも素晴らしいです。」</p>
+          <div class="review-author">
+            <div class="review-avatar">T.S</div>
+            <div>
+              <strong>T.S 様</strong>
+              <span>トヨタ アクア ご購入</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+          <p class="review-text">「他店より20万円も安く、しかも状態が良い車を見つけてもらえました。買取の時もお世話になりましたが、こちらも大満足の査定額でした。」</p>
+          <div class="review-author">
+            <div class="review-avatar">K.M</div>
+            <div>
+              <strong>K.M 様</strong>
+              <span>ホンダ ステップワゴン ご購入</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-stars">&#9733;&#9733;&#9733;&#9733;&#9734;</div>
+          <p class="review-text">「遠方からの購入でしたが、動画や写真で細かく車の状態を見せていただき、納車もスムーズでした。信頼できるお店です。」</p>
+          <div class="review-author">
+            <div class="review-avatar">Y.A</div>
+            <div>
+              <strong>Y.A 様</strong>
+              <span>マツダ CX-30 ご購入</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ACCESS ========== -->
+  <section class="section access-section" id="access">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">ACCESS</span>
+        <h2>アクセス情報</h2>
+        <p>お気軽にご来店ください</p>
+      </div>
+      <div class="access-grid">
+        <div class="access-info">
+          <table class="access-table">
+            <tr>
+              <th>店舗名</th>
+              <td>オートガレージ信頼</td>
+            </tr>
+            <tr>
+              <th>住所</th>
+              <td>〒123-4567<br>東京都世田谷区XX町1-2-3</td>
+            </tr>
+            <tr>
+              <th>電話</th>
+              <td><a href="tel:0120-XXX-XXX">0120-XXX-XXX</a>（通話無料）</td>
+            </tr>
+            <tr>
+              <th>営業時間</th>
+              <td>10:00 〜 19:00</td>
+            </tr>
+            <tr>
+              <th>定休日</th>
+              <td>毎週水曜日・第2火曜日</td>
+            </tr>
+            <tr>
+              <th>駐車場</th>
+              <td>20台完備</td>
+            </tr>
+            <tr>
+              <th>最寄駅</th>
+              <td>○○線 △△駅より徒歩10分</td>
+            </tr>
+          </table>
+        </div>
+        <div class="access-map">
+          <div class="map-placeholder">
+            <span>&#128205;</span>
+            <p>Google Maps</p>
+            <small>ここに地図が表示されます</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">CONTACT</span>
+        <h2>お問い合わせ</h2>
+        <p>ご質問・ご相談はお気軽にどうぞ。24時間以内にご返信いたします。</p>
+      </div>
+      <div class="contact-wrapper">
+        <form class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">お名前 <span class="required">必須</span></label>
+              <input type="text" id="name" placeholder="山田 太郎" required>
+            </div>
+            <div class="form-group">
+              <label for="kana">フリガナ <span class="required">必須</span></label>
+              <input type="text" id="kana" placeholder="ヤマダ タロウ" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">メールアドレス <span class="required">必須</span></label>
+              <input type="email" id="email" placeholder="example@mail.com" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">電話番号</label>
+              <input type="tel" id="phone" placeholder="090-1234-5678">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inquiry-type">お問い合わせ種類</label>
+            <select id="inquiry-type">
+              <option value="">選択してください</option>
+              <option>在庫車両について</option>
+              <option>車検・整備について</option>
+              <option>買取査定について</option>
+              <option>カスタムについて</option>
+              <option>保険について</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">お問い合わせ内容 <span class="required">必須</span></label>
+            <textarea id="message" rows="6" placeholder="ご質問やご要望をお書きください" required></textarea>
+          </div>
+          <div class="form-group form-privacy">
+            <label>
+              <input type="checkbox" required>
+              <a href="#">プライバシーポリシー</a>に同意する
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg">送信する</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo logo-footer">
+            <span class="logo-icon">&#9881;</span>
+            <span class="logo-text">オートガレージ<strong>信頼</strong></span>
+          </a>
+          <p>お客様に安心と信頼をお届けする中古車ディーラーとして、誠実な対応を心がけております。</p>
+        </div>
+        <div class="footer-links">
+          <h4>メニュー</h4>
+          <a href="#cars">在庫一覧</a>
+          <a href="#services">サービス</a>
+          <a href="#why">選ばれる理由</a>
+          <a href="#reviews">お客様の声</a>
+        </div>
+        <div class="footer-links">
+          <h4>サービス</h4>
+          <a href="#">中古車販売</a>
+          <a href="#">車検・整備</a>
+          <a href="#">買取査定</a>
+          <a href="#">カスタム</a>
+          <a href="#">保険</a>
+        </div>
+        <div class="footer-links">
+          <h4>サポート</h4>
+          <a href="#contact">お問い合わせ</a>
+          <a href="#access">アクセス</a>
+          <a href="#">プライバシーポリシー</a>
+          <a href="#">特定商取引法に基づく表記</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 オートガレージ信頼 All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('navToggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      toggle.classList.toggle('active');
+    });
+    // Close nav when clicking a link
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        toggle.classList.remove('active');
+      });
+    });
+    // Sticky header shadow
+    window.addEventListener('scroll', () => {
+      document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+    });
+  </script>
+
+</body>
+</html>

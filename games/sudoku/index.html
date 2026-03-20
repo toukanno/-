@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数独</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>数独</h1>
+
+    <div id="controls-top">
+      <div id="difficulty-selector">
+        <button class="diff-btn active" data-difficulty="easy">簡単</button>
+        <button class="diff-btn" data-difficulty="medium">普通</button>
+        <button class="diff-btn" data-difficulty="hard">難しい</button>
+      </div>
+      <div id="timer">00:00</div>
+    </div>
+
+    <div id="board"></div>
+
+    <div id="number-pad">
+      <button class="num-btn" data-num="1">1</button>
+      <button class="num-btn" data-num="2">2</button>
+      <button class="num-btn" data-num="3">3</button>
+      <button class="num-btn" data-num="4">4</button>
+      <button class="num-btn" data-num="5">5</button>
+      <button class="num-btn" data-num="6">6</button>
+      <button class="num-btn" data-num="7">7</button>
+      <button class="num-btn" data-num="8">8</button>
+      <button class="num-btn" data-num="9">9</button>
+      <button class="num-btn erase-btn" data-num="0">&#x232b;</button>
+    </div>
+
+    <div id="controls-bottom">
+      <button id="btn-new">新しいゲーム</button>
+      <button id="btn-hint">ヒント</button>
+      <button id="btn-check">確認</button>
+    </div>
+
+    <div id="modal-overlay" class="hidden">
+      <div id="modal">
+        <p id="modal-message"></p>
+        <button id="modal-close">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>パスワード生成器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 class="glitch" data-text="パスワード生成器">パスワード生成器</h1>
+      <p class="subtitle">安全なパスワードを即座に生成</p>
+    </header>
+
+    <main>
+      <!-- Generated Password Display -->
+      <section class="password-display">
+        <div class="password-output">
+          <input type="text" id="password-output" readonly placeholder="生成ボタンを押してください">
+          <button id="btn-copy" class="btn-icon" title="コピー" disabled>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+          </button>
+        </div>
+        <div class="copy-feedback" id="copy-feedback">コピーしました!</div>
+
+        <!-- Strength Meter -->
+        <div class="strength-meter">
+          <div class="strength-bar">
+            <div class="strength-fill" id="strength-fill"></div>
+          </div>
+          <span class="strength-label" id="strength-label"></span>
+        </div>
+
+        <!-- Crack Time -->
+        <div class="crack-time" id="crack-time"></div>
+      </section>
+
+      <!-- Controls -->
+      <section class="controls">
+        <!-- Length Slider -->
+        <div class="control-group">
+          <label for="length-slider">
+            パスワードの長さ: <span id="length-value" class="accent">16</span>
+          </label>
+          <input type="range" id="length-slider" min="4" max="64" value="16">
+        </div>
+
+        <!-- Character Options -->
+        <div class="control-group options-grid">
+          <label class="toggle-option">
+            <input type="checkbox" id="opt-uppercase" checked>
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">大文字 (A-Z)</span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" id="opt-lowercase" checked>
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">小文字 (a-z)</span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" id="opt-numbers" checked>
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">数字 (0-9)</span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" id="opt-symbols" checked>
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">記号 (!@#$...)</span>
+          </label>
+          <label class="toggle-option">
+            <input type="checkbox" id="opt-exclude-ambiguous">
+            <span class="toggle-slider"></span>
+            <span class="toggle-label">曖昧な文字を除外</span>
+          </label>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group">
+          <button id="btn-generate" class="btn btn-primary">生成</button>
+          <button id="btn-generate-multi" class="btn btn-secondary">5件生成</button>
+        </div>
+      </section>
+
+      <!-- Multiple Passwords -->
+      <section class="multi-passwords" id="multi-passwords" hidden>
+        <h2>生成結果</h2>
+        <ul id="multi-list"></ul>
+      </section>
+
+      <!-- History -->
+      <section class="history-section">
+        <div class="history-header">
+          <h2>履歴</h2>
+          <button id="btn-clear-history" class="btn btn-small btn-danger">クリア</button>
+        </div>
+        <ul id="history-list" class="history-list">
+          <li class="history-empty">履歴はありません</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 パスワード生成器</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
