@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Book</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #fff8f3; color: #333; }
+    header { background: #e8522a; color: white; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+    header h1 { font-size: 1.6rem; }
+    .add-btn { background: white; color: #e8522a; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; }
+    .filters { display: flex; gap: 10px; padding: 20px 40px; background: white; border-bottom: 1px solid #f0e0d8; flex-wrap: wrap; }
+    .filters button { padding: 6px 18px; border-radius: 20px; border: 1px solid #ddd; cursor: pointer; background: white; color: #666; }
+    .filters button.active { background: #e8522a; color: white; border-color: #e8522a; }
+    .recipes { max-width: 1200px; margin: 32px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .recipe { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.08); transition: transform 0.2s; cursor: pointer; }
+    .recipe:hover { transform: translateY(-4px); }
+    .recipe-img { height: 160px; display: flex; align-items: center; justify-content: center; font-size: 4rem; }
+    .recipe-body { padding: 16px; }
+    .recipe-body h3 { font-size: 1rem; margin-bottom: 8px; }
+    .recipe-body .meta { font-size: 0.8rem; color: #999; display: flex; gap: 16px; }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; margin-bottom: 8px; background: #fff0eb; color: #e8522a; }
+    .fav { float: right; background: none; border: none; cursor: pointer; font-size: 1.2rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Recipe Book</h1>
+    <button class="add-btn">+ レシピ追加</button>
+  </header>
+  <div class="filters">
+    <button class="active" onclick="filter('all', this)">すべて</button>
+    <button onclick="filter('和食', this)">和食</button>
+    <button onclick="filter('洋食', this)">洋食</button>
+    <button onclick="filter('中華', this)">中華</button>
+    <button onclick="filter('デザート', this)">デザート</button>
+  </div>
+  <div class="recipes" id="recipes"></div>
+  <script>
+    const recipes = [
+      { id: 1, name: '親子丼', cat: '和食', time: '20分', calories: '520kcal', emoji: '🍳', fav: true },
+      { id: 2, name: 'カルボナーラ', cat: '洋食', time: '25分', calories: '680kcal', emoji: '🍝', fav: false },
+      { id: 3, name: '麻婆豆腐', cat: '中華', time: '30分', calories: '450kcal', emoji: '🌶️', fav: false },
+      { id: 4, name: '肉じゃが', cat: '和食', time: '40分', calories: '380kcal', emoji: '🥔', fav: true },
+      { id: 5, name: 'チョコケーキ', cat: 'デザート', time: '60分', calories: '420kcal', emoji: '🍰', fav: false },
+      { id: 6, name: 'ハンバーガー', cat: '洋食', time: '35分', calories: '780kcal', emoji: '🍔', fav: false },
+    ];
+    let currentFilter = 'all';
+    function filter(f, btn) {
+      currentFilter = f;
+      document.querySelectorAll('.filters button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active'); render();
+    }
+    function render() {
+      const list = currentFilter === 'all' ? recipes : recipes.filter(r => r.cat === currentFilter);
+      document.getElementById('recipes').innerHTML = list.map(r => `
+        <div class="recipe">
+          <div class="recipe-img" style="background: #fff0eb">${r.emoji}</div>
+          <div class="recipe-body">
+            <span class="badge">${r.cat}</span>
+            <button class="fav">${r.fav ? '❤️' : '🤍'}</button>
+            <h3>${r.name}</h3>
+            <div class="meta"><span>⏱ ${r.time}</span><span>🔥 ${r.calories}</span></div>
+          </div>
+        </div>`).join('');
+    }
+    render();
+  </script>
+</body>
+</html>

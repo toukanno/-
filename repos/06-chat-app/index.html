@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat App</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #1e1e2e; color: #cdd6f4; height: 100vh; display: flex; }
+    .sidebar { width: 260px; background: #181825; padding: 20px; display: flex; flex-direction: column; border-right: 1px solid #313244; }
+    .sidebar h2 { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6c7086; margin-bottom: 16px; }
+    .user { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: 8px; cursor: pointer; transition: background 0.15s; }
+    .user:hover { background: #313244; }
+    .user.active { background: #313244; }
+    .avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: bold; }
+    .user-info .name { font-size: 0.9rem; }
+    .user-info .status { font-size: 0.75rem; color: #a6e3a1; }
+    .chat { flex: 1; display: flex; flex-direction: column; }
+    .chat-header { padding: 20px 24px; border-bottom: 1px solid #313244; font-weight: bold; }
+    .messages { flex: 1; padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+    .msg { display: flex; gap: 12px; max-width: 80%; }
+    .msg.mine { align-self: flex-end; flex-direction: row-reverse; }
+    .msg .av { width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .bubble { background: #313244; padding: 12px 16px; border-radius: 12px; font-size: 0.9rem; line-height: 1.5; }
+    .msg.mine .bubble { background: #89b4fa; color: #1e1e2e; }
+    .input-area { padding: 16px 24px; border-top: 1px solid #313244; display: flex; gap: 12px; }
+    .input-area input { flex: 1; background: #313244; border: none; padding: 12px 16px; border-radius: 24px; color: #cdd6f4; font-size: 0.95rem; outline: none; }
+    .send-btn { background: #89b4fa; color: #1e1e2e; border: none; padding: 12px 20px; border-radius: 24px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>メッセージ</h2>
+    <div class="user active"><div class="avatar" style="background:#cba6f7">A</div><div class="user-info"><div class="name">Alice</div><div class="status">オンライン</div></div></div>
+    <div class="user"><div class="avatar" style="background:#a6e3a1">B</div><div class="user-info"><div class="name">Bob</div><div class="status">オンライン</div></div></div>
+    <div class="user"><div class="avatar" style="background:#f38ba8">C</div><div class="user-info"><div class="name">Carol</div><div class="status">退席中</div></div></div>
+  </div>
+  <div class="chat">
+    <div class="chat-header">Alice</div>
+    <div class="messages" id="messages">
+      <div class="msg"><div class="av" style="background:#cba6f7">A</div><div class="bubble">こんにちは！元気？</div></div>
+      <div class="msg mine"><div class="av" style="background:#89b4fa">Me</div><div class="bubble">元気だよ！ありがとう</div></div>
+      <div class="msg"><div class="av" style="background:#cba6f7">A</div><div class="bubble">今夜ミーティングある？</div></div>
+    </div>
+    <div class="input-area">
+      <input type="text" id="msgInput" placeholder="メッセージを入力..." />
+      <button class="send-btn" onclick="sendMsg()">送信</button>
+    </div>
+  </div>
+  <script>
+    function sendMsg() {
+      const input = document.getElementById('msgInput');
+      const text = input.value.trim();
+      if (!text) return;
+      const msgs = document.getElementById('messages');
+      msgs.innerHTML += `<div class="msg mine"><div class="av" style="background:#89b4fa">Me</div><div class="bubble">${text}</div></div>`;
+      input.value = '';
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+    document.getElementById('msgInput').addEventListener('keydown', e => { if (e.key === 'Enter') sendMsg(); });
+  </script>
+</body>
+</html>
